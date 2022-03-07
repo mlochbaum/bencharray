@@ -60,15 +60,14 @@ GetColors ← {
   ni ⊏ col∾ce
 }
 
-Plot ⇐ { 𝕊 dat:
-  title ← "Plot"
-  xcapt ← "Size"
-  ycapt ← "Time (ns / value)"
-  ylog ← 1
-  col ← "stroke"⊸⋈¨ GetColors names ← ⟨"BQN"⟩
+Plot ⇐ { opts 𝕊 dat:
+  title‿xcapt‿ycapt‿labels ← opts
+  ylog ← {⟨r⇐ylog⟩:r; 1} opts
+  changeBounds ← {⟨r⇐changeBounds⟩:r; ⊢} opts
+  col ← "stroke"⊸⋈¨ GetColors labels
 
   width ← 512
-  off ← 50‿40 ⋄ end ← 20‿46
+  off ← 60‿40 ⋄ end ← 20‿50
   dim ← width (⊣⋈×) 0.55
   out ← (-off)≍dim+off+end
   padb ← ylog × padi ← 0‿20
@@ -79,7 +78,7 @@ Plot ⇐ { 𝕊 dat:
   Log ← ⋆⁼⌾(ylog⊑⊑‿⊢)
   dat ↓˜↩ 0‿0
   xy ← <∘∾˘⍉dat
-  win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬ylog) Log bounds ← (⌊´≍⌈´)∘⥊¨ xy
+  win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬ylog) Log bounds ← ChangeBounds (⌊´≍⌈´)∘⥊¨ xy
   ScaleI ← ({¬𝕏}⌾(1⊸⊑) {𝕩÷˜𝕨-˜⊢}´¨ win) {𝕎𝕩}¨ Log  # To [0,1]
   Scale ← padi + (dim-padb+padi) × ScaleI          # To pixels
   line ← (<≍˘)○Num´∘Scale˘ dat
@@ -89,8 +88,8 @@ Plot ⇐ { 𝕊 dat:
     Background out
     ⟨
       ((TSize 18)∾Pos⟨width÷2,¯19⟩) Text title
-      xcapt Text˜ Pos 0‿26+dim×0.5‿1
-      ycapt Text˜ "transform"‿"rotate(-90)"∾Pos 0‿32-˜⌽dim×0‿¯0.5
+      xcapt Text˜ Pos 0‿32+dim×0.5‿1
+      ycapt Text˜ "transform"‿"rotate(-90)"∾Pos 0‿42-˜⌽dim×0‿¯0.5
     ⟩
     Tick {
       off⇐0‿0 ⋄ dim⇐dim
@@ -102,7 +101,7 @@ Plot ⇐ { 𝕊 dat:
     ls Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
     Outline 0‿0≍dim
     Legend {
-      label ⇐ names
+      label ⇐ labels
       outer ⇐ dim
       place ⇐ (↕2‿2) ⊑∘⍒⊸⊑˜○⥊ ⌊´¨ ≍˘⟜¬ ≤⟜(÷4)⊸/{𝔽⋈¬⊸𝔽}´ ScaleI xy
       width ⇐ 134 ⋄ spacing ⇐ 18 ⋄ pad ⇐ 6
