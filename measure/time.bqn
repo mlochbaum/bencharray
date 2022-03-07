@@ -26,20 +26,19 @@ _avgTime_ ⇐ {
 # Quick calls are pooled to reject outliers; for slower ones this is
 # less likely to work so we just average
 TimeFn ⇐ {
+  a0 ← 4                          # Number of wanted argument sets
   _sub ← { # Function and arguments are 𝕨𝔽𝕩 here
-    t ← 5e¯9⌈𝕨 𝔽○{𝕏@} 𝕩           # Start with one timing (also warmup)
-    a ← 4                         # Number of wanted argument sets
+    t ← 𝕨 𝔽○{𝕏@} 𝕩                # Start with one timing (also warmup)
     n ← 1+⌊(1+1e¯1÷t)÷2           # Target 0.1 for one run, 0.05 for many
-    𝕨𝔽{
-      n<50 ?
-        a ⌊↩ n                    # Don't make args that won't be used
-        t ← 𝕨𝔽¨○{n⥊𝕏¨↕a}𝕩         # Repeat args to get rep number up
-        (+´÷≠) ⌊´¨ (a|↕∘≠)⊸⊔ t    # Min across equal args, then average
-      ;
-        a +↩ ⌊2e¯5÷t              # Try to add sets
-        r ← ⌈(200⌊n)÷a            # Number of reps
-        𝕨 𝔽_avgTime_ r○{𝕏¨↕a} 𝕩   # Do the fancy timing
-    }𝕩
+    n<50 ?
+      a ← n ⌊ a0 ⌈ ⌊5÷n           # Ensure ≤5 reps, and no unused args
+      t ↩ 𝕨𝔽¨○{n⥊𝕏¨↕a}𝕩           # Repeat args to get rep number up
+      (+´÷≠) ⌊´¨ (a|↕∘≠)⊸⊔ t      # Min across equal args, then average
+    ;
+      t ← (+´÷≠)𝕨𝔽¨○{𝕏¨↕10}𝕩      # Redo the timing with more runs
+      a ← a0 + ⌊2e¯5÷t            # Try to add sets
+      r ← ⌈(200⌊2e¯2÷t)÷a         # Number of reps
+      𝕨 𝔽_avgTime_ r○{𝕏¨↕a} 𝕩     # Do the fancy timing
   }
   {fn‿x: fn•_timed _sub x; fn‿w‿x: w fn{𝕨⊸𝔽•_timed𝕩} _sub x} 𝕩
 }
