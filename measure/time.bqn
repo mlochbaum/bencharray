@@ -10,7 +10,7 @@ _bind ← {𝔽𝕏;𝕎𝔽𝕏}
 _avgTime_ ⇐ {
   n ← ≠⥊𝕨⊢¨𝕩                      # Number of calls (𝕘 reps each)
   Mid ← (⌈𝕘÷2)↑(⌊´0‿2+⌊𝕘÷3‿10)↓∧  # Reject potential outliers
-  FT ← (+´÷≠)∘⥊ ·Mid˘∘⍉ 𝔽•_timed¨ # And average
+  FT ← (+´÷≠)∘⥊ ·Mid˘∘⍉ 𝔽¨        # And average
   t ← 𝕨 FT _bind○({𝕩˙}𝕘‿n⊸⥊) 𝕩    # Bind argument arrays
   Cond ← {
     4>≠𝕩?1;                       # Always take at least 5 samples
@@ -27,13 +27,13 @@ _avgTime_ ⇐ {
 # less likely to work so we just average
 TimeFn ⇐ {
   _sub ← { # Function and arguments are 𝕨𝔽𝕩 here
-    t ← 5e¯9⌈𝕨 𝔽•_timed○{𝕏@} 𝕩    # Start with one timing (also warmup)
+    t ← 5e¯9⌈𝕨 𝔽○{𝕏@} 𝕩           # Start with one timing (also warmup)
     a ← 4                         # Number of wanted argument sets
     n ← 1+⌊(1+1e¯1÷t)÷2           # Target 0.1 for one run, 0.05 for many
     𝕨𝔽{
       n<50 ?
         a ⌊↩ n                    # Don't make args that won't be used
-        t ← 𝕨𝔽•_timed¨○{n⥊𝕏¨↕a}𝕩  # Repeat args to get rep number up
+        t ← 𝕨𝔽¨○{n⥊𝕏¨↕a}𝕩         # Repeat args to get rep number up
         (+´÷≠) ⌊´¨ (a|↕∘≠)⊸⊔ t    # Min across equal args, then average
       ;
         a +↩ ⌊2e¯5÷t              # Try to add sets
@@ -41,5 +41,5 @@ TimeFn ⇐ {
         𝕨 𝔽_avgTime_ r○{𝕏¨↕a} 𝕩   # Do the fancy timing
     }𝕩
   }
-  {fn‿x: fn _sub x; fn‿w‿x: w fn _sub x} 𝕩
+  {fn‿x: fn•_timed _sub x; fn‿w‿x: w fn{𝕨⊸𝔽•_timed𝕩} _sub x} 𝕩
 }
