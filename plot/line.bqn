@@ -1,8 +1,11 @@
-Num‿Pos‿SVG‿Ge‿Elt‿Rect‿Text‿TSize‿Path ← •Import "svg.bqn"
+Num‿Pos‿SVG‿Ge‿Elt‿At‿Enc‿Rect‿Text‿TSize‿Path ← •Import "svg.bqn"
 
 # Graph components
 Background ← <"fill=white" Rect ⊢
-Outline ← <"stroke=#111|fill=none" Rect ⊢
+Clip ← <"defs" Enc ("clipPath"At"id=clip") Enc Rect
+
+Box ← "stroke-width=1.2|stroke=#111|fill="⊸∾ ⊸ Rect
+Outline ← <"none" Box ⊢
 
 Legend ← {
   place‿spacing‿pad‿width‿label‿Samples ← 𝕩
@@ -10,7 +13,7 @@ Legend ← {
   dim ← ⟨width,(2×pad)+spacing×n⟩
   ltr ← "transform=translate("∾")"∾˜∾⟜","⊸∾´Num place
   legend ← (ltr∾"|text-anchor=start|font-size=13px") Ge ⟨
-    "fill=white|stroke=#111" Rect 0‿0≍dim
+    "white" Box 0‿0≍dim
     Samples y
     y (Pos 36⊸⋈)⊸Text¨ label
   ⟩
@@ -69,7 +72,8 @@ Plot ⇐ { 𝕊 dat:
   out ← (-off)≍dim+off+end
   padb ← ylog × padi ← 0‿20
 
-  gr ← "stroke-width=1.2|font-size=14px|text-anchor=middle"
+  gr ← "stroke-width=2.6|font-size=14px|text-anchor=middle"
+  ls ← "clip-path=url(#clip)|fill=none|stroke-linecap=round|stroke-linejoin=round"
 
   Log ← ⋆⁼⌾(ylog⊑⊑‿⊢)
   dat ↓˜↩ 0‿0
@@ -79,6 +83,7 @@ Plot ⇐ { 𝕊 dat:
   line ← (<≍˘)○Num´∘Scale˘ dat
 
   ∾ ∾⟜(@+10)¨ (⥊out) SVG gr Ge ⟨
+    Clip 0‿0≍dim
     Background out
     ⟨
       ((TSize 18)∾Pos⟨width÷2,¯19⟩) Text title
@@ -92,13 +97,13 @@ Plot ⇐ { 𝕊 dat:
       tpos ⇐ Scale ticks ← 1‿ylog GetTicks¨ bounds
       ttext ⇐ ⟨1e3⊸<◶Num‿("1e"∾'0'+·⌊0.5+10⋆⁼⊢)¨, Num⟩ {𝕎𝕩}¨ ticks
     }
-    "stroke-width=2.6|fill=none" Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
+    ls Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
     Outline 0‿0≍dim
     Legend {
       label ⇐ names
       place ⇐ 10‿6
       width ⇐ 134 ⋄ spacing ⇐ 18 ⋄ pad ⇐ 6
-      Samples ⇐ "stroke-width=2.6" Ge col ≍⊸Path⟜(∾"M h"∾¨Num)¨ (8∾∾⟜22)¨
+      Samples ⇐ col ≍⊸Path⟜(∾"M h"∾¨Num)¨ (8∾∾⟜22)¨
     }
   ⟩
 }
