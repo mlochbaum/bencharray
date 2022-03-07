@@ -1,0 +1,56 @@
+<svg viewBox='-60 -40 592 371.6' height='557.4' width='888' xmlns='http://www.w3.org/2000/svg'>
+  <g stroke-width='2.6' font-size='14px' text-anchor='middle'>
+    <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
+    <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
+    <text dy='0.33em' font-size='18px' x='256' y='-19'>Indices from uniform boolean list</text>
+    <text dy='0.33em' x='256' y='313.6'>Size</text>
+    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
+    <g stroke-width='0.3' stroke='#555'>
+      <path d='M73.142 0v281.6'/>
+      <path d='M146.285 0v281.6'/>
+      <path d='M219.428 0v281.6'/>
+      <path d='M292.571 0v281.6'/>
+      <path d='M365.714 0v281.6'/>
+      <path d='M438.857 0v281.6'/>
+      <path d='M0 270.989h512'/>
+      <path d='M0 237.325h512'/>
+      <path d='M0 199.056h512'/>
+      <path d='M0 171.903h512'/>
+      <path d='M0 133.634h512'/>
+      <path d='M0 106.482h512'/>
+      <path d='M0 85.421h512'/>
+      <path d='M0 53.664h512'/>
+      <path d='M0 20h512'/>
+    </g>
+    <g font-size='11px'>
+      <text dy='0.33em' x='0' y='291.1'>1</text>
+      <text dy='0.33em' x='73.142' y='291.1'>10</text>
+      <text dy='0.33em' x='146.285' y='291.1'>100</text>
+      <text dy='0.33em' x='219.428' y='291.1'>1000</text>
+      <text dy='0.33em' x='292.571' y='291.1'>1e4</text>
+      <text dy='0.33em' x='365.714' y='291.1'>1e5</text>
+      <text dy='0.33em' x='438.857' y='291.1'>1e6</text>
+      <text dy='0.33em' x='512' y='291.1'>1e7</text>
+      <g text-anchor='end'>
+        <text dy='0.33em' x='-6' y='270.989'>0.7</text>
+        <text dy='0.33em' x='-6' y='237.325'>1</text>
+        <text dy='0.33em' x='-6' y='199.056'>1.5</text>
+        <text dy='0.33em' x='-6' y='171.903'>2</text>
+        <text dy='0.33em' x='-6' y='133.634'>3</text>
+        <text dy='0.33em' x='-6' y='106.482'>4</text>
+        <text dy='0.33em' x='-6' y='85.421'>5</text>
+        <text dy='0.33em' x='-6' y='53.664'>7</text>
+        <text dy='0.33em' x='-6' y='20'>10</text>
+      </g>
+    </g>
+    <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+      <path stroke='#2b7067' d='M0 -115.208L22.018 -55.231L34.898 -18.369L44.036 6.933L51.124 26.383L56.916 41.829L61.812 54.862L66.054 65.696L73.142 84.312L81.476 104.858L89.998 125.023L99.6 145.962L108.04 162.419L116.375 178.528L124.896 192.258L133.086 204.074L141.494 214.119L149.885 223.41L158.306 230.928L166.674 237.276L175.008 241.894L183.332 244.517L191.644 247.937L199.972 250.812L208.324 252.845L216.676 254.035L225.007 256.888L233.349 257.981L241.684 258.482L250.012 256.694L258.349 257.917L266.686 259.325L275.025 259.949L283.356 260.481L291.692 259.401L300.028 259.131L308.363 260.645L316.697 260.821L325.03 261.6L333.364 260.77L341.699 260.887L350.033 260.756L358.368 261.061L366.702 261.27L375.036 261.376L383.37 261.156L391.704 261.155L400.038 260.976L408.372 261.128L416.707 260.925L425.041 261.217L433.375 258.108L441.709 259.192L450.043 258.838L458.377 258.133L466.711 255.435L475.046 254.729L483.38 254.839L491.714 253.398L500.048 253.96L508.382 254.034L516.716 254.317'/>
+    </g>
+    <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
+    <g transform='translate(368,6)' text-anchor='start' font-size='13px'>
+      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='134' height='30'/>
+      <path stroke='#2b7067' d='M8 15h22'/>
+      <text dy='0.33em' x='36' y='15'>BQN</text>
+    </g>
+  </g>
+</svg>
