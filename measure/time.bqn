@@ -1,17 +1,28 @@
 # Utilities for estimated timings
 
-_bind ← {𝔽𝕏;𝕎𝔽𝕏}
+# Methods here attempt to remove noise that adds time to measurements,
+# for example switching to other processes. This also removes amortized
+# costs such as garbage collection, so it's not entirely suitable for
+# cross-language comparisons.
+
+# Since noise almost always increases rather than decreases execution
+# time, it's removed by taking a minimum or other selection that skews
+# low from timings. This is only ever applied to measurements on the
+# same set of arguments, to avoid ignoring sets that are actually slower
+# to evaluate. Multiple sets of arguments are always generated if more
+# than one run is used, and calls cycle through the generated sets to
+# avoid branch prediction.
 
 # Estimated average time to run 𝔽 in 𝕨 𝔽¨ 𝕩 when 𝔽 is quick
 # Time for 𝔽 is assumed deterministic but can vary based on argument
 # Calls 𝔽 at least 200 times, and at least 9 on each argument
 # For best reliability, an individual call of 𝔽 should take >5μs
 # Seems accurate within 2% or so
-_avgTime_ ⇐ {
+_avgTime_ ← {
   n ← ≠⥊𝕨⊢¨𝕩                      # Number of calls (𝕘 reps each)
   Mid ← (⌈𝕘÷2)↑(⌊´0‿2+⌊𝕘÷3‿10)↓∧  # Reject potential outliers
   FT ← (+´÷≠)∘⥊ ·Mid˘∘⍉ 𝔽¨        # And average
-  t ← 𝕨 FT _bind○({𝕩˙}𝕘‿n⊸⥊) 𝕩    # Bind argument arrays
+  t ← 𝕨 FT{𝔽𝕏;𝕎𝔽𝕏}○({𝕩˙}𝕘‿n⊸⥊) 𝕩  # Bind argument arrays
   Cond ← {
     4>≠𝕩?1;                       # Always take at least 5 samples
     20≤≠𝕩?0;                      # And give up at 20
@@ -25,20 +36,21 @@ _avgTime_ ⇐ {
 # differ based on generator output then the result will be inconsistent
 # Quick calls are pooled to reject outliers; for slower ones this is
 # less likely to work so we just average
+a0 ← 4                            # Number of wanted argument sets
+_timedGen ← {
+  t ← 𝕨 𝔽○{𝕏@} 𝕩                  # Start with one timing (also warmup)
+  n ← 1+⌊(1+1e¯1÷t)÷2             # Target 0.1 for one run, 0.05 for many
+  n<50 ?
+    a ← n ⌊ a0 ⌈ ⌊5÷n             # Ensure ≤5 reps, and no unused args
+    t ↩ 𝕨𝔽¨○{n⥊𝕏¨↕a}𝕩             # Repeat args to get rep number up
+    (+´÷≠) ⌊´¨ (a|↕∘≠)⊸⊔ t        # Min across equal args, then average
+  ;
+    t ← (+´÷≠)𝕨𝔽¨○{𝕏¨↕10}𝕩        # Redo the timing with more runs
+    a ← a0 + ⌊2e¯5÷t              # Try to add sets
+    r ← ⌈(200⌊2e¯2÷t)÷a           # Number of reps
+    𝕨 𝔽_avgTime_ r○{𝕏¨↕a} 𝕩       # Do the fancy timing
+}
 TimeFn ⇐ {
-  a0 ← 4                          # Number of wanted argument sets
-  _sub ← { # Function and arguments are 𝕨𝔽𝕩 here
-    t ← 𝕨 𝔽○{𝕏@} 𝕩                # Start with one timing (also warmup)
-    n ← 1+⌊(1+1e¯1÷t)÷2           # Target 0.1 for one run, 0.05 for many
-    n<50 ?
-      a ← n ⌊ a0 ⌈ ⌊5÷n           # Ensure ≤5 reps, and no unused args
-      t ↩ 𝕨𝔽¨○{n⥊𝕏¨↕a}𝕩           # Repeat args to get rep number up
-      (+´÷≠) ⌊´¨ (a|↕∘≠)⊸⊔ t      # Min across equal args, then average
-    ;
-      t ← (+´÷≠)𝕨𝔽¨○{𝕏¨↕10}𝕩      # Redo the timing with more runs
-      a ← a0 + ⌊2e¯5÷t            # Try to add sets
-      r ← ⌈(200⌊2e¯2÷t)÷a         # Number of reps
-      𝕨 𝔽_avgTime_ r○{𝕏¨↕a} 𝕩     # Do the fancy timing
-  }
-  {fn‿x: fn•_timed _sub x; fn‿w‿x: w fn{𝕨⊸𝔽•_timed𝕩} _sub x} 𝕩
+  fn‿x  :   fn    •_timed   _timedGen x ;
+  fn‿w‿x: w fn{𝕨⊸𝔽•_timed𝕩} _timedGen x
 }
