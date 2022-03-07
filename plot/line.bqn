@@ -8,10 +8,11 @@ Box ← "stroke-width=1.2|stroke=#111|fill="⊸∾ ⊸ Rect
 Outline ← <"none" Box ⊢
 
 Legend ← {
-  place‿spacing‿pad‿width‿label‿Samples ← 𝕩
+  outer‿place‿spacing‿pad‿width‿label‿Samples ← 𝕩
   y ← pad+spacing×0.5+↕n←≠label
   dim ← ⟨width,(2×pad)+spacing×n⟩
-  ltr ← "transform=translate("∾")"∾˜∾⟜","⊸∾´Num place
+  pl ← (10‿6×¬⊸-place) + place×outer-dim
+  ltr ← "transform=translate("∾")"∾˜∾⟜","⊸∾´Num pl
   legend ← (ltr∾"|text-anchor=start|font-size=13px") Ge ⟨
     "white" Box 0‿0≍dim
     Samples y
@@ -79,7 +80,8 @@ Plot ⇐ { 𝕊 dat:
   dat ↓˜↩ 0‿0
   xy ← <∘∾˘⍉dat
   win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬ylog) Log bounds ← (⌊´≍⌈´)∘⥊¨ xy
-  Scale ← padi+(dim-padb+padi)× ({¬𝕏}⌾(1⊸⊑) {𝕩÷˜𝕨-˜⊢}´¨ win) {𝕎𝕩}¨ Log
+  ScaleI ← ({¬𝕏}⌾(1⊸⊑) {𝕩÷˜𝕨-˜⊢}´¨ win) {𝕎𝕩}¨ Log  # To [0,1]
+  Scale ← padi + (dim-padb+padi) × ScaleI          # To pixels
   line ← (<≍˘)○Num´∘Scale˘ dat
 
   ∾ ∾⟜(@+10)¨ (⥊out) SVG gr Ge ⟨
@@ -101,7 +103,8 @@ Plot ⇐ { 𝕊 dat:
     Outline 0‿0≍dim
     Legend {
       label ⇐ names
-      place ⇐ 10‿6
+      outer ⇐ dim
+      place ⇐ (↕2‿2) ⊑∘⍒⊸⊑˜○⥊ ⌊´¨ ≍˘⟜¬ ≤⟜(÷4)⊸/{𝔽⋈¬⊸𝔽}´ ScaleI xy
       width ⇐ 134 ⋄ spacing ⇐ 18 ⋄ pad ⇐ 6
       Samples ⇐ col ≍⊸Path⟜(∾"M h"∾¨Num)¨ (8∾∾⟜22)¨
     }
