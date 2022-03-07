@@ -1,0 +1,104 @@
+Num‿Pos‿SVG‿Ge‿Elt‿Rect‿Text‿TSize‿Path ← •Import "svg.bqn"
+
+# Graph components
+Background ← <"fill=white" Rect ⊢
+Outline ← <"stroke=#111|fill=none" Rect ⊢
+
+Legend ← {
+  place‿spacing‿pad‿width‿label‿Samples ← 𝕩
+  y ← pad+spacing×0.5+↕n←≠label
+  dim ← ⟨width,(2×pad)+spacing×n⟩
+  ltr ← "transform=translate("∾")"∾˜∾⟜","⊸∾´Num place
+  legend ← (ltr∾"|text-anchor=start|font-size=13px") Ge ⟨
+    "fill=white|stroke=#111" Rect 0‿0≍dim
+    Samples y
+    y (Pos 36⊸⋈)⊸Text¨ label
+  ⟩
+}
+
+Tick ← {
+  off‿dim‿orient‿tpos‿ttext ← 𝕩
+  s ← 'h'=orient
+  Lines ← {
+    h ← 'h'=𝕨
+    P ← ⌽⌾(2⊸↑)⍟h ∾⟜((¬h)⊏⍉off≍dim)
+    ("path"Elt"d"⋈·∾("M "∾𝕨)∾¨Num∘P)¨ 𝕩
+  }
+  dist ← (s⊏dim)(-⌊⊢)tpos-s⊏off
+  Filter ← ≤⟜dist/¨⊢
+  to ← 9.5‿¯6 + ⌽off+dim×0‿1
+  Vals ← { "text-anchor=end" Ge⍟𝕨 (Pos 𝕨⌽⋈⟜(𝕨⊑to))⊸Text¨´ 𝕩 }
+  ⟨
+    "stroke-width=0.3|stroke=#555" Ge orient Lines¨ 1 Filter tpos
+    "font-size=11px" Ge s Vals¨ tpos ⋈¨○(0⊸Filter) ttext
+  ⟩
+}
+
+_inRange ← {⌈⊸(⊣+↕∘¬˜)⟜⌊⌾(𝔽⁼)´}
+GetTicks ← {
+  𝕊𝕩: 0𝕊𝕩;
+  0𝕊𝕩: # Linear
+    dist ← {(⊑∘⍋⟜𝕩-1˙)⊸⊑ 1‿2‿5 × ⌊⌾(10⋆⁼⊢) 𝕩} 6 ÷˜ -˜´ 𝕩
+    dist⊸×_inRange 𝕩;
+  1𝕊𝕩: # Log
+    p ← ⟨⋈1, 1‿2‿5, ∧1.5‿7∾1+↕5, ∧1.2‿1.5‿2.5∾1+↕9⟩
+    i ← 1-˜ ⊑ (≠¨p) ⍋ 12 ÷ -˜´ 10⋆⁼𝕩
+    (i⊑p) (⥊×⌜˜) (10⋆⊢)_inRange 𝕩÷10‿1
+}
+
+# Name info
+GetColors ← {
+  nam ← ⋈"BQN"
+  col ← ⋈"#2b7067"
+  ce  ← "#22c"‿"#c22"‿"#2a7"‿"#919"
+  ni ← nam ⊐ 𝕩
+  ni +↩ (≠ce)|⊒⊸×ni=≠nam  # Cycle through extra colors
+  ni ⊏ col∾ce
+}
+
+Plot ⇐ { 𝕊 dat:
+  title ← "Plot"
+  xcapt ← "Size"
+  ycapt ← "Time (ns / value)"
+  ylog ← 1
+  col ← "stroke"⊸⋈¨ GetColors names ← ⟨"BQN"⟩
+
+  width ← 512
+  off ← 50‿40 ⋄ end ← 20‿46
+  dim ← width (⊣⋈×) 0.55
+  out ← (-off)≍dim+off+end
+  padb ← ylog × padi ← 0‿20
+
+  gr ← "stroke-width=1.2|font-size=14px|text-anchor=middle"
+
+  Log ← ⋆⁼⌾(ylog⊑⊑‿⊢)
+  dat ↓˜↩ 0‿0
+  xy ← <∘∾˘⍉dat
+  win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬ylog) Log bounds ← (⌊´≍⌈´)∘⥊¨ xy
+  Scale ← padi+(dim-padb+padi)× ({¬𝕏}⌾(1⊸⊑) {𝕩÷˜𝕨-˜⊢}´¨ win) {𝕎𝕩}¨ Log
+  line ← (<≍˘)○Num´∘Scale˘ dat
+
+  ∾ ∾⟜(@+10)¨ (⥊out) SVG gr Ge ⟨
+    Background out
+    ⟨
+      ((TSize 18)∾Pos⟨width÷2,¯19⟩) Text title
+      xcapt Text˜ Pos 0‿26+dim×0.5‿1
+      ycapt Text˜ "transform"‿"rotate(-90)"∾Pos 0‿32-˜⌽dim×0‿¯0.5
+    ⟩
+    Tick {
+      off⇐0‿0 ⋄ dim⇐dim
+      orient⇐"vh"
+      RoundDown ← {(⊑∘⍋⟜𝕩-1˙)⊸⊑1‿2‿5×⌊⌾(10⋆⁼⊢)𝕩}
+      tpos ⇐ Scale ticks ← 1‿ylog GetTicks¨ bounds
+      ttext ⇐ ⟨1e3⊸<◶Num‿("1e"∾'0'+·⌊0.5+10⋆⁼⊢)¨, Num⟩ {𝕎𝕩}¨ ticks
+    }
+    "stroke-width=2.6|fill=none" Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
+    Outline 0‿0≍dim
+    Legend {
+      label ⇐ names
+      place ⇐ 10‿6
+      width ⇐ 134 ⋄ spacing ⇐ 18 ⋄ pad ⇐ 6
+      Samples ⇐ "stroke-width=2.6" Ge col ≍⊸Path⟜(∾"M h"∾¨Num)¨ (8∾∾⟜22)¨
+    }
+  ⟩
+}
