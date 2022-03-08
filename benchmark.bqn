@@ -1,13 +1,18 @@
 #! /usr/bin/env bqn
 
-types ← "measure"‿"plot"‿"all"‿"help"
+types ← "measure"‿"plot"‿"all"‿"list"‿"help"
 type ← ⊑ types ⊐ 1↑•args
 
 Exit ← •Exit∘⊣⟜•Out
 ⟨At⟩ ← •file
 
 {type<1-˜≠types?@;
-  0 Exit "Usage: benchmark.bqn (help|measure|plot|all) [functions...]"
+  0 Exit "Usage: benchmark.bqn (help|list|measure|plot|all) [functions...]"
+}
+
+{type≠2-˜≠types?@; # List
+  c ← -≠ ext ← ".bqn"
+  0 Exit "Available functions:"∾∾(@+10)∾¨ c↓¨ (ext≡c⊸↑)¨⊸/ •file.List "functions"
 }
 
 {1<≠•args?@; 1 Exit "No functions specified" }
