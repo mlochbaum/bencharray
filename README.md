@@ -7,4 +7,4 @@ To use:
     $ benchmark.bqn help       # See options
     $ benchmark.bqn all arith  # Record and plot arithmetic benchmarks
 
-![Performance bar chart](ouput/plot/arith.svg)
+![Arithmetic performance](output/plot/arith.svg)
