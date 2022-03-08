@@ -20,13 +20,21 @@ fns ← •Import∘("functions"At∾⟜".bqn")⎊@¨ fnames ← 1↓•args
 scale    ← •Import "measure/scale.bqn"
 ⟨LinePlot⇐Plot⟩ ← •Import "plot/line.bqn"
 
-All ← {
-  Time ⇐ TimeFn 𝕩.TimeParams
-  Time¨ 𝕩.timeInit
-
-  y ← 1e9×x÷˜ Time¨ x ← scale.E13 𝕩.xmax
-  ("output/plot"At𝕩.name∾".svg") •file.Chars 𝕩.plotOpts LinePlot 1↓¨x⋈y
+Measure ← {
+  M ← {
+    Time ← TimeFn 𝕩.TimeParams
+    Time¨ 𝕩.timeInit
+    y ← 1e9×x÷˜ Time¨ x ← scale.E13 𝕩.xmax
+    1↓¨x‿y
+  }
+  > M¨ 𝕩.measure
 }
-Measure ← Plot ← !
+Plot ← {
+  ("output/plot"At𝕨.name∾".svg") •file.Chars 𝕨.plotOpts LinePlot 𝕩
+}
 
-(type⊑Measure‿Plot‿All)¨ fns
+TName ← { "output/timings" At 𝕩.name }
+Write ← TName ⊸ •file.Chars ⟜ •Repr
+Read  ← •BQN •file.Chars∘TName
+
+(type⊑⟨ Write⟜Measure, Plot⟜Read, (Plot⊣Write)⟜Measure ⟩)¨ fns
