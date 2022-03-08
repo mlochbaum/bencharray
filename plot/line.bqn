@@ -62,6 +62,7 @@ GetColors ← {
 
 Plot ⇐ { opts 𝕊 dat:
   title‿xcapt‿ycapt‿labels ← opts
+  xlog ← {⟨r⇐xlog⟩:r; 1} opts
   ylog ← {⟨r⇐ylog⟩:r; 1} opts
   changeBounds ← {⟨r⇐changeBounds⟩:r; ⊢} opts
   col ← "stroke"⊸⋈¨ GetColors labels
@@ -75,7 +76,7 @@ Plot ⇐ { opts 𝕊 dat:
   gr ← "stroke-width=2.6|font-size=14px|text-anchor=middle"
   ls ← "clip-path=url(#clip)|fill=none|stroke-linecap=round|stroke-linejoin=round"
 
-  Log ← ⋆⁼⌾(ylog⊑⊑‿⊢)
+  Log ← ⋆⁼⌾(xlog‿ylog⊸/)
   dat ↓˜↩ 0‿0
   xy ← <∘∾˘⍉dat
   win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬ylog) Log bounds ← ChangeBounds (⌊´≍⌈´)∘⥊¨ xy
@@ -95,7 +96,7 @@ Plot ⇐ { opts 𝕊 dat:
       off⇐0‿0 ⋄ dim⇐dim
       orient⇐"vh"
       RoundDown ← {(⊑∘⍋⟜𝕩-1˙)⊸⊑1‿2‿5×⌊⌾(10⋆⁼⊢)𝕩}
-      tpos ⇐ Scale ticks ← 1‿ylog GetTicks⟜∧¨ Scale⁼0⋈¨dim
+      tpos ⇐ Scale ticks ← (⍷∧⊑xy) {𝕨⌾⊑𝕩}⍟(10≥≠∘⊣) xlog‿ylog GetTicks⟜∧¨ Scale⁼0⋈¨dim
       ENum ← {∾⟜"e"⊸∾○Num´ (𝕩÷10⊸⋆)⊸((1<5e¯4+÷⟜10)◶⟨⋈,÷⟜10⊸⋈⟜(1⊸+)⟩)⌊10⋆⁼𝕩}
       ttext ⇐ 1e4⊸≤◶Num‿ENum⚇0 ticks
     }

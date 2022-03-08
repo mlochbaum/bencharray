@@ -29,13 +29,13 @@ Measure ← {
   M ← {
     Time ← TimeFn 𝕩.TimeParams
     Time¨ 𝕩.timeInit
-    y ← 1e9×x÷˜ Time¨ x ← scale.E13 𝕩.xmax
-    1↓¨x‿y
+    𝕩.Result⟜(Time¨) 𝕩.scale
   }
   > M¨ 𝕩.measure
 }
 Plot ← {
-  ("output/plot"At𝕨.name∾".svg") •file.Chars 𝕨.plotOpts LinePlot 𝕩
+  p ← 𝕨.plotOpts LinePlot 𝕨.PlotPre 𝕩
+  ("output/plot"At𝕨.name∾".svg") •file.Chars p
 }
 
 TName ← { "output/timings" At 𝕩.name }
