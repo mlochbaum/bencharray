@@ -34,7 +34,7 @@ Tick ← {
   Vals ← { "text-anchor=end" Ge⍟𝕨 (Pos 𝕨⌽⋈⟜(𝕨⊑to))⊸Text¨´ 𝕩 }
   ⟨
     "stroke-width=0.3|stroke=#555" Ge orient Lines¨ 1 Filter tpos
-    "font-size=11px" Ge s Vals¨ tpos ⋈¨○(0⊸Filter) ttext
+    "font-size=11px" Ge s Vals¨ tpos ⋈¨○(¯0.01⊸Filter) ttext
   ⟩
 }
 
@@ -79,7 +79,7 @@ Plot ⇐ { opts 𝕊 dat:
   dat ↓˜↩ 0‿0
   xy ← <∘∾˘⍉dat
   win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬ylog) Log bounds ← ChangeBounds (⌊´≍⌈´)∘⥊¨ xy
-  ScaleI ← ({¬𝕏}⌾(1⊸⊑) {𝕩÷˜𝕨-˜⊢}´¨ win) {𝕎𝕩}¨ Log  # To [0,1]
+  ScaleI ← ¬⌾(1⊸⊑) ({𝕩÷˜𝕨-˜⊢}˝ ⍉>win)∘Log          # To [0,1]
   Scale ← padi + (dim-padb+padi) × ScaleI          # To pixels
   line ← (<≍˘)○Num´∘Scale˘ dat
 
@@ -95,7 +95,7 @@ Plot ⇐ { opts 𝕊 dat:
       off⇐0‿0 ⋄ dim⇐dim
       orient⇐"vh"
       RoundDown ← {(⊑∘⍋⟜𝕩-1˙)⊸⊑1‿2‿5×⌊⌾(10⋆⁼⊢)𝕩}
-      tpos ⇐ Scale ticks ← 1‿ylog GetTicks¨ Log⁼+`¨win
+      tpos ⇐ Scale ticks ← 1‿ylog GetTicks⟜∧¨ Scale⁼0⋈¨dim
       ENum ← {∾⟜"e"⊸∾○Num´ (𝕩÷10⊸⋆)⊸((1<5e¯4+÷⟜10)◶⟨⋈,÷⟜10⊸⋈⟜(1⊸+)⟩)⌊10⋆⁼𝕩}
       ttext ⇐ 1e4⊸≤◶Num‿ENum⚇0 ticks
     }
