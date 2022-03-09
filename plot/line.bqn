@@ -54,7 +54,8 @@ GetTicks ← {
 GetColors ← {
   nam ← ⋈"BQN"
   col ← ⋈"#2b7067"
-  ce  ← "#22c"‿"#c22"‿"#2a7"‿"#919"
+  ce  ← ⟨"#e41a1c","#377eb8","#4daf4a","#984ea3"
+         "#ff7f00","#ffff33","#a65628","#f781bf"⟩
   ni ← nam ⊐ 𝕩
   ni +↩ (≠ce)|⊒⊸×ni=≠nam  # Cycle through extra colors
   ni ⊏ col∾ce
