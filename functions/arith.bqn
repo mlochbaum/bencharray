@@ -2,7 +2,7 @@
 
 name ⇐ "arith"
 
-arith ← +‿-‿×
+arith ← ×‿+‿-‿⌊‿⌈
 
 xmax ← 2e6
 measure ⇐ (↕4) { type𝕊fn:
