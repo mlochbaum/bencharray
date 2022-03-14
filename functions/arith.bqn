@@ -29,7 +29,8 @@ measure ⇐ (↕4) { type𝕊fn:
 PlotPre ⇐ {> (↕4)⊸⋈¨ <˘⍉𝕩}
 plotOpts ⇐ {
   title ⇐ "Arithmetic with no overflow, 32KB"
-  xcapt ⇐ "Type" ⋄ xlog⇐0
+  types ← (3‿1/"if")∾⟜•Repr¨2⋆3+↕4
+  xcapt ⇐ "Type" ⋄ xlog⇐0 ⋄ XDisp⇐⊑⟜types
   ycapt ⇐ "Time (ns / value)"
   labels ⇐ •Repr¨ arith
   ChangeBounds ⇐ xmax‿10⊸⌊

@@ -19,10 +19,10 @@
       <path d='M0 30.78h512'/>
     </g>
     <g font-size='11px'>
-      <text dy='0.33em' x='0' y='291.1'>0</text>
-      <text dy='0.33em' x='170.667' y='291.1'>1</text>
-      <text dy='0.33em' x='341.333' y='291.1'>2</text>
-      <text dy='0.33em' x='512' y='291.1'>3</text>
+      <text dy='0.33em' x='0' y='291.1'>i8</text>
+      <text dy='0.33em' x='170.667' y='291.1'>i16</text>
+      <text dy='0.33em' x='341.333' y='291.1'>i32</text>
+      <text dy='0.33em' x='512' y='291.1'>f64</text>
       <g text-anchor='end'>
         <text dy='0.33em' x='-6' y='267.204'>0.05</text>
         <text dy='0.33em' x='-6' y='237.061'>0.07</text>

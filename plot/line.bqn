@@ -61,12 +61,17 @@ GetColors ← {
   ni ⊏ col∾ce
 }
 
+ENum ← {∾⟜"e"⊸∾○Num´ (𝕩÷10⊸⋆)⊸((1<5e¯4+÷⟜10)◶⟨⋈,÷⟜10⊸⋈⟜(1⊸+)⟩)⌊10⋆⁼𝕩}
+DispNum ← 1e4⊸≤◶Num‿ENum
+
 Plot ⇐ { opts 𝕊 dat:
   title‿xcapt‿ycapt‿labels ← opts
   xlog ← {⟨r⇐xlog⟩:r; 1} opts
   ylog ← {⟨r⇐ylog⟩:r; 1} opts
   changeBounds ← {⟨r⇐changeBounds⟩:r; ⊢} opts
   col ← "stroke"⊸⋈¨ GetColors labels
+  xDisp ← {⟨r⇐xDisp⟩:r; DispNum} opts
+  yDisp ← {⟨r⇐yDisp⟩:r; DispNum} opts
 
   width ← 512
   off ← 60‿40 ⋄ end ← 20‿50
@@ -98,8 +103,7 @@ Plot ⇐ { opts 𝕊 dat:
       orient⇐"vh"
       RoundDown ← {(⊑∘⍋⟜𝕩-1˙)⊸⊑1‿2‿5×⌊⌾(10⋆⁼⊢)𝕩}
       tpos ⇐ Scale ticks ← (⍷∧⊑xy) {𝕨⌾⊑𝕩}⍟(10≥≠∘⊣) xlog‿ylog GetTicks⟜∧¨ Scale⁼0⋈¨dim
-      ENum ← {∾⟜"e"⊸∾○Num´ (𝕩÷10⊸⋆)⊸((1<5e¯4+÷⟜10)◶⟨⋈,÷⟜10⊸⋈⟜(1⊸+)⟩)⌊10⋆⁼𝕩}
-      ttext ⇐ 1e4⊸≤◶Num‿ENum⚇0 ticks
+      ttext ⇐ XDisp‿YDisp {𝕎⚇0𝕩}¨ ticks
     }
     ls Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
     Outline 0‿0≍dim
