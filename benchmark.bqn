@@ -22,16 +22,16 @@ fns ← •Import∘("functions"At∾⟜".bqn")⎊@¨ fnames ← 1↓•args
 {0=≠𝕩?@; 1 Exit ∾"Unknown functions: "⌾⊑⥊(<", ")≍˘𝕩 } (fns≡¨@)/fnames
 
 ⟨TimeFn⟩ ← •Import "measure/time.bqn"
-scale    ← •Import "measure/scale.bqn"
 ⟨LinePlot⇐Plot⟩ ← •Import "plot/line.bqn"
 
 Measure ← {
+  params‿input‿result‿Measure ← 𝕩
   M ← {
     Time ← TimeFn 𝕩.TimeParams
     Time¨ 𝕩.timeInit
-    𝕩.Result⟜(Time¨) 𝕩.scale
+    𝕩 result.Calc ⋈⟜(Time¨) input.Range 𝕩
   }
-  > M∘𝕩.Measure¨ (<⟨⟩) <⊸∾⌜´ {𝕩.range}¨ 𝕩.params
+  > M∘Measure¨ (<⟨⟩) <⊸∾⌜´ {𝕩.range}¨ params
 }
 Plot ← {
   p ← 𝕨.plotOpts LinePlot 𝕨.PlotPre 𝕩

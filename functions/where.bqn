@@ -6,19 +6,28 @@ name ⇐ "where"
 
 params ⇐ ⟨⟩
 
-xmax ← 1e7
+input ⇐ {
+  name ⇐ "Size"
+  max ⇐ 1e7
+  range ⇐ (•Import"../measure/scale.bqn").E13 max
+}
+
+result ⇐ {
+  name ⇐ "Time (ns / value)"
+  max ⇐ 10
+  Calc ⇐ {𝕨𝕊x‿y: 1↓¨x⋈1e9×y÷x}
+}
+
 measure ⇐ {
   TimeParams ⇐ { ⟨/, RandBool∘𝕩⟩ }
   timeInit ⇐ 1e5‿1‿1e3
-  scale ⇐ (•Import"../measure/scale.bqn").E13 xmax
-  Result ⇐ {x𝕊y: 1↓¨x⋈1e9×y÷x}
 }
 
 PlotPre ⇐ ⊢
 plotOpts ⇐ {
   title ⇐ "Indices from uniform boolean list"
-  x ⇐ {name⇐"Size"}
-  y ⇐ {name⇐"Time (ns / value)"}
+  x ⇐ input
+  y ⇐ result
   labels ⇐ ⋈"/"
-  ChangeBounds ⇐ xmax‿10⊸⌊
+  ChangeBounds ⇐ x.max‿y.max⊸⌊
 }

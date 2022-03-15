@@ -6,10 +6,18 @@ types ← •Import "../params/cputype.bqn"
 fns   ← •Import "../params/arith.bqn"
 params ⇐ types‿fns
 
+input ⇐ {
+  name ⇐ "Length"
+  Range ⇐ {⋈(2⋆3+15)÷𝕩.size}
+}
+
+result ⇐ {
+  name ⇐ "Time (ns / value)"
+  Calc ⇐ {𝕨𝕊x‿y: ⊑1e9×y÷x}
+}
+
 Measure ⇐ { 𝕊 type‿fn:
-  float‿size‿max ← type
-  scale ⇐ ⟨(2⋆3+15)÷size⟩
-  Result ⇐ {x𝕊y: ⊑1e9×y÷x}
+  float‿size‿max ← type ⋄ size⇐
   GetGen ← {
     ⟨Rand⟩ ← ⟨𝕩⟩ •Import "../measure/gen.bqn"
     (⌈(1⌈max)÷2) -˜ 𝕩 Rand max˙
@@ -25,10 +33,10 @@ Measure ⇐ { 𝕊 type‿fn:
   timeInit ⇐ 1e5‿1‿1e3
 }
 
-PlotPre ⇐ {> (↕4)⊸⋈¨ <˘⍉𝕩}
+PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉𝕩}
 plotOpts ⇐ {
   title ⇐ "Arithmetic with no overflow, 32KB"
   x ⇐ types
-  y ⇐ {name⇐"Time (ns / value)"}
+  y ⇐ result
   labels ⇐ {𝕩.Disp¨ 𝕩.range} fns
 }
