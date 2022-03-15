@@ -17,9 +17,12 @@ Exit ← •Exit∘⊣⟜•Out
 
 {1<≠•args?@; 1 Exit "No functions specified" }
 
-fns ← •Import∘("functions"At∾⟜".bqn")⎊@¨ fnames ← 1↓•args
+fpath ← ("functions"At∾⟜".bqn")¨ fnames ← 1↓•args
 
-{0=≠𝕩?@; 1 Exit ∾"Unknown functions: "⌾⊑⥊(<", ")≍˘𝕩 } (fns≡¨@)/fnames
+fexist ← 1∘•file.Type⎊0¨ fpath
+{0=≠𝕩?@; 1 Exit ∾"Unknown functions: "⌾⊑⥊(<", ")≍˘𝕩 } fexist¬⊸/fnames
+
+fns ← •Import¨ fpath
 
 ⟨TimeFn⟩ ← •Import "measure/time.bqn"
 ⟨LinePlot⇐Plot⟩ ← •Import "plot/line.bqn"
