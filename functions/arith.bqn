@@ -8,12 +8,12 @@ params ⇐ types‿fns
 
 input ⇐ {
   name ⇐ "Length"
-  Range ⇐ {⋈(2⋆3+15)÷𝕩.size}
+  Range ⇐ {<(2⋆3+15)÷𝕩.size}
 }
 
 result ⇐ {
   name ⇐ "Time (ns / value)"
-  Calc ⇐ {𝕨𝕊x‿y: ⊑1e9×y÷x}
+  Calc ⇐ {𝕨𝕊x‿y: x⋈1e9×y÷x}
 }
 
 Measure ⇐ { 𝕊 type‿fn:
@@ -29,7 +29,7 @@ Measure ⇐ { 𝕊 type‿fn:
   timeInit ⇐ 1e5‿1‿1e3
 }
 
-PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉𝕩}
+PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
 plotOpts ⇐ {
   title ⇐ "Arithmetic with no overflow, 32KB"
   x ⇐ types
