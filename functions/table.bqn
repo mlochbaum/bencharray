@@ -2,12 +2,13 @@
 
 name ⇐ "table"
 
-arith ← ⊏⟨⌈⟩
+types ← •Import "../params/cputype.bqn"
+fns ← ⟨⊏⟨⌈⟩⟩ •Import "../params/arith.bqn"
+params ⇐ types‿fns
 
 xmax ← 1e5
-measure ⇐ (↕4) { type𝕊fn:
-  float ← 64 = size ⇐ 2⋆3+type
-  max ← (¬float) × 1-˜2⋆size-1
+Measure ⇐ { 𝕊 type‿fn:
+  float‿size‿max ← type
   Flip ← xmax⌈∘÷⊢  # Length of other dimension
   scale ⇐ {(⊢∾Flip∘⌽) ⍷ ⌈ 𝕩 ⋆ (2⊸×÷˜0∾0.5+↕) ⌈2÷˜ ⌈1.3⋆⁼𝕩} xmax
   Result ⇐ {x𝕊y: x⋈1e9×y÷Flip⊸×x}
@@ -17,13 +18,12 @@ measure ⇐ (↕4) { type𝕊fn:
   }
   TimeParams ⇐ { ⟨fn⌜⟩ ∾ ⋈○GetGen⟜Flip 𝕩 }
   timeInit ⇐ 1e4‿1‿1e3
-  xmax ⇐ xmax
-}⌜ arith
+}
 
 PlotPre ⇐ ⌽
 plotOpts ⇐ {
   title ⇐ "Arithmetic ⌈⌜ with 1e5-element result"
   xcapt ⇐ "Left argument length"
   ycapt ⇐ "Time (ns / value)"
-  labels ⇐ ⌽(∾⟜"-byte int"¨"124")∾<"8-byte float"
+  labels ⇐ {𝕩.label}¨ ⌽types.range
 }

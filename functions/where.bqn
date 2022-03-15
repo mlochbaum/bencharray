@@ -4,8 +4,10 @@
 
 name ⇐ "where"
 
+params ⇐ ⟨⟩
+
 xmax ← 1e7
-measure ⇐ ⋈{
+measure ⇐ {
   TimeParams ⇐ { ⟨/, RandBool∘𝕩⟩ }
   timeInit ⇐ 1e5‿1‿1e3
   scale ⇐ (•Import"../measure/scale.bqn").E13 xmax

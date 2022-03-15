@@ -31,7 +31,7 @@ Measure ← {
     Time¨ 𝕩.timeInit
     𝕩.Result⟜(Time¨) 𝕩.scale
   }
-  > M¨ 𝕩.measure
+  > M∘𝕩.Measure¨ (<⟨⟩) <⊸∾⌜´ {𝕩.range}¨ 𝕩.params
 }
 Plot ← {
   p ← 𝕨.plotOpts LinePlot 𝕨.PlotPre 𝕩

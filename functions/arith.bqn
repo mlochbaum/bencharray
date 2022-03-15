@@ -2,12 +2,12 @@
 
 name ⇐ "arith"
 
-arith ← ×‿+‿-‿⌊‿⌈
+types ← •Import "../params/cputype.bqn"
+fns   ← •Import "../params/arith.bqn"
+params ⇐ types‿fns
 
-xmax ← 2e6
-measure ⇐ (↕4) { type𝕊fn:
-  float ← 64 = size ⇐ 2⋆3+type
-  max ← (¬float) × 1-˜2⋆size-1
+Measure ⇐ { 𝕊 type‿fn:
+  float‿size‿max ← type
   scale ⇐ ⟨(2⋆3+15)÷size⟩
   Result ⇐ {x𝕊y: ⊑1e9×y÷x}
   GetGen ← {
@@ -23,15 +23,12 @@ measure ⇐ (↕4) { type𝕊fn:
     ⟨fn⟩ ∾ ⊣‿{(××(⌊max÷|𝕨)⌊|)𝕩} {𝕎○𝕏˜}⟜GetGen¨ <𝕩
   }
   timeInit ⇐ 1e5‿1‿1e3
-  xmax ⇐ xmax
-}⌜ arith
+}
 
 PlotPre ⇐ {> (↕4)⊸⋈¨ <˘⍉𝕩}
 plotOpts ⇐ {
   title ⇐ "Arithmetic with no overflow, 32KB"
-  types ← (3‿1/"if")∾⟜•Repr¨2⋆3+↕4
-  xcapt ⇐ "Type" ⋄ xlog⇐0 ⋄ XDisp⇐⊑⟜types
+  ⟨xcapt⇐name, xlog⇐log, XDisp⇐Disp⟩ ⇐ types
   ycapt ⇐ "Time (ns / value)"
-  labels ⇐ •Repr¨ arith
-  ChangeBounds ⇐ xmax‿10⊸⌊
+  labels ⇐ {𝕩.Disp¨ 𝕩.range} fns
 }
