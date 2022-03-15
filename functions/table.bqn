@@ -19,12 +19,7 @@ result ⇐ {
 }
 
 Measure ⇐ { 𝕊 type‿fn:
-  ⟨max⟩ ← type
-  GetGen ← {
-    ⟨Rand⟩ ← ⟨𝕩⟩ •Import "../measure/gen.bqn"
-    (⌈(1⌈max)÷2) -˜ 𝕩 Rand max˙
-  }
-  TimeParams ⇐ { ⟨fn⌜⟩ ∾ ⋈○GetGen⟜Flip 𝕩 }
+  TimeParams ⇐ { ⟨fn⌜⟩ ∾ ⋈○type.GetGenSmall⟜Flip 𝕩 }
   timeInit ⇐ 1e4‿1‿1e3
 }
 

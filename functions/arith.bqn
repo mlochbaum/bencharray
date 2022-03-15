@@ -17,11 +17,7 @@ result ⇐ {
 }
 
 Measure ⇐ { 𝕊 type‿fn:
-  float‿size‿max ← type ⋄ size⇐
-  GetGen ← {
-    ⟨Rand⟩ ← ⟨𝕩⟩ •Import "../measure/gen.bqn"
-    (⌈(1⌈max)÷2) -˜ 𝕩 Rand max˙
-  }
+  ⟨float,size,max,GetGen⇐GetGenSmall⟩ ← type ⋄ size⇐
   TimeParams ⇐ {
     # Use one generator for both arguments
     float ∨ ×˙⊸≠fn ? l ← 1‿2/⟨fn, GetGen𝕩⟩ ;
