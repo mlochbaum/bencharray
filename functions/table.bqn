@@ -2,6 +2,8 @@
 
 name ⇐ "table"
 
+result ⇐ •Import "../params/ns_v.bqn"
+
 types ← •Import "../params/cputype.bqn"
 fns ← ⟨⊏⟨⌈⟩⟩ •Import "../params/arith.bqn"
 params ⇐ types‿fns
@@ -13,12 +15,8 @@ input ⇐ {
   range ⇐ {(⊢∾Flip∘⌽) ⍷ ⌈ 𝕩 ⋆ (2⊸×÷˜0∾0.5+↕) ⌈2÷˜ ⌈1.3⋆⁼𝕩} xmax
 }
 
-result ⇐ {
-  name ⇐ "Time (ns / value)"
-  Calc ⇐ {𝕨𝕊x‿y: x⋈1e9×y÷Flip⊸×x}
-}
-
 Measure ⇐ { 𝕊 type‿fn:
+  Len ⇐ Flip⊸×
   TimeParams ⇐ { ⟨fn⌜⟩ ∾ ⋈○type.GetGenSmall⟜Flip 𝕩 }
   timeInit ⇐ 1e4‿1‿1e3
 }

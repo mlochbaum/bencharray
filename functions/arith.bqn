@@ -2,6 +2,8 @@
 
 name ⇐ "arith"
 
+result ⇐ •Import "../params/ns_v.bqn"
+
 types ← •Import "../params/cputype.bqn"
 fns   ← •Import "../params/arith.bqn"
 params ⇐ types‿fns
@@ -9,11 +11,6 @@ params ⇐ types‿fns
 input ⇐ {
   name ⇐ "Length"
   Range ⇐ {<(2⋆3+15)÷𝕩.size}
-}
-
-result ⇐ {
-  name ⇐ "Time (ns / value)"
-  Calc ⇐ {𝕨𝕊x‿y: x⋈1e9×y÷x}
 }
 
 Measure ⇐ { 𝕊 type‿fn:

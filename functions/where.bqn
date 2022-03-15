@@ -5,17 +5,12 @@
 name ⇐ "where"
 
 params ⇐ ⟨⟩
+result ⇐ ⟨10⟩ •Import "../params/ns_v.bqn"
 
 input ⇐ {
   name ⇐ "Size"
   max ⇐ 1e7
-  range ⇐ (•Import"../measure/scale.bqn").E13 max
-}
-
-result ⇐ {
-  name ⇐ "Time (ns / value)"
-  max ⇐ 10
-  Calc ⇐ {𝕨𝕊x‿y: 1↓¨x⋈1e9×y÷x}
+  range ⇐ 1 ↓ (•Import"../measure/scale.bqn").E13 max
 }
 
 measure ⇐ {
