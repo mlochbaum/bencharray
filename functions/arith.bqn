@@ -34,13 +34,15 @@ Bench ← {
     labels ⇐ {𝕩.Disp¨ 𝕩.range} fnobjs
   }
 }
+Summary ← Bench∘{
+  ext⇐𝕨 ⋄ fns‿plotname ⇐ 𝕩
+  Range ⇐ {<(2⋆3+15)÷𝕩.size}
+  PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
+}
 
-Bench¨ ⟨
-  {
-    ext ⇐ ""
-    fns ⇐ ×‿+‿-‿⌊‿⌈
-    Range ⇐ {<(2⋆3+15)÷𝕩.size}
-    PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
-    plotname ⇐ "Arithmetic with no overflow, 32KB"
-  }
+⟨
+  ""         Summary ⟨×‿+‿⌊‿<,      "Arithmetic with no overflow, 32KB"⟩
+  "-small"   Summary ⟨×‿+‿-‿⌊‿⌈,    "Arithmetic with no overflow, 32KB"⟩
+  "-compare" Summary ⟨<‿>‿=‿≠‿≤‿≥,  "Comparisons, 32KB"⟩
+  "-slow"    Summary ⟨(⋆⁼)‿⋆‿√‿|‿÷, "Slow arithmetic, 32KB"⟩
 ⟩

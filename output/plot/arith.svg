@@ -8,15 +8,17 @@
     <g stroke-width='0.3' stroke='#555'>
       <path d='M170.667 0v281.6'/>
       <path d='M341.333 0v281.6'/>
-      <path d='M0 267.204h512'/>
-      <path d='M0 237.061h512'/>
-      <path d='M0 205.107h512'/>
-      <path d='M0 168.783h512'/>
-      <path d='M0 143.011h512'/>
-      <path d='M0 106.686h512'/>
-      <path d='M0 80.914h512'/>
-      <path d='M0 60.923h512'/>
-      <path d='M0 30.78h512'/>
+      <path d='M0 278.62h512'/>
+      <path d='M0 259.622h512'/>
+      <path d='M0 230.975h512'/>
+      <path d='M0 200.607h512'/>
+      <path d='M0 166.086h512'/>
+      <path d='M0 141.593h512'/>
+      <path d='M0 107.072h512'/>
+      <path d='M0 82.579h512'/>
+      <path d='M0 63.58h512'/>
+      <path d='M0 34.933h512'/>
+      <path d='M0 4.566h512'/>
     </g>
     <g font-size='11px'>
       <text dy='0.33em' x='0' y='291.1'>i8</text>
@@ -24,37 +26,36 @@
       <text dy='0.33em' x='341.333' y='291.1'>i32</text>
       <text dy='0.33em' x='512' y='291.1'>f64</text>
       <g text-anchor='end'>
-        <text dy='0.33em' x='-6' y='267.204'>0.05</text>
-        <text dy='0.33em' x='-6' y='237.061'>0.07</text>
-        <text dy='0.33em' x='-6' y='205.107'>0.1</text>
-        <text dy='0.33em' x='-6' y='168.783'>0.15</text>
-        <text dy='0.33em' x='-6' y='143.011'>0.2</text>
-        <text dy='0.33em' x='-6' y='106.686'>0.3</text>
-        <text dy='0.33em' x='-6' y='80.914'>0.4</text>
-        <text dy='0.33em' x='-6' y='60.923'>0.5</text>
-        <text dy='0.33em' x='-6' y='30.78'>0.7</text>
+        <text dy='0.33em' x='-6' y='278.62'>0.04</text>
+        <text dy='0.33em' x='-6' y='259.622'>0.05</text>
+        <text dy='0.33em' x='-6' y='230.975'>0.07</text>
+        <text dy='0.33em' x='-6' y='200.607'>0.1</text>
+        <text dy='0.33em' x='-6' y='166.086'>0.15</text>
+        <text dy='0.33em' x='-6' y='141.593'>0.2</text>
+        <text dy='0.33em' x='-6' y='107.072'>0.3</text>
+        <text dy='0.33em' x='-6' y='82.579'>0.4</text>
+        <text dy='0.33em' x='-6' y='63.58'>0.5</text>
+        <text dy='0.33em' x='-6' y='34.933'>0.7</text>
+        <text dy='0.33em' x='-6' y='4.566'>1</text>
       </g>
     </g>
     <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
-      <path stroke='#e41a1c' d='M0 198.92L170.667 180.414L341.333 20L512 54.706'/>
-      <path stroke='#377eb8' d='M0 252.443L170.667 188.267L341.333 116.692L512 53.857'/>
-      <path stroke='#4daf4a' d='M0 252.866L170.667 189.288L341.333 116.785L512 57.217'/>
-      <path stroke='#984ea3' d='M0 261.6L170.667 200.554L341.333 133.379L512 56.412'/>
-      <path stroke='#ff7f00' d='M0 260.819L170.667 199.623L341.333 132.99L512 58.828'/>
+      <path stroke='#e41a1c' d='M0 192.608L170.667 179.073L341.333 20L512 73.881'/>
+      <path stroke='#377eb8' d='M0 243.113L170.667 185.765L341.333 119.616L512 72.187'/>
+      <path stroke='#4daf4a' d='M0 254.138L170.667 187.696L341.333 137.8L512 76.763'/>
+      <path stroke='#984ea3' d='M0 261.6L170.667 192.052L341.333 145.611L512 87.898'/>
     </g>
     <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
-    <g transform='translate(368,173.6)' text-anchor='start' font-size='13px'>
-      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='134' height='102'/>
+    <g transform='translate(368,191.6)' text-anchor='start' font-size='13px'>
+      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='134' height='84'/>
       <path stroke='#e41a1c' d='M8 15h22'/>
       <path stroke='#377eb8' d='M8 33h22'/>
       <path stroke='#4daf4a' d='M8 51h22'/>
       <path stroke='#984ea3' d='M8 69h22'/>
-      <path stroke='#ff7f00' d='M8 87h22'/>
       <text dy='0.33em' x='36' y='15'>×</text>
       <text dy='0.33em' x='36' y='33'>+</text>
-      <text dy='0.33em' x='36' y='51'>-</text>
-      <text dy='0.33em' x='36' y='69'>⌊</text>
-      <text dy='0.33em' x='36' y='87'>⌈</text>
+      <text dy='0.33em' x='36' y='51'>⌊</text>
+      <text dy='0.33em' x='36' y='69'>&lt;</text>
     </g>
   </g>
 </svg>
