@@ -22,7 +22,7 @@ fpath ← ("functions"At∾⟜".bqn")¨ fnames ← 1↓•args
 fexist ← 1∘•file.Type⎊0¨ fpath
 {0=≠𝕩?@; 1 Exit ∾"Unknown functions: "⌾⊑⥊(<", ")≍˘𝕩 } fexist¬⊸/fnames
 
-fns ← •Import¨ fpath
+fns ← ∾ ⥊∘•Import¨ fpath
 
 ⟨TimeFn⟩ ← •Import "measure/time.bqn"
 ⟨LinePlot⇐Plot⟩ ← •Import "plot/line.bqn"

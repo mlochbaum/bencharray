@@ -1,19 +1,13 @@
 # Arithmetic functions
 
-name ⇐ "arith"
+basename ← "arith"
 
-result ⇐ •Import "../params/ns_v.bqn"
+ns_v   ← •Import "../params/ns_v.bqn"
+types  ← •Import "../params/cputype.bqn"
+GetFns ← ⋈ •Import "../params/arith.bqn"˙
+GetInp ← {name⇐"Length" ⋄ range⇐𝕩}
 
-types ← •Import "../params/cputype.bqn"
-fns   ← •Import "../params/arith.bqn"
-params ⇐ types‿fns
-
-input ⇐ {
-  name ⇐ "Length"
-  Range ⇐ {<(2⋆3+15)÷𝕩.size}
-}
-
-Measure ⇐ { 𝕊 type‿fn:
+Measure ← { 𝕊 type‿fn:
   ⟨float,size,max,GetGen⇐GetGenSmall⟩ ← type ⋄ size⇐
   TimeParams ⇐ {
     # Use one generator for both arguments
@@ -25,10 +19,28 @@ Measure ⇐ { 𝕊 type‿fn:
   }
 }
 
-PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
-plotOpts ⇐ {
-  title ⇐ "Arithmetic with no overflow, 32KB"
-  x ⇐ types
-  y ⇐ result
-  labels ⇐ {𝕩.Disp¨ 𝕩.range} fns
+Bench ← {
+  ext‿fns‿range‿plotpre‿plotname ← 𝕩
+  name ⇐ basename∾ext
+  params ⇐ types ⋈ fnobjs ← GetFns fns
+  input ⇐ GetInp range
+  result ⇐ ns_v
+  Measure ⇐ Measure
+  PlotPre⇐
+  plotOpts ⇐ {
+    title ⇐ plotname
+    x ⇐ types
+    y ⇐ result
+    labels ⇐ {𝕩.Disp¨ 𝕩.range} fnobjs
+  }
 }
+
+Bench¨ ⟨
+  {
+    ext ⇐ ""
+    fns ⇐ ×‿+‿-‿⌊‿⌈
+    Range ⇐ {<(2⋆3+15)÷𝕩.size}
+    PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
+    plotname ⇐ "Arithmetic with no overflow, 32KB"
+  }
+⟩
