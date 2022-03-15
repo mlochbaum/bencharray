@@ -28,7 +28,7 @@ Measure ← {
   params‿input‿result‿Measure ← 𝕩
   M ← {
     Time ← TimeFn 𝕩.TimeParams
-    Time¨ 𝕩.timeInit
+    {⟨i⇐timeInit⟩:Time¨i;@} 𝕩
     𝕩 result.Calc ⋈⟜(Time¨) input.Range 𝕩
   }
   > M∘Measure¨ (<⟨⟩) <⊸∾⌜´ {𝕩.range}¨ params

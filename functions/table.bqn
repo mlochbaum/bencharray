@@ -18,7 +18,6 @@ input ⇐ {
 Measure ⇐ { 𝕊 type‿fn:
   Len ⇐ Flip⊸×
   TimeParams ⇐ { ⟨fn⌜⟩ ∾ ⋈○type.GetGenSmall⟜Flip 𝕩 }
-  timeInit ⇐ 1e4‿1‿1e3
 }
 
 PlotPre ⇐ ⌽

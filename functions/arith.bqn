@@ -23,7 +23,6 @@ Measure ⇐ { 𝕊 type‿fn:
     # both sets of random numbers
     ⟨fn⟩ ∾ ⊣‿{(××(⌊max÷|𝕨)⌊|)𝕩} {𝕎○𝕏˜}⟜GetGen¨ <𝕩
   }
-  timeInit ⇐ 1e5‿1‿1e3
 }
 
 PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
