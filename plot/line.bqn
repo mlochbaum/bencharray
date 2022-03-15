@@ -65,27 +65,28 @@ ENum ← {∾⟜"e"⊸∾○Num´ (𝕩÷10⊸⋆)⊸((1<5e¯4+÷⟜10)◶⟨⋈
 DispNum ← 1e4⊸≤◶Num‿ENum
 
 Plot ⇐ { opts 𝕊 dat:
-  title‿xcapt‿ycapt‿labels ← opts
-  xlog ← {⟨r⇐xlog⟩:r; 1} opts
-  ylog ← {⟨r⇐ylog⟩:r; 1} opts
+  title‿x‿y‿labels ← opts
   changeBounds ← {⟨r⇐changeBounds⟩:r; ⊢} opts
   col ← "stroke"⊸⋈¨ GetColors labels
-  xDisp ← {⟨r⇐xDisp⟩:r; DispNum} opts
-  yDisp ← {⟨r⇐yDisp⟩:r; DispNum} opts
+
+  axes ← x‿y
+  xcapt‿ycapt ← {𝕩.name}¨ axes
+  alog ← {⟨r⇐log⟩:r; 1}¨ axes
+  disp ← {⟨r⇐disp⟩:r; DispNum}¨ axes
 
   width ← 512
   off ← 60‿40 ⋄ end ← 20‿50
   dim ← width (⊣⋈×) 0.55
   out ← (-off)≍dim+off+end
-  padb ← ylog × padi ← 0‿20
+  padb ← alog × padi ← 0‿20
 
   gr ← "stroke-width=2.6|font-size=14px|text-anchor=middle"
   ls ← "clip-path=url(#clip)|fill=none|stroke-linecap=round|stroke-linejoin=round"
 
-  Log ← ⋆⁼⌾(xlog‿ylog⊸/)
+  Log ← ⋆⁼⌾(alog⊸/)
   dat ↓˜↩ 0‿0
   xy ← <∘∾˘⍉dat
-  win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬ylog) Log bounds ← ChangeBounds (⌊´≍⌈´)∘⥊¨ xy
+  win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬1⊑alog) Log bounds ← ChangeBounds (⌊´≍⌈´)∘⥊¨ xy
   ScaleI ← ¬⌾(1⊸⊑) ({𝕩÷˜𝕨-˜⊢}˝ ⍉>win)∘Log          # To [0,1]
   Scale ← padi + (dim-padb+padi) × ScaleI          # To pixels
   line ← (<≍˘)○Num´∘Scale˘ dat
@@ -102,8 +103,8 @@ Plot ⇐ { opts 𝕊 dat:
       off⇐0‿0 ⋄ dim⇐dim
       orient⇐"vh"
       RoundDown ← {(⊑∘⍋⟜𝕩-1˙)⊸⊑1‿2‿5×⌊⌾(10⋆⁼⊢)𝕩}
-      tpos ⇐ Scale ticks ← (⍷∧⊑xy) {𝕨⌾⊑𝕩}⍟(10≥≠∘⊣) xlog‿ylog GetTicks⟜∧¨ Scale⁼0⋈¨dim
-      ttext ⇐ XDisp‿YDisp {𝕎⚇0𝕩}¨ ticks
+      tpos ⇐ Scale ticks ← (⍷∧⊑xy) {𝕨⌾⊑𝕩}⍟(10≥≠∘⊣) alog GetTicks⟜∧¨ Scale⁼0⋈¨dim
+      ttext ⇐ disp {𝕎⚇0𝕩}¨ ticks
     }
     ls Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
     Outline 0‿0≍dim

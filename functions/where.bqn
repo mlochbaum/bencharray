@@ -17,8 +17,8 @@ measure ⇐ {
 PlotPre ⇐ ⊢
 plotOpts ⇐ {
   title ⇐ "Indices from uniform boolean list"
-  xcapt ⇐ "Size"
-  ycapt ⇐ "Time (ns / value)"
+  x ⇐ {name⇐"Size"}
+  y ⇐ {name⇐"Time (ns / value)"}
   labels ⇐ ⋈"/"
   ChangeBounds ⇐ xmax‿10⊸⌊
 }

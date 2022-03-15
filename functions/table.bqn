@@ -23,7 +23,7 @@ Measure ⇐ { 𝕊 type‿fn:
 PlotPre ⇐ ⌽
 plotOpts ⇐ {
   title ⇐ "Arithmetic ⌈⌜ with 1e5-element result"
-  xcapt ⇐ "Left argument length"
-  ycapt ⇐ "Time (ns / value)"
+  x ⇐ {name⇐"Left argument length"}
+  y ⇐ {name⇐"Time (ns / value)"}
   labels ⇐ {𝕩.label}¨ ⌽types.range
 }

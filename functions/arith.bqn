@@ -28,7 +28,7 @@ Measure ⇐ { 𝕊 type‿fn:
 PlotPre ⇐ {> (↕4)⊸⋈¨ <˘⍉𝕩}
 plotOpts ⇐ {
   title ⇐ "Arithmetic with no overflow, 32KB"
-  ⟨xcapt⇐name, xlog⇐log, XDisp⇐Disp⟩ ⇐ types
-  ycapt ⇐ "Time (ns / value)"
+  x ⇐ types
+  y ⇐ {name⇐"Time (ns / value)"}
   labels ⇐ {𝕩.Disp¨ 𝕩.range} fns
 }
