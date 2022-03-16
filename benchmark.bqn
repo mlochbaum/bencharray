@@ -6,14 +6,15 @@ type ← ⊑ types ⊐ 1↑•args
 Exit ← •Exit∘⊣⟜•Out
 ⟨At⟩ ← •file
 
-{type<1-˜≠types?@;
+ifHelp‿ifList ← type=1‿2-˜≠types
+{¬ifHelp?@;
   0 Exit "Usage: benchmark.bqn (help|list|measure|plot|all) [functions...]"
 }
 
-{type≠2-˜≠types?@; # List
+{ifList? 1=≠•args?
   c ← -≠ ext ← ".bqn"
-  0 Exit "Available functions:"∾∾(@+10)∾¨ c↓¨ (ext≡c⊸↑)¨⊸/ •file.List "functions"
-}
+  0 Exit "Available groups:"∾∾(@+10)∾¨ c↓¨ (ext≡c⊸↑)¨⊸/ •file.List "functions"
+;@}
 
 {1<≠•args?@; 1 Exit "No functions specified" }
 
@@ -24,6 +25,8 @@ missing ← (¬ •file.Exists¨ fpath) / fname
 {0=≠𝕩?@; 1 Exit ∾"Unknown functions: "⌾⊑⥊(<", ")≍˘𝕩 } missing
 
 fns ← ∾ (fid⊔fspec) ({𝕩.name}¨⊸∊˜/⊢)⍟(⊑'-'∊∾∘⊣)⟜(⥊•Import)¨ fpath
+
+{ ¬ifList?@; 0 Exit "Available benchmarks:"∾∾(@+10)∾¨{𝕩.name}¨fns }
 
 ⟨TimeFn⟩ ← •Import "measure/time.bqn"
 ⟨LinePlot⇐Plot⟩ ← •Import "plot/line.bqn"
