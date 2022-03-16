@@ -41,7 +41,7 @@ Summary ← Bench∘{
 }
 
 ⟨
-  ""         Summary ⟨×‿+‿⌊‿<,      "Arithmetic with no overflow, 32KB"⟩
+  "-summary" Summary ⟨×‿+‿⌊‿<,      "Arithmetic with no overflow, 32KB"⟩
   "-small"   Summary ⟨×‿+‿-‿⌊‿⌈,    "Arithmetic with no overflow, 32KB"⟩
   "-compare" Summary ⟨<‿>‿=‿≠‿≤‿≥,  "Comparisons, 32KB"⟩
   "-slow"    Summary ⟨(⋆⁼)‿⋆‿√‿|‿÷, "Slow arithmetic, 32KB"⟩

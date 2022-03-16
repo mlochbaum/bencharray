@@ -17,12 +17,13 @@ Exit ← •Exit∘⊣⟜•Out
 
 {1<≠•args?@; 1 Exit "No functions specified" }
 
-fpath ← ("functions"At∾⟜".bqn")¨ fnames ← 1↓•args
+fname‿fid ← (⍷⋈⊐) (∧`'-'⊸≠)⊸/¨ fspec ← 1↓•args
+fpath ← ("functions"At∾⟜".bqn")¨ fname
 
-fexist ← 1∘•file.Type⎊0¨ fpath
-{0=≠𝕩?@; 1 Exit ∾"Unknown functions: "⌾⊑⥊(<", ")≍˘𝕩 } fexist¬⊸/fnames
+missing ← (¬ •file.Exists¨ fpath) / fname
+{0=≠𝕩?@; 1 Exit ∾"Unknown functions: "⌾⊑⥊(<", ")≍˘𝕩 } missing
 
-fns ← ∾ ⥊∘•Import¨ fpath
+fns ← ∾ (fid⊔fspec) ({𝕩.name}¨⊸∊˜/⊢)⍟(⊑'-'∊∾∘⊣)⟜(⥊•Import)¨ fpath
 
 ⟨TimeFn⟩ ← •Import "measure/time.bqn"
 ⟨LinePlot⇐Plot⟩ ← •Import "plot/line.bqn"
