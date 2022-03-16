@@ -1,0 +1,62 @@
+<svg viewBox='-60 -40 592 371.6' height='557.4' width='888' xmlns='http://www.w3.org/2000/svg'>
+  <g stroke-width='2.6' font-size='14px' text-anchor='middle'>
+    <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
+    <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
+    <text dy='0.33em' font-size='18px' x='256' y='-19'>Indices from 1e6 booleans</text>
+    <text dy='0.33em' x='256' y='313.6'>Density (+´÷≠)</text>
+    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
+    <g stroke-width='0.3' stroke='#555'>
+      <path d='M51.2 0v281.6'/>
+      <path d='M102.4 0v281.6'/>
+      <path d='M153.6 0v281.6'/>
+      <path d='M204.8 0v281.6'/>
+      <path d='M256 0v281.6'/>
+      <path d='M307.2 0v281.6'/>
+      <path d='M358.4 0v281.6'/>
+      <path d='M409.6 0v281.6'/>
+      <path d='M460.8 0v281.6'/>
+      <path d='M0 256.025h512'/>
+      <path d='M0 229.527h512'/>
+      <path d='M0 205.824h512'/>
+      <path d='M0 164.806h512'/>
+      <path d='M0 114.604h512'/>
+      <path d='M0 49.883h512'/>
+    </g>
+    <g font-size='11px'>
+      <text dy='0.33em' x='0' y='291.1'>0</text>
+      <text dy='0.33em' x='51.2' y='291.1'>0.1</text>
+      <text dy='0.33em' x='102.4' y='291.1'>0.2</text>
+      <text dy='0.33em' x='153.6' y='291.1'>0.3</text>
+      <text dy='0.33em' x='204.8' y='291.1'>0.4</text>
+      <text dy='0.33em' x='256' y='291.1'>0.5</text>
+      <text dy='0.33em' x='307.2' y='291.1'>0.6</text>
+      <text dy='0.33em' x='358.4' y='291.1'>0.7</text>
+      <text dy='0.33em' x='409.6' y='291.1'>0.8</text>
+      <text dy='0.33em' x='460.8' y='291.1'>0.9</text>
+      <text dy='0.33em' x='512' y='291.1'>1</text>
+      <g text-anchor='end'>
+        <text dy='0.33em' x='-6' y='256.025'>0.8</text>
+        <text dy='0.33em' x='-6' y='229.527'>0.9</text>
+        <text dy='0.33em' x='-6' y='205.824'>1</text>
+        <text dy='0.33em' x='-6' y='164.806'>1.2</text>
+        <text dy='0.33em' x='-6' y='114.604'>1.5</text>
+        <text dy='0.33em' x='-6' y='49.883'>2</text>
+      </g>
+    </g>
+    <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+      <path stroke='#e41a1c' d='M0 20L25.6 28.391L51.2 28.083L76.8 32.413L102.4 77.954L128 81.396L153.6 81.837L179.2 83.326L204.8 82.749L230.4 83.362L256 82.749L281.6 85.779L307.2 89.231L332.8 90.598L358.4 133.349L384 132.965L409.6 133.846L435.2 134.951L460.8 137.813L486.4 137.305L512 139.643'/>
+      <path stroke='#377eb8' d='M0 226.061L25.6 261.6L51.2 261.243L76.8 261.148L102.4 261.141L128 261.073L153.6 261.131L179.2 261.124L204.8 261.102L230.4 258.468L256 257.949L281.6 257.029L307.2 254.181L332.8 255.772L358.4 256.765L384 254.219L409.6 256.446L435.2 260.574L460.8 260.563L486.4 260.793L512 260.725'/>
+      <path stroke='#4daf4a' d='M0 223.967L25.6 258.223L51.2 257.97L76.8 257.909L102.4 257.214L128 257.368L153.6 256.231L179.2 255.806L204.8 255.862L230.4 255.154L256 254.267L281.6 252.828L307.2 249.685L332.8 251.66L358.4 249.42L384 249.042L409.6 250.68L435.2 248.612L460.8 248.092L486.4 248.576L512 245.628'/>
+    </g>
+    <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
+    <g transform='translate(368,6)' text-anchor='start' font-size='13px'>
+      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='134' height='66'/>
+      <path stroke='#e41a1c' d='M8 15h22'/>
+      <path stroke='#377eb8' d='M8 33h22'/>
+      <path stroke='#4daf4a' d='M8 51h22'/>
+      <text dy='0.33em' x='36' y='15'>length 1e2</text>
+      <text dy='0.33em' x='36' y='33'>length 1e4</text>
+      <text dy='0.33em' x='36' y='51'>length 1e6</text>
+    </g>
+  </g>
+</svg>
