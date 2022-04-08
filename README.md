@@ -8,4 +8,4 @@ To use:
     $ ./benchmark.bqn list       # See functions that can be benchmarked
     $ ./benchmark.bqn all arith  # Record and plot arithmetic benchmarks
 
-![Arithmetic performance](output/plot/arith.svg)
+![Arithmetic performance](output/plot/arith-summary.svg)
