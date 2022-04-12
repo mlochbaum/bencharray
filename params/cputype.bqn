@@ -9,6 +9,13 @@ range ⇐ {
   disp ⇐ (float⊑"if") ∾ •Repr size
   label ⇐ ∾⟨•Repr size÷8, "-byte ", float⊑"int"‿"float"⟩
 
+  # Random numbers
+  GetGen ⇐ {
+    ⟨Rand⟩ ← ⟨𝕩⟩ •Import "../measure/gen.bqn"
+    n ← (¬float) × 2⋆size
+    ((float+n)÷2) -˜ 𝕩 Rand n˙
+  }
+
   # Random numbers that won't overflow for +-
   GetGenSmall ⇐ {
     ⟨Rand⟩ ← ⟨𝕩⟩ •Import "../measure/gen.bqn"
