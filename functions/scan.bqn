@@ -3,33 +3,51 @@
 basename ← "scan"
 
 ⟨RandBool⟩ ← •Import "../measure/gen.bqn"
-ns ← •Import "../params/ns_v.bqn"
-cputypes  ← •Import "../params/cputype.bqn"
+scales     ← •Import "../measure/scale.bqn"
+ns         ← •Import "../params/ns_v.bqn"
+cputypes   ← •Import "../params/cputype.bqn"
 
-Bool ← {
-  name ⇐ basename∾𝕨
-  params ⇐ ⟨⟨𝕩⟩ •Import "../params/logic.bqn"⟩
+MeasureArith ← { 𝕊 type‿fn:
+  ⟨size,GetGen⟩ ← type ⋄ size⇐
+  TimeParams ⇐ { ⟨Fn`, GetGen𝕩⟩ }
+}
+
+Scale ← {
+  name ⇐ "Length"
+  range ⇐ 1 ↓ scales.E13 max ⇐ 𝕩
+}
+
+Detail ← {
+  params‿input‿GetTime ⇐ ext‿plotname ← 𝕩
+  name ⇐ basename∾ext
   result ⇐ ns
-
-  input ⇐ {
-    name ⇐ "Size"
-    max ⇐ 1e7
-    range ⇐ 1 ↓ (•Import"../measure/scale.bqn").E13 max
-  }
-
-  PlotPre ⇐ ⊢
-  Measure ⇐ { 𝕊 ⟨fn⟩:
-    TimeParams ⇐ { ⟨Fn`, RandBool∘𝕩⟩ }
+  Measure ⇐ {
+    timeParams ⇐ GetTime 𝕩
     timeInit ⇐ 1e5‿1‿1e3
   }
-
+  PlotPre ⇐ ⊢
   plotOpts ⇐ {
-    title ⇐ "Scan F` of boolean list"
+    title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    labels ⇐ {𝕩.Disp¨ 𝕩.range} ⊑params
+    labels ⇐ {𝕩.Disp¨ 𝕩.num} ⊑params
     ChangeBounds ⇐ x.max‿y.max⊸⌊
   }
+}
+
+Bool ← Detail∘{
+  ext ⇐ 𝕨 ⋄ plotname ⇐ "Scan F` of boolean list"
+  params ⇐ ⟨⟨𝕩⟩ •Import "../params/logic.bqn"⟩
+  input ⇐ Scale 1e7
+  GetTime ⇐ { 𝕊 ⟨fn⟩: { ⟨Fn`, RandBool∘𝕩⟩ } }
+}
+
+Arith ← Detail∘{
+  ext ⇐ 𝕨 ⋄ fn ← 𝕩
+  plotname ⇐ "Scan "∾(•Repr fn)∾"` of numeric list"
+  params ⇐ ⟨cputypes⟩
+  input ⇐ Scale 1e5
+  GetTime ⇐ {𝕩.TimeParams}∘MeasureArith ∾⟜⟨fn⟩
 }
 
 Summary ← {
@@ -40,10 +58,7 @@ Summary ← {
 
   input ⇐ { name⇐"Length" ⋄ Range⇐{<(2⋆3+15)÷𝕩.size} }
   PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
-  Measure ⇐ { 𝕊 type‿fn:
-    ⟨size,GetGen⟩ ← type ⋄ size⇐
-    TimeParams ⇐ { ⟨Fn`, GetGen𝕩⟩ }
-  }
+  Measure ⇐ MeasureArith
 
   plotOpts ⇐ {
     title ⇐ "Scan F` of numeric list, 32KB"
@@ -58,4 +73,6 @@ Summary ← {
   "-boolcmp" Bool <‿>‿≤‿≥
   "-arith" Summary +‿-‿⌈‿⌊
   "-slow"  Summary ×‿÷‿⋆‿|
+  "-plus"  Arith {+}
+  "-min"   Arith {⌊}
 ⟩

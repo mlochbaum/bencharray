@@ -3,7 +3,7 @@
     <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
     <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
     <text dy='0.33em' font-size='18px' x='256' y='-19'>Scan F` of boolean list</text>
-    <text dy='0.33em' x='256' y='313.6'>Size</text>
+    <text dy='0.33em' x='256' y='313.6'>Length</text>
     <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
     <g stroke-width='0.3' stroke='#555'>
       <path d='M73.143 0v281.6'/>
@@ -53,10 +53,10 @@
       <path stroke='#377eb8' d='M8 33h22'/>
       <path stroke='#4daf4a' d='M8 51h22'/>
       <path stroke='#984ea3' d='M8 69h22'/>
-      <text dy='0.33em' x='36' y='15'>&lt;</text>
-      <text dy='0.33em' x='36' y='33'>&gt;</text>
-      <text dy='0.33em' x='36' y='51'>≤</text>
-      <text dy='0.33em' x='36' y='69'>≥</text>
+      <text dy='0.33em' x='36' y='15'>0</text>
+      <text dy='0.33em' x='36' y='33'>1</text>
+      <text dy='0.33em' x='36' y='51'>2</text>
+      <text dy='0.33em' x='36' y='69'>3</text>
     </g>
   </g>
 </svg>
