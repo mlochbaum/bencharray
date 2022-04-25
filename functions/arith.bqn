@@ -31,7 +31,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ types
     y ⇐ result
-    labels ⇐ {𝕩.Disp¨ 𝕩.range} fnobjs
+    labels ⇐ {𝕩.Disp¨ 𝕩.num} fnobjs
   }
 }
 Summary ← Bench∘{
