@@ -54,10 +54,10 @@
       <path stroke='#377eb8' d='M8 33h22'/>
       <path stroke='#4daf4a' d='M8 51h22'/>
       <path stroke='#984ea3' d='M8 69h22'/>
-      <text dy='0.33em' x='36' y='15'>i8</text>
-      <text dy='0.33em' x='36' y='33'>i16</text>
-      <text dy='0.33em' x='36' y='51'>i32</text>
-      <text dy='0.33em' x='36' y='69'>f64</text>
+      <text dy='0.33em' x='36' y='15'>1-byte int</text>
+      <text dy='0.33em' x='36' y='33'>2-byte int</text>
+      <text dy='0.33em' x='36' y='51'>4-byte int</text>
+      <text dy='0.33em' x='36' y='69'>8-byte float</text>
     </g>
   </g>
 </svg>

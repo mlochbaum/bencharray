@@ -26,5 +26,5 @@ plotOpts ⇐ {
   title ⇐ "Selecting 1e6 elements with ⊏"
   x ⇐ input
   y ⇐ result
-  labels ⇐ {𝕩.label}¨ ⌽types.range
+  labels ⇐ ⌽types.labels
 }

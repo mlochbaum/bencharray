@@ -30,7 +30,7 @@ Detail ← {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    labels ⇐ {𝕩.Disp¨ 𝕩.num} ⊑params
+    ⟨labels⟩ ⇐ ⊑params
     ChangeBounds ⇐ x.max‿y.max⊸⌊
   }
 }
@@ -64,7 +64,7 @@ Summary ← {
     title ⇐ "Scan F` of numeric list, 32KB"
     x ⇐ types
     y ⇐ result
-    labels ⇐ {𝕩.Disp¨ 𝕩.num} fns
+    ⟨labels⟩ ⇐ fns
   }
 }
 
