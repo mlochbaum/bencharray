@@ -41,7 +41,7 @@ Measure ← {
   > M∘Measure¨ (<⟨⟩) <⊸∾⌜´ {𝕩.range}¨ params
 }
 Plot ← {
-  p ← 𝕨.plotOpts LinePlot 𝕨.PlotPre 𝕩
+  p ← 𝕨.plotOpts LinePlot 𝕨{⟨P⇐PlotPre⟩_𝕣:P; ⊢} 𝕩
   ("output/plot"At𝕨.name∾".svg") •file.Chars p
 }
 

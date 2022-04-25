@@ -8,7 +8,6 @@ Bench ← {
 
   result ⇐ ⟨10⟩ •Import "../params/ns_v.bqn"
 
-  PlotPre ⇐ ⊢
   plotOpts ⇐ {
     title ⇐ plotname
     x ⇐ input

@@ -20,10 +20,10 @@ Measure ⇐ { 𝕊 type‿fn:
   TimeParams ⇐ { ⟨fn⌜⟩ ∾ ⋈○type.GetGenSmall⟜Flip 𝕩 }
 }
 
-PlotPre ⇐ ⌽
 plotOpts ⇐ {
   title ⇐ "Arithmetic ⌈⌜ with 1e5-element result"
   x ⇐ input
   y ⇐ result
-  labels ⇐ ⌽types.labels
+  labels ⇐ types.labels
+  Order ⇐ ⌽
 }

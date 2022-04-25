@@ -66,6 +66,7 @@ DispNum ← 1e4⊸≤◶Num‿ENum
 
 Plot ⇐ { opts 𝕊 dat:
   title‿x‿y‿labels ← opts
+  order ← {⟨r⇐order⟩:r; ⊢} opts
   changeBounds ← {⟨r⇐changeBounds⟩:r; ⊢} opts
   col ← "stroke"⊸⋈¨ GetColors labels
 
@@ -84,7 +85,7 @@ Plot ⇐ { opts 𝕊 dat:
   ls ← "clip-path=url(#clip)|fill=none|stroke-linecap=round|stroke-linejoin=round"
 
   Log ← ⋆⁼⌾(alog⊸/)
-  dat ↓˜↩ 0‿0
+  dat ↩ 0‿0 ↓ Order dat
   xy ← <∘∾˘⍉dat
   win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬1⊑alog) Log bounds ← ChangeBounds (⌊´≍⌈´)∘⥊¨ xy
   ScaleI ← ¬⌾(1⊸⊑) ({𝕩÷˜𝕨-˜⊢}˝ ⍉>win)∘Log          # To [0,1]
@@ -109,7 +110,7 @@ Plot ⇐ { opts 𝕊 dat:
     ls Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
     Outline 0‿0≍dim
     Legend {
-      label ⇐ labels
+      label ⇐ Order labels
       outer ⇐ dim
       place ⇐ (↕2‿2) ⊑∘⍒⊸⊑˜○⥊ ⌊´¨ ≍˘⟜¬ ≤⟜(÷4)⊸/{𝔽⋈¬⊸𝔽}´ ScaleI xy
       width ⇐ 134 ⋄ spacing ⇐ 18 ⋄ pad ⇐ 6

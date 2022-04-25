@@ -25,7 +25,6 @@ Detail ← {
     timeParams ⇐ GetTime 𝕩
     timeInit ⇐ 1e5‿1‿1e3
   }
-  PlotPre ⇐ ⊢
   plotOpts ⇐ {
     title ⇐ plotname
     x ⇐ input

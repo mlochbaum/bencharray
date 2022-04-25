@@ -21,10 +21,10 @@ Measure ⇐ { 𝕊 ⟨type⟩:
   }
 }
 
-PlotPre ⇐ ⌽
 plotOpts ⇐ {
   title ⇐ "Selecting 1e6 elements with ⊏"
   x ⇐ input
   y ⇐ result
-  labels ⇐ ⌽types.labels
+  labels ⇐ types.labels
+  Order ⇐ ⌽
 }
