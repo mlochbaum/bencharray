@@ -16,7 +16,7 @@
   }
   {
     extension⇐name ⇐ "dyalog"
-    shell ⇐ ⟨"dyalogscript"⟩
+    shell ⇐ ⟨"dyalogscript","MAXWS=2G"⟩
     FmtFn ⇐ ("⍸"‿"⌷⍨∘⊂⍨"⊏˜/‿⊏⊸⊐)⌾<∘⊢
   }
 ⟩
