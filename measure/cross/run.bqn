@@ -1,4 +1,5 @@
 # Write files and run the measurement function
+lang ← •Import∘"langs.bqn"⊸(⊑⊣⊏˜{𝕩.name}¨⊸⊐⟜<)⍟(6≠•Type) ⊑•args
 
 # Adapted from _timedGen in measure/time.bqn
 a0 ← 4                            # Number of wanted argument sets
@@ -27,10 +28,11 @@ TimeFn ⇐ {
     fn‿w‿x: w fn{𝕨⊸𝔽•_timed𝕩} _estCount x
   } 𝕩
   arrs ← ⥊⍉> {𝕏¨↕num}¨ 1↓𝕩
+  valence ← 1-˜≠𝕩
   header ← (typ.Write∾·∾' '∾¨•Fmt¨∘≢)¨ arrs
-  meta ← ⟨"I."⟩∾(•Fmt¨⟨1-˜≠𝕩,iter⟩)∾header  # Hard-coded / → I.
+  meta ← ⟨valence lang.FmtFn ⊑𝕩⟩∾(•Fmt¨valence‿iter)∾header
   "/tmp/bencharray_meta" •file.Lines meta
   "/tmp/bencharray_data" •file.Bytes ∾ typ.Conv∘⥊¨ arrs
-  res ← 1 ⊑ •SH "j9"‿"-c"‿(•file.At"avgtime.ijs")
-  num ÷˜ 0 ⌈ •BQN "_¯" (⊢+-˜´∘⊣×⊑⊸=) res
+  res ← 1 ⊑ •SH lang.shell ∾< •file.At"avgtime."∾lang.extension
+  num ÷˜ 1e¯9 ⌈ •BQN "_¯" (⊢+-˜´∘⊣×⊑⊸=) res
 }
