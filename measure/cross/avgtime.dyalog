@@ -15,10 +15,11 @@ args ← get¨ arrs
 
 dy ← 2 = valence
 (aa aw) ← {~dy: ⍬⍵ ⋄ ↓⍉(2÷⍨≢⍵)2⍴⍵} args
-(noop expr) ← ('{⍬⊣',,∘'}¨⍳iter')∘('aa ',⍣dy,∘'¨ aw')¨ '{⍬}'fn
-t0 ← 1⊃⎕AI
+(noop expr) ← ('{⍬⊣',,∘'}¨⍳iter')∘('aa ',⍣dy,∘'¨ aw')¨ '⊢'fn
+10 ⎕DT 'J'  ⍝ Unpredictable delays otherwise
+t0 ← 10 ⎕DT 'J'
 ⍎ noop
-t1 ← 1⊃⎕AI
+t1 ← 10 ⎕DT 'J'
 ⍎ expr
-t2 ← 1⊃⎕AI
-⎕ ← (iter×1e3) ÷⍨ (t2-t1)-(t1-t0)
+t2 ← 10 ⎕DT 'J'
+⎕ ← (iter×1e9) ÷⍨ (t2-t1)-(t1-t0)

@@ -17,6 +17,6 @@
   {
     extension⇐name ⇐ "dyalog"
     shell ⇐ ⟨"dyalogscript"⟩
-    FmtFn ⇐ ("I."‿"⌷⍨∘⊂⍨"⊏˜/‿⊏⊸⊐)⌾<∘⊢
+    FmtFn ⇐ ("⍸"‿"⌷⍨∘⊂⍨"⊏˜/‿⊏⊸⊐)⌾<∘⊢
   }
 ⟩
