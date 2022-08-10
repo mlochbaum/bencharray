@@ -33,6 +33,7 @@ TimeFn ⇐ {
   meta ← ⟨valence lang.FmtFn ⊑𝕩⟩∾(•Fmt¨valence‿iter)∾header
   "/tmp/bencharray_meta" •file.Lines meta
   "/tmp/bencharray_data" •file.Bytes ∾ typ.Conv∘⥊¨ arrs
-  res ← 1 ⊑ •SH lang.shell ∾< •file.At"avgtime."∾lang.extension
-  num ÷˜ 1e¯9 ⌈ •BQN "_¯" (⊢+-˜´∘⊣×⊑⊸=) res
+  res ← •SH lang.shell ∾< •file.At"avgtime."∾lang.extension
+  (2⊸⊑ ! 0=⊑) res
+  num ÷˜ 1e¯9 ⌈ •BQN "_¯" (⊢+-˜´∘⊣×⊑⊸=) 1 ⊑ res
 }
