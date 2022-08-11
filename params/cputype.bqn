@@ -13,7 +13,7 @@ range ⇐ {
   GetGen ⇐ {
     ⟨Rand⟩ ← ⟨𝕩⟩ •Import "../measure/gen.bqn"
     n ← (¬float) × 2⋆size
-    ((float+n)÷2) -˜ 𝕩 Rand n˙
+    •internal.Squeeze ((float+n)÷2) -˜ 𝕩 Rand n˙
   }
 
   # Random numbers that won't overflow for +-
