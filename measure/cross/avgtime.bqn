@@ -18,4 +18,4 @@ args ← Get¨ arrs
 
 dy ← 2 = valence
 timed ← dy ⊑ {𝔽•_timed}‿{𝔽´•_timed}
-•Show (Fn¨ _timed - ⊢¨ _timed) {<˘⍉∘‿2⥊𝕩}⍟dy args
+•Show iter (Fn¨ _timed - ⊢¨ _timed) {<˘⍉∘‿2⥊𝕩}⍟dy args
