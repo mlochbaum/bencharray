@@ -16,5 +16,6 @@ Get ← {
 }
 args ← Get¨ arrs
 
-apply ← (2=valence) ⊑ {𝔽}‿{𝔽˝ ·⍉∘‿2⊸⥊}
-•Show (Fn¨•_timed - ⊢¨•_timed)_apply args
+dy ← 2 = valence
+timed ← dy ⊑ {𝔽•_timed}‿{𝔽´•_timed}
+•Show (Fn¨ _timed - ⊢¨ _timed) {<˘⍉∘‿2⥊𝕩}⍟dy args
