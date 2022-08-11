@@ -35,6 +35,17 @@ fns‿fnd‿fnj ← (⊑¨<⊸∾·{<˘⍉>>𝕩}((2⥊⋈⍟(1≥≡))¨·(2⌊
   # Not covered: ≍⋈↕«»⊑⊒⊔!
 ⟩
 
+_fmtLang_ ← {
+  t‿d ← (⊑⋈1⊸↓) •Decompose 𝕩
+  P←"("∾∾⟜")" ⋄ F ← 𝕨𝕊⊢ ⋄ Tr ← P·∾F¨
+  t◶⟨
+    𝕗 ⊑˜ (𝕨-1)⋈·⊑fns⊸⊐  # 0 primitive
+    !, Tr, Tr           # 1 block, 2/3 train
+    𝔾{!{⌜}≡1⊑𝕩⋄𝔽 F⊑𝕩}   # 4 1-modifier
+    !                   # 5 2-modifier
+  ⟩ d
+}
+
 ⟨
   {
     shell ⇐ ⋈ extension⇐name ⇐ "bqn"
@@ -44,11 +55,11 @@ fns‿fnd‿fnj ← (⊑¨<⊸∾·{<˘⍉>>𝕩}((2⥊⋈⍟(1≥≡))¨·(2⌊
     name ⇐ "j"
     extension ⇐ "ijs"
     shell ⇐ "j9"‿"-c"  # ⟨"jconsole"⟩
-    FmtFn ⇐ fnj ⊑˜ -⟜1⊸⋈⟜(fns⊸⊐⌾<)
+    FmtFn ⇐ fnj _fmtLang_ (∾⟜"/")
   }
   {
     extension⇐name ⇐ "dyalog"
     shell ⇐ ⟨"dyalogscript","MAXWS=2G"⟩
-    FmtFn ⇐ fnd ⊑˜ -⟜1⊸⋈⟜(fns⊸⊐⌾<)
+    FmtFn ⇐ fnd _fmtLang_ ("∘."∾("("∾∾⟜")")⍟(1<≠))
   }
 ⟩
