@@ -2,7 +2,7 @@
 meta ← (⎕UCS 10) (≠⊆⊢) ⊃ ⎕NGET '/tmp/bencharray_meta'
 (fn valence iter arrs) ← 3 ((1(↑,⍎¨⍤↓)↑) , ⊂⍤↓) meta
 
-data ← ⊃ (⍳256) ⎕NGET '/tmp/bencharray_data'
+data ← {(⎕NUNTIE ⍵)⊢⎕NREAD ⍵ 83 ¯1} 0 ⎕NTIE⍨ '/tmp/bencharray_data'
 get ← {
   qual ← ⊃⍵
   (width shape) ← (⊃ ,⍥⊂ 1∘↓) ⍎ 1↓⍵
