@@ -32,9 +32,9 @@
       <text dy='0.33em' x='438.857' y='291.1'>1e6</text>
       <text dy='0.33em' x='512' y='291.1'>1e7</text>
       <g text-anchor='end'>
-        <text dy='0.33em' x='-6' y='277.901'>0</text>
-        <text dy='0.33em' x='-6' y='243.709'>0</text>
-        <text dy='0.33em' x='-6' y='209.516'>0</text>
+        <text dy='0.33em' x='-6' y='277.901'>1e-6</text>
+        <text dy='0.33em' x='-6' y='243.709'>1e-5</text>
+        <text dy='0.33em' x='-6' y='209.516'>1e-4</text>
         <text dy='0.33em' x='-6' y='175.324'>0.001</text>
         <text dy='0.33em' x='-6' y='141.131'>0.01</text>
         <text dy='0.33em' x='-6' y='106.939'>0.1</text>
