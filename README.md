@@ -1,6 +1,6 @@
 # Array language benchmarks
 
-In-progress benchmark suite for array languages, currently targetting BQN only.
+In-progress benchmark suite for array languages. Supports BQN primarily, with working but not-too-accurate cross-language interfaces to BQN, Dyalog APL, and J.
 
 To use:
 

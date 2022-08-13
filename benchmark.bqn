@@ -8,7 +8,7 @@ Exit ← •Exit∘⊣⟜•Out
 
 ifHelp‿ifList ← type=1‿2-˜≠types
 {¬ifHelp?@;
-  0 Exit "Usage: benchmark.bqn (help|list|measure|plot|all) [functions...]"
+  0 Exit "Usage: benchmark.bqn (help|list|measure|plot|all) [langs,functions...]"
 }
 
 {ifList? 1=≠•args?
@@ -18,7 +18,10 @@ ifHelp‿ifList ← type=1‿2-˜≠types
 
 {1<≠•args?@; 1 Exit "No functions specified" }
 
-fname‿fid ← (⍷⋈⊐) (∧`'-'⊸≠)⊸/¨ fspec ← 1↓•args
+lnames ← {𝕩.name}¨ langs ← •Import "measure/cross/langs.bqn"
+fspec‿lang ← (∊⟜lnames∾2˙)⊸⊔ 1↓•args
+
+fname‿fid ← (⍷⋈⊐) (∧`'-'⊸≠)⊸/¨ fspec
 fpath ← ("functions"At∾⟜".bqn")¨ fname
 
 missing ← (¬ •file.Exists¨ fpath) / fname
@@ -28,25 +31,32 @@ fns ← ∾ (fid⊔fspec) ({𝕩.name}¨⊸∊˜/⊢)⍟(⊑'-'∊∾∘⊣)⟜(
 
 { ¬ifList?@; 0 Exit "Available benchmarks:"∾∾(@+10)∾¨{𝕩.name}¨fns }
 
-⟨TimeFn⟩ ← •Import "measure/time.bqn"
 ⟨LinePlot⇐Plot⟩ ← •Import "plot/line.bqn"
 
-Measure ← {
-  params‿input‿result‿Measure ← 𝕩
-  M ← {
-    Time ← TimeFn 𝕩.TimeParams
-    {⟨i⇐timeInit⟩:Time¨i;@} 𝕩
-    𝕩 result.Calc ⋈⟜(Time¨) input.Range 𝕩
+Run ← { 𝕊 lang:
+  ⟨TimeFn⟩ ← {
+    lang≡@ ? •Import "measure/time.bqn" ;
+    ⟨lang⟩ •Import "measure/cross/run.bqn"
   }
-  > M∘Measure¨ (<⟨⟩) <⊸∾⌜´ {𝕩.range}¨ params
-}
-Plot ← {
-  p ← 𝕨.plotOpts LinePlot 𝕨{⟨P⇐PlotPre⟩_𝕣:P; ⊢} 𝕩
-  ("output/plot"At𝕨.name∾".svg") •file.Chars p
-}
+  file ← { lang≡@ ? At ; At⟜(∾⟜("-x-"∾lang.name)) }
+  Measure ← {
+    params‿input‿result‿Measure ← 𝕩
+    M ← {
+      Time ← TimeFn 𝕩.TimeParams
+      {⟨i⇐timeInit⟩:Time¨i;@} 𝕩
+      𝕩 result.Calc ⋈⟜(Time¨) input.Range 𝕩
+    }
+    > M∘Measure¨ (<⟨⟩) <⊸∾⌜´ {𝕩.range}¨ params
+  }
+  Plot ← {
+    p ← 𝕨.plotOpts LinePlot 𝕨{⟨P⇐PlotPre⟩_𝕣:P; ⊢} 𝕩
+    (("output/plot" File 𝕨.name)∾".svg") •file.Chars p
+  }
 
-TName ← { "output/timings" At 𝕩.name }
-Write ← TName ⊸ •file.Chars ⟜ •Repr
-Read  ← •BQN •file.Chars∘TName
+  TName ← { "output/timings" File 𝕩.name }
+  Write ← TName ⊸ •file.Chars ⟜ •Repr
+  Read  ← •BQN •file.Chars∘TName
 
-(type⊑⟨ Write⟜Measure, Plot⟜Read, (Plot⊣Write)⟜Measure ⟩)¨ fns
+  (type⊑⟨ Write⟜Measure, Plot⟜Read, (Plot⊣Write)⟜Measure ⟩)¨ fns
+}
+Run¨ ⟨@⟩⊸∾⍟(0=≠) langs ⊏˜ lnames ⊐ lang
