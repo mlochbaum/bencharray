@@ -38,5 +38,10 @@ Bench¨ ∾ ⟨
     desc ⇐ "random "∾𝕩.label
     ⟨GetGen⟩ ⇐ 𝕩
   }¨ types.range
+  {
+    ext  ⇐ "sort-"  ∾𝕩.disp
+    desc ⇐ "sorted "∾𝕩.label
+    GetGen ⇐ {∧𝕏} 𝕩.GetGen
+  }¨ types.range
 ⟩
 
