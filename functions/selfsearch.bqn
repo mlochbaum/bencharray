@@ -6,7 +6,7 @@ tname ← "Self-search"
 scales ← •Import "../measure/scale.bqn"
 ns     ← •Import "../params/ns_v.bqn"
 types  ← •Import "../params/cputype.bqn"
-fns    ← ⟨⊐‿⊒‿∊⟩ •Import "../params/arith.bqn"
+fns    ← ⟨⊐‿⊒‿∊‿⍷⟩ •Import "../params/arith.bqn"
 
 Scale ← {
   name ⇐ "Length"
@@ -41,7 +41,7 @@ Bench¨ ∾ ⟨
   {
     ext  ⇐ "sort-"  ∾𝕩.disp
     desc ⇐ "sorted "∾𝕩.label
-    GetGen ⇐ {∧𝕏} 𝕩.GetGen
+    GetGen ⇐ {•internal.Squeeze∘∧𝕏} 𝕩.GetGen
   }¨ types.range
 ⟩
 
