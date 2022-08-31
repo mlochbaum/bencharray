@@ -15,7 +15,7 @@ Measure ← { 𝕊 type‿fn:
     # In integer × arguments need to interact to suppress overflow: use
     # two parallel generators but run each twice so each argument sees
     # both sets of random numbers
-    ⟨fn⟩ ∾ ⊣‿{(××(⌊max÷|𝕨)⌊|)𝕩} {𝕎○𝕏˜}⟜GetGen¨ <𝕩
+    ⟨fn⟩ ∾ ⊣‿{•internal.Squeeze(××(⌊max÷|𝕨)⌊|)𝕩} {𝕎○𝕏˜}⟜GetGen¨ <𝕩
   }
 }
 
