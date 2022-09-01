@@ -19,10 +19,12 @@ MSmall ← { 𝕊 type‿fn:
     ⟨fn⟩ ∾ ⊣‿{•internal.Squeeze(××(⌊max÷|𝕨)⌊|)𝕩} {𝕎○𝕏˜}⟜GetGen¨ <𝕩
   }
 }
-MLarge ← { 𝕊 type‿fn:
+_mGen ← { GenPair _𝕣 type‿fn:
   ⟨size,GetGen⟩ ← type ⋄ size⇐
-  TimeParams ⇐ { 1‿2/⟨fn, GetGen𝕩⟩ }
+  TimeParams ⇐ { ⟨fn⟩∾getGen GenPair 𝕩 }
 }
+MLarge ← (⋈˜{𝕎𝕩})_mGen
+MLScal ← {⟨{⊑𝕏}𝕎1,𝕎𝕩⟩}_mGen
 
 Bench ← {
   ext‿fns‿range‿measure‿plotpre‿plotname ← 𝕩
@@ -48,6 +50,7 @@ Summary ← Bench∘{
   "-summary" Summary ⟨×‿+‿⌊‿<,      MSmall, "Arithmetic with no overflow, 32KB"⟩
   "-small"   Summary ⟨×‿+‿-‿⌊‿⌈,    MSmall, "Arithmetic with no overflow, 32KB"⟩
   "-over"    Summary ⟨×‿+‿-,        MLarge, "Arithmetic with overflow, 32KB"⟩
+  "-scal"    Summary ⟨×‿+‿⌊‿<,      MLScal, "Scalar-list arithmetic allowing overflow, 32KB"⟩
   "-compare" Summary ⟨<‿>‿=‿≠‿≤‿≥,  MLarge, "Comparisons, 32KB"⟩
   "-slow"    Summary ⟨(⋆⁼)‿⋆‿√‿|‿÷, MLarge, "Slow arithmetic, 32KB"⟩
 ⟩
