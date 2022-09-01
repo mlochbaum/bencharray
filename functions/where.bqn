@@ -36,7 +36,7 @@ Bench¨ ⟨
   }
   {
     name ⇐ "where-density"
-    plotname ⇐ "Indices from 1e6 booleans"
+    plotname ⇐ "Indices from boolean lists"
 
     params ⇐ ⟨{
       name ⇐ "Size"
