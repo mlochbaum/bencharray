@@ -16,7 +16,7 @@ MeasureArith ← { 𝕊 type‿fn:
 
 Scale ← {
   name ⇐ "Length"
-  range ⇐ scales.E13 max ⇐ 𝕩
+  range ⇐ scales.E23 max ⇐ 𝕩
 }
 
 Detail ← {
