@@ -26,7 +26,7 @@ Bench¨ ⟨
     input ⇐ {
       name ⇐ "Size"
       max ⇐ 1e7
-      range ⇐ 1 ↓ (•Import"../measure/scale.bqn").E13 max
+      range ⇐ (•Import"../measure/scale.bqn").E13 max
     }
 
     measure ⇐ {

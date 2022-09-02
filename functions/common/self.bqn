@@ -9,7 +9,7 @@ fnobjs ← ⟨fns⟩ •Import "../../params/arith.bqn"
 
 Scale ← {
   name ⇐ "Length"
-  range ⇐ 1 ↓ scales.E13 max ⇐ 𝕩
+  range ⇐ scales.E13 max ⇐ 𝕩
 }
 
 Bench ⇐ {

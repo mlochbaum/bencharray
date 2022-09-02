@@ -10,7 +10,7 @@ params ⇐ ⟨types⟩
 input ⇐ {
   name ⇐ "Right argument length"
   max ⇐ 1e6
-  range ⇐ 1 ↓ (•Import"../measure/scale.bqn").E13 max
+  range ⇐ (•Import"../measure/scale.bqn").E13 max
 }
 
 Measure ⇐ { 𝕊 ⟨type⟩:
