@@ -4,7 +4,7 @@ name ⇐ "select-many"
 
 result ⇐ •Import "../params/ns_v.bqn"
 
-types ← •Import "../params/cputype.bqn"
+types ← •Import "../params/numtype.bqn"
 params ⇐ ⟨types⟩
 
 input ⇐ {
@@ -27,4 +27,5 @@ plotOpts ⇐ {
   y ⇐ result
   labels ⇐ types.labels
   Order ⇐ ⌽
+  ChangeBounds ⇐ 0‿0.4⊸⌈
 }
