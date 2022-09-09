@@ -27,8 +27,8 @@ Bench¨ ⟨
     input ⇐ {
       name ⇐ "Left argument non-negative density"
       max ⇐ 1
-      log ⇐ 0
-      range ⇐ ↕⊸∾⊸÷ 10
+      log ⇐ 0 ⋄ Trans ⇐ 1.6⊸√
+      range ⇐ ×˜ ↕⊸∾⊸÷ 10
     }
     Measure ⇐ { 𝕊 ⟨type⟩:
       len ⇐ 1e5

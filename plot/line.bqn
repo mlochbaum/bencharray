@@ -84,7 +84,7 @@ Plot ⇐ { opts 𝕊 dat:
   gr ← "stroke-width=2.6|font-size=14px|text-anchor=middle"
   ls ← "clip-path=url(#clip)|fill=none|stroke-linecap=round|stroke-linejoin=round"
 
-  Log ← ⋆⁼⌾(alog⊸/)
+  Log ← ({⟨R⇐Trans⟩:R; ⊢}⊑axes)⌾⊑ ⋆⁼⌾(alog⊸/)
   dat ↩ 0‿0 ↓ Order dat
   xy ← <∘∾˘⍉dat
   win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬1⊑alog) Log bounds ← ChangeBounds (⌊´≍⌈´)∘⥊¨ xy
