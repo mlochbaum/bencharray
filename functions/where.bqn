@@ -45,7 +45,6 @@ Bench¨ ⟨
       label ⇐ ("length 1e"∾•Repr)¨ exp
     }⟩
 
-    len ← 1e6
     input ⇐ {
       name ⇐ "Density (+´÷≠)"
       max ⇐ 1
