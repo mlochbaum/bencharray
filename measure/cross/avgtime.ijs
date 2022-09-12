@@ -10,7 +10,7 @@ get =: 3 : 0
   d =. size {. data
   data =: size }. data
   l =. 2^.1>.byte
-  csmall =. ,@:(|."1)@:((8$2)&#:)`(]-256*128&<:)@.(1<width)@:(a.&i.)
+  csmall =. ,@:(|."1)@:(0~:(8$2)&#:)`(]-256*128&<:)@.(1<width)@:(a.&i.)
   shape $ ((float-l) 3!:(4+float) ])`csmall@.(0=l) d
 )
 args =: get&.> arrs
