@@ -1,4 +1,4 @@
-# Arithmetic functions
+# Dyadic arithmetic functions
 
 basename ← "arith"
 
