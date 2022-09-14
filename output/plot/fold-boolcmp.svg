@@ -48,8 +48,8 @@
       <path stroke='#984ea3' d='M0 21.082L22.018 87.636L34.898 123.692L51.125 164.375L78.934 211.629L104.694 232.098L132.109 247.948L158.739 255.328L185.16 258.936L211.658 260.444L238.118 261.139L264.573 261.242L291.036 261.524L317.493 261.578L343.951 261.57L370.409 261.278L396.867 261.39L423.325 260.906L449.783 259.705L476.241 258.729L502.698 258.701L529.156 258.582'/>
     </g>
     <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
-    <g transform='translate(368,6)' text-anchor='start' font-size='13px'>
-      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='134' height='84'/>
+    <g transform='translate(442,6)' text-anchor='start' font-size='13px'>
+      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='60' height='84'/>
       <path stroke='#e41a1c' d='M8 15h22'/>
       <path stroke='#377eb8' d='M8 33h22'/>
       <path stroke='#4daf4a' d='M8 51h22'/>

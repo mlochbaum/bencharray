@@ -113,7 +113,7 @@ Plot ⇐ { opts 𝕊 dat:
       label ⇐ Order labels
       outer ⇐ dim
       place ⇐ (↕2‿2) ⊑∘⍒⊸⊑˜○⥊ ⌊´¨ ≍˘⟜¬ ≤⟜(÷4)⊸/{𝔽⋈¬⊸𝔽}´ ScaleI xy
-      width ⇐ 134 ⋄ spacing ⇐ 18 ⋄ pad ⇐ 6
+      width ⇐ (2<⌈´≠¨label)⊑60‿134 ⋄ spacing ⇐ 18 ⋄ pad ⇐ 6
       Samples ⇐ col ≍⊸Path⟜(∾"M h"∾¨Num)¨ (8∾∾⟜22)¨
     }
   ⟩
