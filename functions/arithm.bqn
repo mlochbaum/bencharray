@@ -33,5 +33,5 @@ Summary ← Bench∘{
 
 ⟨
   "-simple"  Summary ⟨-‿¬‿×‿|‿⌊‿⌈,  "Monadic arithmetic, 32KB"⟩
-  "-slow"    Summary ⟨⋆‿√‿÷,        "Slow monadic arithmetic, 32KB"⟩
+  "-slow"    Summary ⟨(⋆⁼)‿⋆‿√‿÷,   "Slow monadic arithmetic, 32KB"⟩
 ⟩
