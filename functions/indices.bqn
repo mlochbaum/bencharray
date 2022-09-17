@@ -3,6 +3,12 @@
 ⟨RandBool⟩ ← •Import "../measure/gen.bqn"
 scale ← •Import"../measure/scale.bqn"
 
+sizes ← {
+  name ⇐ "Size"
+  range ⇐ 10⋆exp←2‿4‿6
+  label ⇐ ("length 1e"∾•Repr)¨ exp
+}
+
 Bench ← {
   params‿input‿measure ⇐ ext‿plotname ← 𝕩
   name ⇐ "indices-"∾ext
@@ -39,12 +45,7 @@ Bench¨ ⟨
     ext ⇐ "where-density"
     plotname ⇐ "Indices from boolean lists"
 
-    params ⇐ ⟨{
-      name ⇐ "Size"
-      range ⇐ 10⋆exp←2‿4‿6
-      label ⇐ ("length 1e"∾•Repr)¨ exp
-    }⟩
-
+    params ⇐ ⟨sizes⟩
     input ⇐ {
       name ⇐ "Density (+´÷≠)"
       max ⇐ 1
@@ -55,6 +56,22 @@ Bench¨ ⟨
     Measure ⇐ { 𝕊⟨len⟩: len⇐
       TimeParams ⇐ { ⟨/, len↑·/⁼(⌊0.5+𝕩×len) •rand.Subset len˙⟩ }
       timeInit ⇐ (len<1e3)⊑⟨0‿0.8,1‿2‿0‿4‿6‿9‿3‿7‿8‿5÷10⟩
+    }
+  }
+  {
+    ext ⇐ "avg"
+    plotname ⇐ "Indices from uniform random list"
+
+    params ⇐ ⟨sizes⟩
+    input ⇐ {
+      name ⇐ "Average (+´÷≠)"
+      max ⇐ 100
+      range ⇐ scale.E13 max
+    }
+
+    Measure ⇐ { 𝕊⟨l⟩: Len⇐l⊸×
+      TimeParams ⇐ { ⟨/, l •rand.Range (1+2×𝕩)˙⟩ }
+      timeInit ⇐ (l<1e3)⊑⟨2‿31,4‿37‿1‿6‿3‿11‿2⟩
     }
   }
   {

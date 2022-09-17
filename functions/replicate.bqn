@@ -52,7 +52,39 @@ Bench¨ ⟨
       len ⇐ 1e5
       TimeParams ⇐ { ⟨/, len↑·/⁼(⌊0.5+𝕩×len) •rand.Subset len˙,
                          type.GetGen len⟩ }
-      timeInit ⇐ (len<1e3)⊑⟨0‿0.8,1‿2‿0‿4‿6‿9‿3‿7‿8‿5÷10⟩
+      timeInit ⇐ 0‿0.8
+    }
+  }
+  {
+    ext ⇐ "avg"
+    plotname ⇐ "Replicating with 1e5 uniform random lengths"
+
+    input ⇐ {
+      name ⇐ "Average (+´÷≠)"
+      max ⇐ 100
+      range ⇐ scale.E13 max
+    }
+
+    Measure ⇐ { 𝕊 ⟨type⟩:
+      l←1e5 ⋄ Len⇐l⊸×
+      TimeParams ⇐ { ⟨/, l •rand.Range (1+2×𝕩)˙, type.GetGen l⟩ }
+      timeInit ⇐ 2‿31
+    }
+  }
+  {
+    ext ⇐ "const"
+    plotname ⇐ "Replicating 1e5 elements by constant factor"
+
+    input ⇐ {
+      name ⇐ "Left argument"
+      max ⇐ 50
+      range ⇐ scale.E13 max
+    }
+
+    Measure ⇐ { 𝕊 ⟨type⟩:
+      l←1e5 ⋄ Len⇐l⊸×
+      TimeParams ⇐ { ⟨/, 𝕩˙, type.GetGen l⟩ }
+      timeInit ⇐ 2‿31
     }
   }
 ⟩

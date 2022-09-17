@@ -1,0 +1,60 @@
+<svg viewBox='-60 -40 592 371.6' height='557.4' width='888' xmlns='http://www.w3.org/2000/svg'>
+  <g stroke-width='2.6' font-size='14px' text-anchor='middle'>
+    <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
+    <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
+    <text dy='0.33em' font-size='18px' x='256' y='-19'>Replicating with 1e5 uniform random lengths</text>
+    <text dy='0.33em' x='256' y='313.6'>Average (+´÷≠)</text>
+    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
+    <g stroke-width='0.3' stroke='#555'>
+      <path d='M77.064 0v281.6'/>
+      <path d='M178.936 0v281.6'/>
+      <path d='M256 0v281.6'/>
+      <path d='M333.064 0v281.6'/>
+      <path d='M434.936 0v281.6'/>
+      <path d='M0 267.474h512'/>
+      <path d='M0 211.678h512'/>
+      <path d='M0 169.469h512'/>
+      <path d='M0 127.261h512'/>
+      <path d='M0 71.465h512'/>
+      <path d='M0 29.257h512'/>
+    </g>
+    <g font-size='11px'>
+      <text dy='0.33em' x='0' y='291.1'>1</text>
+      <text dy='0.33em' x='77.064' y='291.1'>2</text>
+      <text dy='0.33em' x='178.936' y='291.1'>5</text>
+      <text dy='0.33em' x='256' y='291.1'>10</text>
+      <text dy='0.33em' x='333.064' y='291.1'>20</text>
+      <text dy='0.33em' x='434.936' y='291.1'>50</text>
+      <text dy='0.33em' x='512' y='291.1'>100</text>
+      <g text-anchor='end'>
+        <text dy='0.33em' x='-6' y='267.474'>0.2</text>
+        <text dy='0.33em' x='-6' y='211.678'>0.5</text>
+        <text dy='0.33em' x='-6' y='169.469'>1</text>
+        <text dy='0.33em' x='-6' y='127.261'>2</text>
+        <text dy='0.33em' x='-6' y='71.465'>5</text>
+        <text dy='0.33em' x='-6' y='29.257'>10</text>
+      </g>
+    </g>
+    <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+      <path stroke='#e41a1c' d='M0 43.087L77.064 73.517L122.143 82.699L154.127 96.327L178.936 103.433L199.207 112.377L216.345 118.16L231.191 124.914L256 135.315L285.169 147.104L314.995 152.634L348.602 150.322L378.143 149.716L407.313 148.94L437.138 148.099L465.803 74.209L495.232 74.708L524.6 74.506'/>
+      <path stroke='#377eb8' d='M0 45.355L77.064 75.888L122.143 95.751L154.127 108.763L178.936 111.231L199.207 116.612L216.345 123.138L231.191 129.688L256 137.768L285.169 149.209L314.995 162.641L348.602 178.425L378.143 191.4L407.313 193.993L437.138 193.222L465.803 84.263L495.232 84.225L524.6 84.229'/>
+      <path stroke='#4daf4a' d='M0 38.39L77.064 69.703L122.143 88.532L154.127 102.726L178.936 113.037L199.207 121.14L216.345 124.838L231.191 132.023L256 137.088L285.169 148.018L314.995 160.089L348.602 173.347L378.143 186.098L407.313 199.876L437.138 214.184L465.803 89.582L495.232 89.504L524.6 90.102'/>
+      <path stroke='#984ea3' d='M0 40.055L77.064 83.456L122.143 103.899L154.127 121.698L178.936 130.745L199.207 140.556L216.345 151.831L231.191 160.745L256 170.944L285.169 186.978L314.995 203.659L348.602 217.424L378.143 232.991L407.313 246.21L437.138 261.6L465.803 94.39L495.232 94.44L524.6 94.566'/>
+      <path stroke='#ff7f00' d='M0 20L77.064 45.979L122.143 61.381L154.127 71.142L178.936 80.091L199.207 85.12L216.345 90.853L231.191 95.191L256 103.518L285.169 111.972L314.995 119.383L348.602 125.446L378.143 128.826L407.313 131.65L437.138 133.789L465.803 95.979L495.232 96.245L524.6 96.6'/>
+    </g>
+    <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
+    <g transform='translate(10,173.6)' text-anchor='start' font-size='13px'>
+      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='134' height='102'/>
+      <path stroke='#e41a1c' d='M8 15h22'/>
+      <path stroke='#377eb8' d='M8 33h22'/>
+      <path stroke='#4daf4a' d='M8 51h22'/>
+      <path stroke='#984ea3' d='M8 69h22'/>
+      <path stroke='#ff7f00' d='M8 87h22'/>
+      <text dy='0.33em' x='36' y='15'>8-byte float</text>
+      <text dy='0.33em' x='36' y='33'>4-byte int</text>
+      <text dy='0.33em' x='36' y='51'>2-byte int</text>
+      <text dy='0.33em' x='36' y='69'>1-byte int</text>
+      <text dy='0.33em' x='36' y='87'>boolean</text>
+    </g>
+  </g>
+</svg>

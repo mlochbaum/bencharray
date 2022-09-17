@@ -1,0 +1,63 @@
+<svg viewBox='-60 -40 592 371.6' height='557.4' width='888' xmlns='http://www.w3.org/2000/svg'>
+  <g stroke-width='2.6' font-size='14px' text-anchor='middle'>
+    <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
+    <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
+    <text dy='0.33em' font-size='18px' x='256' y='-19'>Indices from uniform random list</text>
+    <text dy='0.33em' x='256' y='313.6'>Average (+´÷≠)</text>
+    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
+    <g stroke-width='0.3' stroke='#555'>
+      <path d='M77.064 0v281.6'/>
+      <path d='M178.936 0v281.6'/>
+      <path d='M256 0v281.6'/>
+      <path d='M333.064 0v281.6'/>
+      <path d='M434.936 0v281.6'/>
+      <path d='M0 247.768h512'/>
+      <path d='M0 224.439h512'/>
+      <path d='M0 206.345h512'/>
+      <path d='M0 179.06h512'/>
+      <path d='M0 150.138h512'/>
+      <path d='M0 117.259h512'/>
+      <path d='M0 93.93h512'/>
+      <path d='M0 61.051h512'/>
+      <path d='M0 37.723h512'/>
+      <path d='M0 19.629h512'/>
+    </g>
+    <g font-size='11px'>
+      <text dy='0.33em' x='0' y='291.1'>1</text>
+      <text dy='0.33em' x='77.064' y='291.1'>2</text>
+      <text dy='0.33em' x='178.936' y='291.1'>5</text>
+      <text dy='0.33em' x='256' y='291.1'>10</text>
+      <text dy='0.33em' x='333.064' y='291.1'>20</text>
+      <text dy='0.33em' x='434.936' y='291.1'>50</text>
+      <text dy='0.33em' x='512' y='291.1'>100</text>
+      <g text-anchor='end'>
+        <text dy='0.33em' x='-6' y='280.647'>0.2</text>
+        <text dy='0.33em' x='-6' y='247.768'>0.3</text>
+        <text dy='0.33em' x='-6' y='224.439'>0.4</text>
+        <text dy='0.33em' x='-6' y='206.345'>0.5</text>
+        <text dy='0.33em' x='-6' y='179.06'>0.7</text>
+        <text dy='0.33em' x='-6' y='150.138'>1</text>
+        <text dy='0.33em' x='-6' y='117.259'>1.5</text>
+        <text dy='0.33em' x='-6' y='93.93'>2</text>
+        <text dy='0.33em' x='-6' y='61.051'>3</text>
+        <text dy='0.33em' x='-6' y='37.723'>4</text>
+        <text dy='0.33em' x='-6' y='19.629'>5</text>
+      </g>
+    </g>
+    <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+      <path stroke='#e41a1c' d='M0 33.966L77.064 64.116L122.143 82.774L154.127 100.631L178.936 99.179L199.207 111.014L216.345 113.242L231.191 124.967L256 148.25L285.169 174.813L314.995 199.567L348.602 215.732L378.143 232.529L407.313 245.407L437.138 261.322L465.803 226.4L495.232 243.407L524.6 261.6'/>
+      <path stroke='#377eb8' d='M0 24.533L77.064 23.256L122.143 43.593L154.127 59.601L178.936 65.988L199.207 75.771L216.345 87.239L231.191 96.692L256 106.303L285.169 122.791L314.995 139.916L348.602 159.934L378.143 177.893L407.313 193.499L437.138 208.828L465.803 203.445L495.232 219.437L524.6 233.323'/>
+      <path stroke='#4daf4a' d='M0 21.927L77.064 20L122.143 39.065L154.127 55.813L178.936 62.438L199.207 72.045L216.345 83.218L231.191 92.718L256 102.446L285.169 118.12L314.995 135.193L348.602 155.222L378.143 172.492L407.313 175.803L437.138 176.884L465.803 174.448L495.232 175.271L524.6 175.732'/>
+    </g>
+    <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
+    <g transform='translate(10,209.6)' text-anchor='start' font-size='13px'>
+      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='134' height='66'/>
+      <path stroke='#e41a1c' d='M8 15h22'/>
+      <path stroke='#377eb8' d='M8 33h22'/>
+      <path stroke='#4daf4a' d='M8 51h22'/>
+      <text dy='0.33em' x='36' y='15'>length 1e2</text>
+      <text dy='0.33em' x='36' y='33'>length 1e4</text>
+      <text dy='0.33em' x='36' y='51'>length 1e6</text>
+    </g>
+  </g>
+</svg>
