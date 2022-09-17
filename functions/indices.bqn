@@ -4,8 +4,8 @@
 scale ← •Import"../measure/scale.bqn"
 
 Bench ← {
-  name‿params‿input‿measure ⇐ 𝕩
-  ⟨plotname⟩ ← 𝕩
+  params‿input‿measure ⇐ ext‿plotname ← 𝕩
+  name ⇐ "indices-"∾ext
 
   result ⇐ ⟨{⟨r⇐maxtime⟩:r;10}𝕩⟩ •Import "../params/ns_v.bqn"
 
@@ -20,7 +20,7 @@ Bench ← {
 
 Bench¨ ⟨
   {
-    name ⇐ "where-length"
+    ext ⇐ "where-length"
     plotname ⇐ "Indices from uniform boolean list"
     params ⇐ ⟨⟩
 
@@ -36,7 +36,7 @@ Bench¨ ⟨
     }
   }
   {
-    name ⇐ "where-density"
+    ext ⇐ "where-density"
     plotname ⇐ "Indices from boolean lists"
 
     params ⇐ ⟨{
@@ -58,7 +58,7 @@ Bench¨ ⟨
     }
   }
   {
-    name ⇐ "where-inverse"
+    ext ⇐ "inverse"
     plotname ⇐ "Index list to counts (/⁼)"
     params ⇐ ⟨{
       name ⇐ "Max"
