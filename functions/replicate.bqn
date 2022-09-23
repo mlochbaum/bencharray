@@ -9,7 +9,7 @@ Bench ← {
   name ⇐ "replicate-"∾ext
 
   params ⇐ ⟨types⟩
-  result ⇐ •Import "../params/ns_v.bqn"
+  result ⇐ ({⟨r⇐denom⟩:⟨{denom⇐r}⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
 
   plotOpts ⇐ {
     title ⇐ plotname
@@ -64,6 +64,7 @@ Bench¨ ⟨
       max ⇐ 200
       range ⇐ scale.E13 max
     }
+    denom ⇐ "output"
 
     Measure ⇐ { 𝕊 ⟨type⟩:
       L←⌈((2⋆3+15)÷type.size)÷⊢ ⋄ Len⇐L⊸×
@@ -80,6 +81,7 @@ Bench¨ ⟨
       max ⇐ 200
       range ⇐ scale.E13 max
     }
+    denom ⇐ "output"
 
     Measure ⇐ { 𝕊 ⟨type⟩:
       L←⌈((2⋆3+15)÷type.size)÷⊢ ⋄ Len⇐L⊸×

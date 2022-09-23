@@ -13,7 +13,7 @@ Bench ← {
   params‿input‿measure ⇐ ext‿plotname ← 𝕩
   name ⇐ "indices-"∾ext
 
-  result ⇐ ⟨{⟨r⇐maxtime⟩:r;10}𝕩⟩ •Import "../params/ns_v.bqn"
+  result ⇐ ({⟨r⇐output⟩:⟨r⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
 
   plotOpts ⇐ {
     title ⇐ plotname
@@ -68,6 +68,7 @@ Bench¨ ⟨
       max ⇐ 100
       range ⇐ scale.E13 max
     }
+    output ⇐ {denom ⇐ "output"}
 
     Measure ⇐ { 𝕊⟨l⟩: Len⇐l⊸×
       TimeParams ⇐ { ⟨/, l •rand.Range (1+2×𝕩)˙⟩ }
@@ -88,8 +89,8 @@ Bench¨ ⟨
       max ⇐ 1e7
       range ⇐ scale.E23 max
     }
+    output ⇐ {max ⇐ 100}
 
-    maxtime ⇐ 100
     Measure ⇐ { 𝕊 ⟨max⟩:
       ⟨Rand⟩ ← ⟨max⟩ •Import "../measure/gen.bqn"
       TimeParams ⇐ { ⟨/⁼, 𝕩 Rand max˙⟩ }
