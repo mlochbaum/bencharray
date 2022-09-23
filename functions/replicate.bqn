@@ -57,33 +57,33 @@ Bench¨ ⟨
   }
   {
     ext ⇐ "avg"
-    plotname ⇐ "Replicating with 1e5 uniform random lengths"
+    plotname ⇐ "Replicating to 32KB, uniform random lengths"
 
     input ⇐ {
       name ⇐ "Average (+´÷≠)"
-      max ⇐ 100
+      max ⇐ 200
       range ⇐ scale.E13 max
     }
 
     Measure ⇐ { 𝕊 ⟨type⟩:
-      l←1e5 ⋄ Len⇐l⊸×
-      TimeParams ⇐ { ⟨/, l •rand.Range (1+2×𝕩)˙, type.GetGen l⟩ }
+      L←⌈((2⋆3+15)÷type.size)÷⊢ ⋄ Len⇐L⊸×
+      TimeParams ⇐ { n←L𝕩 ⋄ ⟨/, n •rand.Range (1+2×𝕩)˙, type.GetGen n⟩ }
       timeInit ⇐ 2‿31
     }
   }
   {
     ext ⇐ "const"
-    plotname ⇐ "Replicating 1e5 elements by constant factor"
+    plotname ⇐ "Replicating by constant factor, 32KB output"
 
     input ⇐ {
       name ⇐ "Left argument"
-      max ⇐ 50
+      max ⇐ 200
       range ⇐ scale.E13 max
     }
 
     Measure ⇐ { 𝕊 ⟨type⟩:
-      l←1e5 ⋄ Len⇐l⊸×
-      TimeParams ⇐ { ⟨/, 𝕩˙, type.GetGen l⟩ }
+      L←⌈((2⋆3+15)÷type.size)÷⊢ ⋄ Len⇐L⊸×
+      TimeParams ⇐ { ⟨/, 𝕩˙, type.GetGen L𝕩⟩ }
       timeInit ⇐ 2‿31
     }
   }
