@@ -1,4 +1,4 @@
-# Self-search: one-argument ⊐⊒∊
+# Self-search: one-argument ⊐⊒∊⍷
 
 types‿Bench ← "common/self.bqn" •Import˜ {
   name ⇐ "selfsearch"

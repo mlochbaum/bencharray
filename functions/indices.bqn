@@ -1,4 +1,4 @@
-# / with boolean argument
+# Monadic /
 
 ⟨RandBool⟩ ← •Import "../measure/gen.bqn"
 scale ← •Import"../measure/scale.bqn"

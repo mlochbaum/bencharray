@@ -1,4 +1,4 @@
-# / with boolean argument
+# Dyadic /
 
 ⟨RandBool⟩ ← •Import "../measure/gen.bqn"
 scale ← •Import "../measure/scale.bqn"
