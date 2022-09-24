@@ -16,7 +16,6 @@ Bench ← {
     y ⇐ result
     labels ⇐ (⊑params).labels
     Order ⇐ ⌽
-    ChangeBounds ⇐ x.max⊸⌊⌾⊑
   }
 }
 

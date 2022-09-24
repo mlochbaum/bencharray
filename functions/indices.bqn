@@ -14,13 +14,13 @@ Bench ← {
   name ⇐ "indices-"∾ext
 
   result ⇐ ({⟨r⇐output⟩:⟨r⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
+  result.SetMin 0.02
 
   plotOpts ⇐ {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
     labels ⇐ ({label⇐⋈"/"} ⊣´ params).label
-    ChangeBounds ⇐ x.max‿y.max⊸⌊
   }
 }
 

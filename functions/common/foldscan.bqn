@@ -32,7 +32,6 @@ Detail ← {
     x ⇐ input
     y ⇐ result
     ⟨labels⟩ ⇐ ⊑params
-    ChangeBounds ⇐ x.max‿y.max⊸⌊
   }
 }
 

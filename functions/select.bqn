@@ -7,6 +7,7 @@ Bench ← {
   name ⇐ "select-"∾ext
 
   result ⇐ ({⟨r⇐denom⟩:⟨{denom⇐r}⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
+  result.SetMin 0.4
   params ⇐ ⟨types⟩
 
   plotOpts ⇐ {
@@ -15,7 +16,6 @@ Bench ← {
     y ⇐ result
     labels ⇐ types.labels
     Order ⇐ ⌽
-    ChangeBounds ⇐ 0‿0.4⊸⌈
   }
 }
 

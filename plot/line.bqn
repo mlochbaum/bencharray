@@ -67,7 +67,7 @@ DispNum ← (2|1e¯9‿1e¯3‿1e4⊸⍋⌾<)◶Num‿ENum
 Plot ⇐ { opts 𝕊 dat:
   title‿x‿y‿labels ← opts
   order ← {⟨r⇐order⟩:r; ⊢} opts
-  changeBounds ← {⟨r⇐changeBounds⟩:r; ⊢} opts
+  BoundAxis ← ⊣ {⟨r⇐min⟩:r;¯∞}⊸⌈ {⟨r⇐max⟩:r;∞}⊸⌊
   col ← "stroke"⊸⋈¨ GetColors labels
 
   axes ← x‿y
@@ -87,7 +87,8 @@ Plot ⇐ { opts 𝕊 dat:
   Log ← ({⟨R⇐Trans⟩:R; ⊢}⊑axes)⌾⊑ ⋆⁼⌾(alog⊸/)
   dat ↩ 0‿0 ↓ Order dat
   xy ← <∘∾˘⍉dat
-  win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬1⊑alog) Log bounds ← ChangeBounds (⌊´≍⌈´)∘⥊¨ xy
+  bounds ← axes BoundAxis¨ (⌊´≍⌈´)∘⥊¨ xy
+  win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬1⊑alog) Log bounds
   ScaleI ← ¬⌾(1⊸⊑) ({𝕩÷˜𝕨-˜⊢}˝ ⍉>win)∘Log          # To [0,1]
   Scale ← padi + (dim-padb+padi) × ScaleI          # To pixels
   line ← (<≍˘)○Num´∘Scale˘ dat
