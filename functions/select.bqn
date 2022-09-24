@@ -1,13 +1,12 @@
 # Select function ⊏
 
-ns    ← •Import "../params/ns_v.bqn"
 types ← •Import "../params/numtype.bqn"
 
 Bench ← {
   input‿Measure ⇐ ext‿plotname ← 𝕩
   name ⇐ "select-"∾ext
 
-  result ⇐ ns
+  result ⇐ ({⟨r⇐denom⟩:⟨{denom⇐r}⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
   params ⇐ ⟨types⟩
 
   plotOpts ⇐ {
@@ -29,6 +28,7 @@ Bench¨ ⟨
       max ⇐ 1e6
       range ⇐ (•Import"../measure/scale.bqn").E13 max
     }
+    denom ⇐ "selection"
     Measure ⇐ { 𝕊 ⟨type⟩:
       len ⇐ 1e6
       TimeParams ⇐ {

@@ -31,6 +31,7 @@ Bench¨ ⟨
       max ⇐ 1e7
       range ⇐ scale.E23 max
     }
+    denom ⇐ "input"
 
     Measure ⇐ { 𝕊 ⟨type⟩:
       TimeParams ⇐ { ⟨/, RandBool∘𝕩, type.GetGen𝕩⟩ }
@@ -47,6 +48,7 @@ Bench¨ ⟨
       log ⇐ 0 ⋄ Trans ⇐ 1.6⊸√⌾(1-˜÷)
       range ⇐ ×˜⌾(1-˜÷) ↕⊸∾⊸÷ 20
     }
+    denom ⇐ "input"
 
     Measure ⇐ { 𝕊 ⟨type⟩:
       len ⇐ 1e5

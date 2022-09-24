@@ -2,7 +2,7 @@
 
 name ⇐ "table"
 
-result ⇐ •Import "../params/ns_v.bqn"
+result ⇐ {denom⇐"output"} •Import "../params/ns_v.bqn"
 
 types ← •Import "../params/cputype.bqn"
 fns ← ⟨⊏⟨⌈⟩⟩ •Import "../params/arith.bqn"

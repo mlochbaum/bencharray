@@ -35,6 +35,7 @@ Bench¨ ⟨
       max ⇐ 1e7
       range ⇐ scale.E13 max
     }
+    output ⇐ {denom ⇐ "input"}
 
     measure ⇐ {
       TimeParams ⇐ { ⟨/, RandBool∘𝕩⟩ }
@@ -52,6 +53,7 @@ Bench¨ ⟨
       log ⇐ 0 ⋄ Trans ⇐ 1.6⊸√⌾(1-˜÷)
       range ⇐ ×˜⌾(1-˜÷) ↕⊸∾⊸÷ 20
     }
+    output ⇐ {denom ⇐ "input"}
 
     Measure ⇐ { 𝕊⟨len⟩: len⇐
       TimeParams ⇐ { ⟨/, len↑·/⁼(⌊0.5+𝕩×len) •rand.Subset len˙⟩ }
@@ -89,7 +91,7 @@ Bench¨ ⟨
       max ⇐ 1e7
       range ⇐ scale.E23 max
     }
-    output ⇐ {max ⇐ 100}
+    output ⇐ {max ⇐ 100, denom ⇐ "input"}
 
     Measure ⇐ { 𝕊 ⟨max⟩:
       ⟨Rand⟩ ← ⟨max⟩ •Import "../measure/gen.bqn"
