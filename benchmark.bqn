@@ -13,7 +13,7 @@ ifHelp‿ifList ← type=1‿2-˜≠types
 
 {ifList? 1=≠•args?
   c ← -≠ ext ← ".bqn"
-  0 Exit "Available groups:"∾∾(@+10)∾¨ c↓¨ (ext≡c⊸↑)¨⊸/ •file.List "functions"
+  0 Exit "Available groups:"∾∾(@+10)∾¨ c↓¨ (ext≡c⊸↑)¨⊸/ ∧ •file.List "functions"
 ;@}
 
 {1<≠•args?@; 1 Exit "No functions specified" }
