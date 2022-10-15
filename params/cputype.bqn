@@ -10,11 +10,13 @@ range ⇐ {
   label ⇐ ∾⟨•Repr size÷8, "-byte ", float⊑"int"‿"float"⟩
 
   # Random numbers
-  GetGen ⇐ {
-    ⟨Rand⟩ ← ⟨𝕩⟩ •Import "../measure/gen.bqn"
+  _ggg ⇐ { 𝕨 Rfn _𝕣 𝕩:
+    rand ← Rfn ⟨𝕩⟩ •Import "../measure/gen.bqn"
     n ← (¬float) × 2⋆size
     •internal.Squeeze ((float+n)÷2) -˜ 𝕩 Rand n˙
   }
+  GetGen ⇐ {𝕩.Rand}_ggg
+  getGenUnique ⇐ {size<32 ? {𝕩.RandUnique}_ggg ; GetGen} # Large-range •rand.Deal unimplemented
 
   # Random numbers that won't overflow for +-
   GetGenSmall ⇐ {

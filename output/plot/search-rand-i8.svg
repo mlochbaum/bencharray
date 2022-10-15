@@ -1,0 +1,69 @@
+<svg viewBox='-60 -40 592 371.6' height='557.4' width='888' xmlns='http://www.w3.org/2000/svg'>
+  <g stroke-width='2.6' font-size='14px' text-anchor='middle'>
+    <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
+    <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
+    <text dy='0.33em' font-size='18px' x='256' y='-19'>Searching for 1e6 random 1-byte ints</text>
+    <text dy='0.33em' x='256' y='313.6'>Searched-in length</text>
+    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
+    <g stroke-width='0.3' stroke='#555'>
+      <path d='M38.532 0v281.6'/>
+      <path d='M89.468 0v281.6'/>
+      <path d='M128 0v281.6'/>
+      <path d='M166.532 0v281.6'/>
+      <path d='M217.468 0v281.6'/>
+      <path d='M256 0v281.6'/>
+      <path d='M294.532 0v281.6'/>
+      <path d='M345.468 0v281.6'/>
+      <path d='M384 0v281.6'/>
+      <path d='M422.532 0v281.6'/>
+      <path d='M473.468 0v281.6'/>
+      <path d='M0 273.404h512'/>
+      <path d='M0 245.076h512'/>
+      <path d='M0 216.747h512'/>
+      <path d='M0 179.298h512'/>
+      <path d='M0 150.97h512'/>
+      <path d='M0 122.641h512'/>
+      <path d='M0 85.193h512'/>
+      <path d='M0 56.864h512'/>
+      <path d='M0 28.535h512'/>
+    </g>
+    <g font-size='11px'>
+      <text dy='0.33em' x='0' y='291.1'>1</text>
+      <text dy='0.33em' x='38.532' y='291.1'>2</text>
+      <text dy='0.33em' x='89.468' y='291.1'>5</text>
+      <text dy='0.33em' x='128' y='291.1'>10</text>
+      <text dy='0.33em' x='166.532' y='291.1'>20</text>
+      <text dy='0.33em' x='217.468' y='291.1'>50</text>
+      <text dy='0.33em' x='256' y='291.1'>100</text>
+      <text dy='0.33em' x='294.532' y='291.1'>200</text>
+      <text dy='0.33em' x='345.468' y='291.1'>500</text>
+      <text dy='0.33em' x='384' y='291.1'>1000</text>
+      <text dy='0.33em' x='422.532' y='291.1'>2000</text>
+      <text dy='0.33em' x='473.468' y='291.1'>5000</text>
+      <text dy='0.33em' x='512' y='291.1'>1e4</text>
+      <g text-anchor='end'>
+        <text dy='0.33em' x='-6' y='273.404'>0.05</text>
+        <text dy='0.33em' x='-6' y='245.076'>0.1</text>
+        <text dy='0.33em' x='-6' y='216.747'>0.2</text>
+        <text dy='0.33em' x='-6' y='179.298'>0.5</text>
+        <text dy='0.33em' x='-6' y='150.97'>1</text>
+        <text dy='0.33em' x='-6' y='122.641'>2</text>
+        <text dy='0.33em' x='-6' y='85.193'>5</text>
+        <text dy='0.33em' x='-6' y='56.864'>10</text>
+        <text dy='0.33em' x='-6' y='28.535'>20</text>
+      </g>
+    </g>
+    <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+      <path stroke='#e41a1c' d='M0 261.6L38.532 228.156L61.072 218.191L77.064 210.887L89.468 205.496L99.603 199.756L108.173 196.299L115.596 191.589L128 184.901L142.585 175.797L157.497 48.118L174.301 39.379L189.072 27.727L203.656 40.628L218.569 30.877L232.902 22.27L247.616 34.598L262.3 27.949L277.037 23.082L291.68 26.318L306.265 24.604L320.833 25.903L335.377 27.525L349.952 27.952L364.568 29.383L379.183 30.308L393.763 30.564L408.362 31.329L422.947 30.957L437.521 30.985L452.111 30.944L466.702 30.793L481.295 30.943L495.874 31.06L510.461 31.16L525.05 30.326'/>
+      <path stroke='#377eb8' d='M0 69.244L38.532 68.018L61.072 65.628L77.064 65.408L89.468 61.702L99.603 58.927L108.173 58.871L115.596 55.989L128 52.476L142.585 48.754L157.497 42.862L174.301 35.357L189.072 24.392L203.656 36.571L218.569 27.932L232.902 20L247.616 31.819L262.3 25.692L277.037 21.445L291.68 24.547L306.265 23.318L320.833 24.96L335.377 27.299L349.952 27.893L364.568 29.66L379.183 30.501L393.763 30.97L408.362 31.031L422.947 30.503L437.521 30.535L452.111 30.443L466.702 30.395L481.295 30.539L495.874 30.594L510.461 30.69L525.05 30.024'/>
+    </g>
+    <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
+    <g transform='translate(442,227.6)' text-anchor='start' font-size='13px'>
+      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='60' height='48'/>
+      <path stroke='#e41a1c' d='M8 15h22'/>
+      <path stroke='#377eb8' d='M8 33h22'/>
+      <text dy='0.33em' x='36' y='15'>∊</text>
+      <text dy='0.33em' x='36' y='33'>⊐</text>
+    </g>
+  </g>
+</svg>

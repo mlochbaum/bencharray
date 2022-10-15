@@ -1,0 +1,51 @@
+<svg viewBox='-60 -40 592 371.6' height='557.4' width='888' xmlns='http://www.w3.org/2000/svg'>
+  <g stroke-width='2.6' font-size='14px' text-anchor='middle'>
+    <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
+    <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
+    <text dy='0.33em' font-size='18px' x='256' y='-19'>Searching for 1e6 2-byte ints 1e3</text>
+    <text dy='0.33em' x='256' y='313.6'>Overlap fraction</text>
+    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
+    <g stroke-width='0.3' stroke='#555'>
+      <path d='M51.2 0v281.6'/>
+      <path d='M102.4 0v281.6'/>
+      <path d='M153.6 0v281.6'/>
+      <path d='M204.8 0v281.6'/>
+      <path d='M256 0v281.6'/>
+      <path d='M307.2 0v281.6'/>
+      <path d='M358.4 0v281.6'/>
+      <path d='M409.6 0v281.6'/>
+      <path d='M460.8 0v281.6'/>
+      <path d='M0 226.961h512'/>
+      <path d='M0 82.592h512'/>
+    </g>
+    <g font-size='11px'>
+      <text dy='0.33em' x='0' y='291.1'>0</text>
+      <text dy='0.33em' x='51.2' y='291.1'>0.1</text>
+      <text dy='0.33em' x='102.4' y='291.1'>0.2</text>
+      <text dy='0.33em' x='153.6' y='291.1'>0.3</text>
+      <text dy='0.33em' x='204.8' y='291.1'>0.4</text>
+      <text dy='0.33em' x='256' y='291.1'>0.5</text>
+      <text dy='0.33em' x='307.2' y='291.1'>0.6</text>
+      <text dy='0.33em' x='358.4' y='291.1'>0.7</text>
+      <text dy='0.33em' x='409.6' y='291.1'>0.8</text>
+      <text dy='0.33em' x='460.8' y='291.1'>0.9</text>
+      <text dy='0.33em' x='512' y='291.1'>1</text>
+      <g text-anchor='end'>
+        <text dy='0.33em' x='-6' y='226.961'>20</text>
+        <text dy='0.33em' x='-6' y='82.592'>25</text>
+      </g>
+    </g>
+    <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+      <path stroke='#e41a1c' d='M0 181.047L25.6 159.305L51.2 143.982L76.8 133.284L102.4 115.053L128 105.39L153.6 103.569L179.2 80.77L204.8 82.985L230.4 70.908L256 63.935L281.6 66.883L307.2 70.273L332.8 75.995L358.4 104.902L384 128.536L409.6 152.192L435.2 176.227L460.8 203.802L486.4 225.239L512 261.6'/>
+      <path stroke='#377eb8' d='M0 98.667L25.6 87.751L51.2 75.761L76.8 68.872L102.4 52.45L128 46.407L153.6 46.565L179.2 32.438L204.8 32.83L230.4 24.826L256 20L281.6 23.358L307.2 25.226L332.8 32.503L358.4 59.115L384 78.695L409.6 109.099L435.2 137.413L460.8 169.182L486.4 189.575L512 223.825'/>
+    </g>
+    <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
+    <g transform='translate(10,227.6)' text-anchor='start' font-size='13px'>
+      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='60' height='48'/>
+      <path stroke='#e41a1c' d='M8 15h22'/>
+      <path stroke='#377eb8' d='M8 33h22'/>
+      <text dy='0.33em' x='36' y='15'>∊</text>
+      <text dy='0.33em' x='36' y='33'>⊐</text>
+    </g>
+  </g>
+</svg>
