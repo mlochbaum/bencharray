@@ -2,7 +2,7 @@
   <g stroke-width='2.6' font-size='14px' text-anchor='middle'>
     <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
     <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
-    <text dy='0.33em' font-size='18px' x='256' y='-19'>Searching for 1e6 8-byte floats 1e3</text>
+    <text dy='0.33em' font-size='18px' x='256' y='-19'>Searching for 1e6 8-byte floats in 1e3</text>
     <text dy='0.33em' x='256' y='313.6'>Overlap fraction</text>
     <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
     <g stroke-width='0.3' stroke='#555'>

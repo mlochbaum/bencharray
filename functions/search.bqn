@@ -70,8 +70,23 @@ Bench¨ ∾ {𝕏¨types.range}¨ ⟨
     }
   }
   {
+    ext ⇐ "total"
+    desc ⇐ "Searching with 1e6 total %s, half hits"
+    type ⇐ 𝕩
+    input ⇐ {
+      name ⇐ "Searched-in length"
+      max ⇐ 10⋆e←6 ⋄ Comp ← ⊢∾max-1↓⌽
+      range ⇐ Comp scales.E23⊸⌊ max÷2
+      Trans ⇐ (1-˜max⊸×)⌾÷ ⋄ ticks ⇐ Comp (10⋆↕e)∾max÷2
+    }
+    Measure ⇐ { 𝕊 ⟨fn⟩:
+      len ⇐ 1e6
+      TimeParams ⇐ { fn MakePar type ParOverlap 𝕩‿(len-𝕩)‿0.5 }
+    }
+  }
+  {
     ext ⇐ "overlap"
-    desc ⇐ "Searching for 1e6 %s 1e3"
+    desc ⇐ "Searching for 1e6 %s in 1e3"
     type ⇐ 𝕩
     input ⇐ overlap
     Measure ⇐ { 𝕊 ⟨fn⟩:

@@ -83,7 +83,7 @@ Plot ⇐ { opts 𝕊 dat:
   gr ← "stroke-width=2.6|font-size=14px|text-anchor=middle"
   ls ← "clip-path=url(#clip)|fill=none|stroke-linecap=round|stroke-linejoin=round"
 
-  Log ← ({⟨R⇐Trans⟩:R; ⊢}⊑axes)⌾⊑ ⋆⁼⌾(alog⊸/)
+  Log ← ⋆⁼⌾(alog⊸/) ({⟨R⇐Trans⟩:R; ⊢}⊑axes)⌾⊑
   dat ↩ 0‿0 ↓ Order dat
   xy ← <∘∾˘⍉dat
   bounds ← axes BoundAxis¨ (⌊´≍⌈´)∘⥊¨ xy
@@ -104,7 +104,7 @@ Plot ⇐ { opts 𝕊 dat:
       off⇐0‿0 ⋄ dim⇐dim
       orient⇐"vh"
       RoundDown ← {(⊑∘⍋⟜𝕩-1˙)⊸⊑1‿2‿5×⌊⌾(10⋆⁼⊢)𝕩}
-      tval ← alog GetTicks⟜∧¨ Scale⁼0⋈¨dim
+      tval ← axes {⟨r⇐ticks⟩𝕊𝕩:r; 𝕩}¨ alog GetTicks⟜∧¨ Scale⁼0⋈¨dim
       tpos ⇐ Scale ticks ← (⍷∧⊑xy) {𝕨⌾⊑𝕩}⍟(10≥≠∘⊣) tval
       ttext ⇐ disp {𝕎⚇0𝕩}¨ ticks
     }
