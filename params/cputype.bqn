@@ -11,7 +11,7 @@ range ⇐ {
 
   # Random numbers
   _ggg ⇐ { 𝕨 Rfn _𝕣 𝕩:
-    rand ← Rfn ⟨𝕩⟩ •Import "../measure/gen.bqn"
+    rand ← Rfn ⟨𝕨⊣𝕩⟩ •Import "../measure/gen.bqn"
     n ← (¬float) × 2⋆size
     •internal.Squeeze ((float+n)÷2) -˜ 𝕩 Rand n˙
   }
@@ -20,7 +20,7 @@ range ⇐ {
 
   # Random numbers that won't overflow for +-
   GetGenSmall ⇐ {
-    ⟨Rand⟩ ← ⟨𝕩⟩ •Import "../measure/gen.bqn"
+    ⟨Rand⟩ ← ⟨𝕨⊣𝕩⟩ •Import "../measure/gen.bqn"
     (⌈(1⌈max)÷2) -˜ 𝕩 Rand max˙
   }
 }¨ num
