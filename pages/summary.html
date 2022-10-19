@@ -11,7 +11,13 @@
 <div class="nav"><a href="https://github.com/mlochbaum/bencharray">bencharray</a></div>
 <h1>Benchmark summary</h1>
 
+<p>Not all benchmarks are included on this page. Header links go to pages with full benchmarks and sometimes extra explanation.</p>
+<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/88193/intel-core-i56200u-processor-3m-cache-up-to-2-80-ghz/specifications.html">Skylake i5-6200U</a> processor using CBQN compiled with <code>make o3n-singeli</code>. It's not a powerful CPU but does support the x86 extensions like AVX2 used by the Singeli build.</p>
+
 <h2><a href="arith.html">Arithmetic</a></h2>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/arithmetic.html">Implementation notes</a></p>
+<p>The arithmetic functions <code>+-×⌈⌊</code>, and comparisons, are standard SIMD functionality. With <code>+-×</code> an overflow check is needed, and if it happens a result in a larger type needs to be created.</p>
+<p>Most other primitives, including <code>÷√⋆</code> and <code>⋆⁼</code>, require conversion to floats, so will ideally run at the same speed for all types. <code>÷</code> and monadic <code>√</code> have native SIMD support. Libraries to compute others using SIMD exist but CBQN doesn't use anything like this yet. Dyadic <code>|</code> is kind of weird as it has faster implementations on integers, but they tend to be complicated.</p>
 <table><tr>
   <img width="50%" src="../output/plot/arith-summary.svg"></img>
   <img width="50%" src="../output/plot/arith-over.svg"></img>
@@ -23,6 +29,7 @@
   <img width="50%" src="../output/plot/arithm-slow.svg"></img>
 </tr></table>
 <h3><a href="fold.html">Fold</a> and <a href="scan.html">Scan</a></h3>
+<p>Folds and scans are defined as a sequential evaluation, but for operand functions that are associative and commutative, evaluation can be reordered to give efficient SIMD implementations. These include <code>+-×⌈⌊</code> on integers, <code>⌈⌊</code> on floats, and many boolean functions. Because floating-point <code>+</code> (along with <code>-</code> and <code>×</code>) isn't exactly associative, we may add a vectorized <code>•math.Sum</code> function for when speed is important. CBQN's coverage of the associative cases is still fairly spotty. Uncovered cases run at about 5ns/value because that's the overhead of calling a primitive function.</p>
 <table><tr>
   <img width="50%" src="../output/plot/fold-arith.svg"></img>
   <img width="50%" src="../output/plot/scan-arith.svg"></img>
@@ -31,20 +38,25 @@
   <img width="50%" src="../output/plot/scan-boolean.svg"></img>
 </tr></table>
 <h3>Table</h3>
+<p>If it had no overhead, Table would have the same per-output timing as arithmetic, or sometimes better as overflow checking can be done purely using the range of both arguments. This is attainable for large right arguments but CBQN does a lot of copying that prevents it from reaching that performance. For smaller right arguments the limiting operation is a constant Replicate (<code>/</code>) on the right argument, or sections of it.</p>
 <img width="50%" src="../output/plot/table.svg"></img>
 
 <h2>Structural</h2>
 <h3>Select</h3>
+<p>BQN's code for selection is mostly straightforward at this point. Selection from a boolean array is usually slower because it requires reading the right byte from memory and then picking out the right bit within it, but for a larger right argument it takes up less cache space and can be faster. For a small right argument but large left argument, it's temporarily converted to 1-byte values so that it runs at the same speed as 1-byte selection.</p>
 <table><tr>
   <img width="50%" src="../output/plot/select-many.svg"></img>
   <img width="50%" src="../output/plot/select-permute.svg"></img>
 </tr></table>
 <h3>Reshape</h3>
+<p>The speed of Reshape with a large result should essentially be limited by the amount of memory written. The current method is to copy the argument to the result, then repeatedly double it until it reaches a suitable block size for filling the rest of the result. There are special cases for 1-byte and 8-byte blocks; strangely, these measure slower than the general case, giving the bumps at the left of the first graph. We've left them in on the grounds that it may be specific to my CPU, and if not, later compiler and libc improvements could fix these cases (there's nothing obviously wrong with the emitted code).</p>
 <table><tr>
   <img width="50%" src="../output/plot/reshape-large.svg"></img>
   <img width="50%" src="../output/plot/reshape-double.svg"></img>
 </tr></table>
 <h3><a href="replicate.html">Replicate</a></h3>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/replicate.html">Implementation notes</a></p>
+<p>Replicate is a complicated family of functions, and CBQN does a lot of work to get consistent worst-case performance and take advantage of special cases: sparse input, and booleans with 1s and 0s mostly grouped together. Except for the grouped case, each algorithm takes some amount of time to process each input value, and some to produce an output value, and CBQN chooses between them based on the density. Note that the graphs for a boolean argument use ns/input and those for the general case use ns/output! In the flat sections for the boolean case, the performance doesn't depend on density at all, usually because the same writes are performed regardless, just overlapping more when the density is smaller.</p>
 <table><tr>
   <img width="50%" src="../output/plot/replicate-compress-density.svg"></img>
   <img width="50%" src="../output/plot/indices-where-density.svg"></img>
@@ -56,13 +68,19 @@
   <img width="50%" src="../output/plot/indices-inverse.svg"></img>
 </tr></table>
 <h3>Group</h3>
+<p>The benchmarks here are not very complete. The first shows how performance scales with the number of <code>¯1</code>s in the argument; when there are a lot Replicate is used to filter out these values and avoid excessive branching. The second concerns a sorted <code>𝕨</code> value, so that the groups are slices from <code>𝕩</code>.</p>
 <table><tr>
   <img width="50%" src="../output/plot/group-density-rand.svg"></img>
   <img width="50%" src="../output/plot/group-range-sort.svg"></img>
 </tr></table>
 
 <h2>Searching and sorting</h2>
+<p>Searching and sorting are the heaviest of BQN's commonly used functions, performance-wise. Element size is very important, as doubling it often slows things down by more than a factor of two.</p>
+<p>For 1- and 2-byte elements, lookup tables usually fit entirely in L1 cache (2-byte tables with large elements can be iffy). Lookup tables are so fast that it doesn't make sense to try for adaptivity on these arguments.</p>
+<p>For larger elements, comparison sorting and hash tables are usually needed, and adaptive sorting can be used. CBQN doesn't have particularly fast implementations of these yet. Some cases of 4-byte elements are better handled by radix partitioning plus lookup tables.</p>
 <h3>Sort and Grade</h3>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/sort.html">Implementation notes</a></p>
+<p>Currently CBQN has solid counting and radix sort implementations used for 1 to 4-byte elements, and uses the generic Timsort for 8-byte elements. 4-byte sorting is competitive with the state of the art for random elements but isn't adaptive at all.</p>
 <table><tr>
   <img width="50%" src="../output/plot/sort-rand-i8.svg"></img>
   <img width="50%" src="../output/plot/sort-rand-i16.svg"></img>
@@ -71,6 +89,7 @@
   <img width="50%" src="../output/plot/sort-rand-f64.svg"></img>
 </tr></table>
 <h3><a href="search.html">Search functions</a></h3>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/search.html">Implementation notes</a></p>
 <table><tr>
   <img width="50%" src="../output/plot/search-total-i8.svg"></img>
   <img width="50%" src="../output/plot/search-total-i16.svg"></img>
@@ -79,6 +98,9 @@
   <img width="50%" src="../output/plot/search-total-f64.svg"></img>
 </tr></table>
 <h3>Self-search functions</h3>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/search.html">Implementation notes</a></p>
+<p>CBQN has well-optimized code for most cases with integer types (and boolean, not shown). Other cases are handled with a generic hash table, which is not ideal. The function Classify (<code>⊐</code>) is troublesome because of the way indices depend on the number of unique elements seen so far, a problem that dyadic <code>⊐</code> (or <code>⊐˜</code>) doesn't have. <code>⍷</code> is just implemented as <code>∊⊸/</code> for lengths above 1, which is hardly slower than <code>∊</code>.</p>
+<p>Cases with a small argument (bound of 8 to 32 depending on type and function) are handled with all-pairs comparisons that use the comparison branchlessly, although a SIMD implementation could be faster. 1-byte and 2-byte cases use a lookup table otherwise, with sparse initialization for the 2-byte table for smaller sizes giving the corner at 1000 or a little higher. Both <code>⊒</code> and <code>⊐</code> are slowed down at large sizes because they need a 4-byte instead of 1-byte table, and there are some bumps in <code>⊐</code> because it has to branch on table lookups.</p>
 <table><tr>
   <img width="50%" src="../output/plot/selfsearch-rand-i8.svg"></img>
   <img width="50%" src="../output/plot/selfsearch-rand-i16.svg"></img>
@@ -86,6 +108,7 @@
   <img width="50%" src="../output/plot/selfsearch-rand-i32.svg"></img>
   <img width="50%" src="../output/plot/selfsearch-rand-f64.svg"></img>
 </tr></table>
+<p>Other than <code>⊐</code>, the 4-byte cases use two rounds of radix moves plus a table on the remaining two bytes. This is not always as fast as a specialized hash table but is more consistent, and much better for large sizes beginning at 1e5 or so. It's slower than sorting because the radix moves need to be undone at the end, so a self-search function takes a total of 4 moves plus a table lookup, while sorting only needs 4 moves.</p>
 
 </body>
 </html>
