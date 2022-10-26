@@ -3,8 +3,7 @@
 scales ← •Import "../measure/scale.bqn"
 ns     ← •Import "../params/ns_v.bqn"
 types  ← •Import "../params/cputype.bqn"
-# ⊒ too slow to measure for now
-fnobjs ← ⟨¯1↓∊‿⊐‿⊒⟩ •Import "../params/arith.bqn"
+fnobjs ← ⟨∊‿⊐‿⊒⟩ •Import "../params/arith.bqn"
 
 # Inputs
 Length ← {
