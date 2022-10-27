@@ -8,7 +8,7 @@ Exit ← •Exit∘⊣⟜•Out
 
 ifHelp‿ifList ← type=1‿2-˜≠types
 {¬ifHelp?@;
-  0 Exit "Usage: benchmark.bqn (help|list|measure|plot|all) [langs,functions...]"
+  0 Exit "Usage: benchmark.bqn (help|list|measure|plot|all) [langs,benchmarks...]"
 }
 
 {ifList? 1=≠•args?
@@ -16,7 +16,7 @@ ifHelp‿ifList ← type=1‿2-˜≠types
   0 Exit "Available groups:"∾∾(@+10)∾¨ c↓¨ (ext≡c⊸↑)¨⊸/ ∧ •file.List "functions"
 ;@}
 
-{1<≠•args?@; 1 Exit "No functions specified" }
+{1<≠•args?@; 1 Exit "No benchmarks specified" }
 
 lnames ← {𝕩.name}¨ langs ← •Import "measure/cross/langs.bqn"
 fspec‿lang ← (∊⟜lnames∾2˙)⊸⊔ 1↓•args
@@ -24,10 +24,16 @@ fspec‿lang ← (∊⟜lnames∾2˙)⊸⊔ 1↓•args
 fname‿fid ← (⍷⋈⊐) (∧`'-'⊸≠)⊸/¨ fspec
 fpath ← ("functions"At∾⟜".bqn")¨ fname
 
-missing ← (¬ •file.Exists¨ fpath) / fname
-{0=≠𝕩?@; 1 Exit ∾"Unknown functions: "⌾⊑⥊(<", ")≍˘𝕩 } missing
+ErrUnknown ← { 1 Exit ∾ ⟨"Unknown ", 𝕨∾"s"/˜1<≠𝕩⟩ ∾ ": "⌾⊑ ⥊(<", ")≍˘𝕩 }
 
-fns ← ∾ (fid⊔fspec) ({𝕩.name}¨⊸∊˜/⊢)⍟(⊑'-'∊∾∘⊣)⟜(⥊•Import)¨ fpath
+("group" ErrUnknown /⟜fname)⍟(∨´) ¬ •file.Exists¨ fpath
+
+FilterFns ← {
+  i ← 𝕨 ⊐˜ n ← {𝕩.name}¨𝕩
+  ("benchmark" ErrUnknown /⟜𝕨)⍟(∨´) i=≠𝕩
+  i ⊏ 𝕩
+}
+fns ← ∾ (fid⊔fspec) FilterFns⍟(⊑'-'∊∾∘⊣)⟜(⥊•Import)¨ fpath
 
 { ¬ifList?@; 0 Exit "Available benchmarks:"∾∾(@+10)∾¨{𝕩.name}¨fns }
 
