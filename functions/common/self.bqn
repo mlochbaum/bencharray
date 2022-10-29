@@ -13,20 +13,27 @@ Scale ← {
 }
 
 Bench ⇐ {
-  ext‿desc‿GetGen ← 𝕩
+  input‿Measure ⇐ ext‿desc ← 𝕩
   plotname ⇐ ∾title‿" "‿desc
   name ⇐ basename∾"-"∾ext
   params ⇐ ⟨fnobjs⟩
-  input ⇐ Scale 1e7
   result ⇐ ns
-  Measure ⇐ { 𝕊 ⟨fn⟩:
-    TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }
-    timeInit ⇐ 1e5‿1‿1e3
-  }
   plotOpts ⇐ {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
     ⟨labels⟩ ⇐ ⊑params
   }
+}
+BenchLenAll ⇐ { pe‿pd 𝕊 len‿typeToGen:
+  Bench∘{
+    ext  ⇐ ∾pe‿"-"‿𝕩.disp
+    desc ⇐ ∾pd‿" "‿𝕩.label
+    getGen ← TypeToGen 𝕩
+    input ⇐ Scale len
+    Measure ⇐ { 𝕊 ⟨fn⟩:
+      TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }
+      timeInit ⇐ 1e5‿1‿1e3
+    }
+  }¨ types.range
 }
