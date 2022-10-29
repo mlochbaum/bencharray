@@ -89,9 +89,9 @@
   <img width="50%" src="../output/plot/sort-rand-f64.svg"></img>
 </tr></table>
 <h3><a href="search.html">Search functions</a></h3>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/search.html">Implementation notes</a></p>
 <p>The x-axis format here is used to display a small searched-in array (<code>𝕨</code> for <code>⊐</code> and <code>⊒</code>, and <code>𝕩</code> for <code>∊</code>) on the left and a small searched-for array (the other argument) on the right. "Half hits" means that half the values in the searched-for argument are found at some index, and is tough on branchy implementations; depending on the application all hits could be more relevant.</p>
 <p>There is special code for 1- and 2-byte integers, and a small searched-in argument. SIMD searches would still be faster for some of these cases. Larger types are handled with generic hash table code.</p>
-<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/search.html">Implementation notes</a></p>
 <table><tr>
   <img width="50%" src="../output/plot/search-total-i8.svg"></img>
   <img width="50%" src="../output/plot/search-total-i16.svg"></img>
@@ -99,7 +99,7 @@
   <img width="50%" src="../output/plot/search-total-i32.svg"></img>
   <img width="50%" src="../output/plot/search-total-f64.svg"></img>
 </tr></table>
-<h3>Self-search functions</h3>
+<h3><a href="selfsearch.html">Self-search functions</a></h3>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/search.html">Implementation notes</a></p>
 <p>CBQN has well-optimized code for most cases with integer types (and boolean, not shown). Other cases are handled with a generic hash table, which is not ideal. The function Classify (<code>⊐</code>) is troublesome because of the way indices depend on the number of unique elements seen so far, a problem that dyadic <code>⊐</code> (or <code>⊐˜</code>) doesn't have. <code>⍷</code> is just implemented as <code>∊⊸/</code> for lengths above 1, which is hardly slower than <code>∊</code>.</p>
 <p>Cases with a small argument (bound of 8 to 32 depending on type and function) are handled with all-pairs comparisons that use the comparison branchlessly, although a SIMD implementation could be faster. 1-byte and 2-byte cases use a lookup table otherwise, with sparse initialization for the 2-byte table for smaller sizes giving the corner at 1000 or a little higher. Both <code>⊒</code> and <code>⊐</code> are slowed down at large sizes because they need a 4-byte instead of 1-byte table, and there are some bumps in <code>⊐</code> because it has to branch on table lookups.</p>
