@@ -9,7 +9,8 @@ get ← {
   size ← ⌈ (width ÷ 8) × ×⌿ shape
   d ← size ↑ data
   data ↓⍨← size
-  shape ⍴ (⌽size 8⍴⊢)⍣(1=width)⊢ ((10×width)+1+2×'uif'⍳qual) ⎕DR d
+  conv ← ((10×width)+1+2×'uif'⍳qual) ⎕DR ⊃0 83⎕DR d
+  shape ⍴ (⌽size 8⍴⊢)⍣(1=width)⊢ conv
 }
 args ← get¨ arrs
 
