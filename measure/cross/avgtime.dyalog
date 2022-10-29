@@ -1,4 +1,4 @@
-⎕IO ⎕ML ← 0 1
+⎕IO ⎕ML ⎕CT ← 0 1 0
 meta ← (⎕UCS 10) (≠⊆⊢) ⊃ ⎕NGET '/tmp/bencharray_meta'
 (fn valence iter arrs) ← 3 ((1(↑,⍎¨⍤↓)↑) , ⊂⍤↓) meta
 

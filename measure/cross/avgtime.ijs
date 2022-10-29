@@ -1,3 +1,4 @@
+9!:19]0  NB. Comparison tolerance
 meta =: <;._2] 1!:1 <'/tmp/bencharray_meta'
 'fn valence iter arrs' =: 3 (({. , ".&.>@}.)@:{. , <@}.) meta
 dy =: 2 = valence
