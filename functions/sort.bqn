@@ -6,6 +6,8 @@ types‿BenchLenAll ← "common/self.bqn" •Import˜ {
   fns ⇐ ∧‿∨‿⍋‿⍒
 }
 
+E13‿E23 ← •Import "../measure/scale.bqn"
+
 ∾ ⟨
-  "rand"‿"random" BenchLenAll 1e7‿{𝕩.GetGen}
+  "rand"‿"random" BenchLenAll 1e7‿E13‿{𝕩.GetGen}
 ⟩

@@ -2,15 +2,9 @@
 
 ⟨basename⇐name, title, fns⟩ ← ⊑•args
 
-scales ← •Import "../../measure/scale.bqn"
 ns     ← •Import "../../params/ns_v.bqn"
 types  ⇐ •Import "../../params/cputype.bqn"
 fnobjs ← ⟨fns⟩ •Import "../../params/arith.bqn"
-
-Scale ← {
-  name ⇐ "Length"
-  range ⇐ scales.E13 max ⇐ 𝕩
-}
 
 Bench ⇐ {
   input‿Measure ⇐ ext‿desc ← 𝕩
@@ -25,19 +19,22 @@ Bench ⇐ {
     ⟨labels⟩ ⇐ ⊑params
   }
 }
-BenchLenAll ⇐ { pe‿pd 𝕊 maxlen‿typeToGen:
+BenchLenAll ⇐ { pe‿pd 𝕊 maxlen‿Scale‿typeToGen:
   Bench∘{
     ext  ⇐ ∾pe‿"-"‿𝕩.disp
     desc ⇐ ∾pd‿" "‿𝕩.label
     getGen ← TypeToGen 𝕩
-    input ⇐ Scale maxlen
+    input ⇐ {
+      name ⇐ "Length"
+      range ⇐ Scale max ⇐ maxlen
+    }
     Measure ⇐ { 𝕊 ⟨fn⟩:
       TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }
       timeInit ⇐ 1e5‿1‿1e3
     }
   }¨ types.range
 }
-BenchFixLen ⇐ { pe‿pd 𝕊 ⟨len,typeToGen,input,timeInit⟩:
+BenchFixLen ⇐ { pe‿pd 𝕊 ⟨len,typeToGen,input⟩:
   Bench∘{
     ext  ⇐ ∾pe‿"-"‿𝕩.disp
     desc ⇐ ∾pd‿" "‿𝕩.label
@@ -47,5 +44,5 @@ BenchFixLen ⇐ { pe‿pd 𝕊 ⟨len,typeToGen,input,timeInit⟩:
       len ⇐ len
       TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }
     }
-  }¨ types.range
+  }¨ 𝕩 {⟨i⇐types⟩𝕊𝕩:i⊏𝕩;𝕩} types.range
 }
