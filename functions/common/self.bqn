@@ -25,15 +25,27 @@ Bench ⇐ {
     ⟨labels⟩ ⇐ ⊑params
   }
 }
-BenchLenAll ⇐ { pe‿pd 𝕊 len‿typeToGen:
+BenchLenAll ⇐ { pe‿pd 𝕊 maxlen‿typeToGen:
   Bench∘{
     ext  ⇐ ∾pe‿"-"‿𝕩.disp
     desc ⇐ ∾pd‿" "‿𝕩.label
     getGen ← TypeToGen 𝕩
-    input ⇐ Scale len
+    input ⇐ Scale maxlen
     Measure ⇐ { 𝕊 ⟨fn⟩:
       TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }
       timeInit ⇐ 1e5‿1‿1e3
+    }
+  }¨ types.range
+}
+BenchFixLen ⇐ { pe‿pd 𝕊 ⟨len,typeToGen,input,timeInit⟩:
+  Bench∘{
+    ext  ⇐ ∾pe‿"-"‿𝕩.disp
+    desc ⇐ ∾pd‿" "‿𝕩.label
+    getGen ← TypeToGen 𝕩
+    input ⇐ input
+    Measure ⇐ { 𝕊 ⟨fn⟩:
+      len ⇐ len
+      TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }
     }
   }¨ types.range
 }
