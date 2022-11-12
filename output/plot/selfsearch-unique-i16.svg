@@ -1,0 +1,62 @@
+<svg viewBox='-60 -40 592 371.6' height='557.4' width='888' xmlns='http://www.w3.org/2000/svg'>
+  <g stroke-width='2.6' font-size='14px' text-anchor='middle'>
+    <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
+    <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
+    <text dy='0.33em' font-size='18px' x='256' y='-19'>Self-search of 1e5 repetitive 2-byte int</text>
+    <text dy='0.33em' x='256' y='313.6'>Unique values</text>
+    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
+    <g stroke-width='0.3' stroke='#555'>
+      <path d='M102.4 0v281.6'/>
+      <path d='M204.8 0v281.6'/>
+      <path d='M307.2 0v281.6'/>
+      <path d='M409.6 0v281.6'/>
+      <path d='M0 264.349h512'/>
+      <path d='M0 249.264h512'/>
+      <path d='M0 223.16h512'/>
+      <path d='M0 191.211h512'/>
+      <path d='M0 150.022h512'/>
+      <path d='M0 118.074h512'/>
+      <path d='M0 91.97h512'/>
+      <path d='M0 50.781h512'/>
+      <path d='M0 18.832h512'/>
+    </g>
+    <g font-size='11px'>
+      <text dy='0.33em' x='0' y='291.1'>1</text>
+      <text dy='0.33em' x='102.4' y='291.1'>10</text>
+      <text dy='0.33em' x='204.8' y='291.1'>100</text>
+      <text dy='0.33em' x='307.2' y='291.1'>1000</text>
+      <text dy='0.33em' x='409.6' y='291.1'>1e4</text>
+      <text dy='0.33em' x='512' y='291.1'>1e5</text>
+      <g text-anchor='end'>
+        <text dy='0.33em' x='-6' y='281.213'>0.8</text>
+        <text dy='0.33em' x='-6' y='264.349'>0.9</text>
+        <text dy='0.33em' x='-6' y='249.264'>1</text>
+        <text dy='0.33em' x='-6' y='223.16'>1.2</text>
+        <text dy='0.33em' x='-6' y='191.211'>1.5</text>
+        <text dy='0.33em' x='-6' y='150.022'>2</text>
+        <text dy='0.33em' x='-6' y='118.074'>2.5</text>
+        <text dy='0.33em' x='-6' y='91.97'>3</text>
+        <text dy='0.33em' x='-6' y='50.781'>4</text>
+        <text dy='0.33em' x='-6' y='18.832'>5</text>
+      </g>
+    </g>
+    <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+      <path stroke='#e41a1c' d='M0 258.293L30.825 258.713L48.857 244.036L71.575 244.263L110.508 244.011L146.572 244.163L184.953 243.585L222.235 245.445L259.223 247.674L296.321 242.689L333.365 221.621L370.402 191.563L407.45 149.777L444.49 94L481.532 43.417L518.573 20'/>
+      <path stroke='#377eb8' d='M0 122.32L30.825 198.552L48.857 199.047L71.575 184.264L110.508 184.265L146.572 184.5L184.953 184.395L222.235 184.544L259.223 183.178L296.321 177.322L333.365 165.303L370.402 155.144L407.45 150.142L444.49 147.711L481.532 146.705L518.573 152.064'/>
+      <path stroke='#4daf4a' d='M0 260.84L30.825 260.931L48.857 261.073L71.575 261.235L110.508 261.326L146.572 261.206L184.953 261.6L222.235 261.597L259.223 259.901L296.321 251.62L333.365 241.714L370.402 237.041L407.45 235.255L444.49 234.294L481.532 234.016L518.573 233.835'/>
+      <path stroke='#984ea3' d='M0 259.147L30.825 259.308L48.857 259.444L71.575 259.4L110.508 259.503L146.572 259.626L184.953 259.878L222.235 259.628L259.223 257.094L296.321 247.905L333.365 235.615L370.402 224.245L407.45 209.771L444.49 205.14L481.532 205.142L518.573 205.254'/>
+    </g>
+    <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
+    <g transform='translate(10,6)' text-anchor='start' font-size='13px'>
+      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='60' height='84'/>
+      <path stroke='#e41a1c' d='M8 15h22'/>
+      <path stroke='#377eb8' d='M8 33h22'/>
+      <path stroke='#4daf4a' d='M8 51h22'/>
+      <path stroke='#984ea3' d='M8 69h22'/>
+      <text dy='0.33em' x='36' y='15'>⊐</text>
+      <text dy='0.33em' x='36' y='33'>⊒</text>
+      <text dy='0.33em' x='36' y='51'>∊</text>
+      <text dy='0.33em' x='36' y='69'>⍷</text>
+    </g>
+  </g>
+</svg>
