@@ -39,7 +39,7 @@ BenchFixLen ⇐ { pe‿pd 𝕊 ⟨len,typeToGen,input⟩:
     ext  ⇐ ∾pe‿"-"‿𝕩.disp
     desc ⇐ ∾pd‿" "‿𝕩.label
     getGen ← TypeToGen 𝕩
-    input ⇐ input
+    input ⇐ Input 𝕩
     Measure ⇐ { 𝕊 ⟨fn⟩:
       len ⇐ len
       TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }

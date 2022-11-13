@@ -23,6 +23,8 @@ range ⇐ {
     ⟨Rand⟩ ← ⟨𝕨⊣𝕩⟩ •Import "../measure/gen.bqn"
     (⌈(1⌈max)÷2) -˜ 𝕩 Rand max˙
   }
+
+  maxrange ⇐ float ⊑ ⟨2⋆size,∞⟩
 }¨ num
 
 Disp ⇐ {𝕩.disp}⊑⟜range
