@@ -3,7 +3,8 @@
 ⟨basename⇐name, title, fns⟩ ← ⊑•args
 
 ns     ← •Import "../../params/ns_v.bqn"
-types  ⇐ •Import "../../params/cputype.bqn"
+types  ← •Import "../../params/cputype.bqn"
+tbool  ← ⊑(•Import "../../params/numtype.bqn").range
 fnobjs ← ⟨fns⟩ •Import "../../params/arith.bqn"
 
 Bench ⇐ {
@@ -45,4 +46,17 @@ BenchFixLen ⇐ { pe‿pd 𝕊 ⟨len,typeToGen,input⟩:
       TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }
     }
   }¨ 𝕩 {⟨i⇐types⟩𝕊𝕩:i⊏𝕩;𝕩} types.range
+}
+BenchBool ⇐ Bench∘{ maxlen‿Scale:
+  ext  ⇐ "bool"
+  desc ⇐ "random booleans"
+  ⟨GetGen⟩ ← tbool
+  input ⇐ {
+    name ⇐ "Length"
+    range ⇐ Scale max ⇐ maxlen
+  }
+  Measure ⇐ { 𝕊 ⟨fn⟩:
+    TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }
+    timeInit ⇐ 1e6‿20‿1e4
+  }
 }

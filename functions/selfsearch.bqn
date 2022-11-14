@@ -1,6 +1,6 @@
 # Self-search: one-argument ⊐⊒∊⍷
 
-types‿Bench‿BenchLenAll‿BenchFixLen ← "common/self.bqn" •Import˜ {
+BenchLenAll‿BenchFixLen‿BenchBool ← "common/self.bqn" •Import˜ {
   name ⇐ "selfsearch"
   title ⇐ "Self-search of"
   fns ⇐ ⊐‿⊒‿∊‿⍷
@@ -34,16 +34,5 @@ E13‿E23 ← •Import "../measure/scale.bqn"
       range ⇐ max ⌊ { ⌊(↕1+⌈)⌾((𝕩⋆15÷˜⊢)⁼)𝕩 } max ⇐ 𝕩.maxrange
     }
   }
-  Bench {
-    ext  ⇐ "bool"
-    desc ⇐ "random booleans"
-    ⟨GetGen⟩ ← ⊑(•Import "../params/numtype.bqn").range
-    input ⇐ {
-      name ⇐ "Length"
-      range ⇐ E23 max ⇐ 1e7
-    }
-    Measure ⇐ { 𝕊 ⟨fn⟩:
-      TimeParams ⇐ { ⟨Fn, GetGen𝕩⟩ }
-    }
-  }
+  BenchBool 1e7‿E23
 ⟩
