@@ -11,7 +11,7 @@ E13‿E23 ← •Import "../measure/scale.bqn"
 ∾ ⟨
   "pair"‿"shuffled pairs," BenchLenAll 1e7‿E13‿{⊢ {•rand.Deal∘≠⊸⊏𝕨⥊𝕏} ·𝕩.GetGen 1⌈⌊∘÷⟜2}
   "rand"‿"random"          BenchLenAll 1e7‿E23‿{𝕩.GetGen}
-  "sort"‿"sorted"          BenchLenAll 1e7‿E23‿{{•internal.Squeeze∘∧𝕏} 𝕩.GetGen}
+  "sort"‿"sorted"          BenchLenAll 1e7‿E23‿{𝕩.GetGenSorted}
   "unique"‿"1e5 repetitive" BenchFixLen {
     len ⇐ 1e5
     TypeToGen ⇐ {{len(•rand.Range⟜≠⊏⊢)𝕏} 𝕩.GetGenUnique}
