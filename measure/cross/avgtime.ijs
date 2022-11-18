@@ -18,5 +18,6 @@ args =: get&.> arrs
 
 (dy{::'ay';'ax ay') =: {.`(<"_1)@.(1<#) |: (-valence) ]\ args
 expr =: 'ax '&,^:dy@:,&'&.> ay'
-echo -~&>/ (iter 6!:2 expr)&.> '0:';fn
-exit ''
+time =: -~&>/ (iter 6!:2 expr)&.> '0:';fn
+time (1!:2) 2  NB. print
+2!:55 ''       NB. exit
