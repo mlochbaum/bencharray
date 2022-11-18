@@ -18,7 +18,7 @@ range ⇐ {
   _ggg ← { {•internal.Squeeze 𝕏-((float+range)÷2)˙}∘𝔽 _ggg0 }
   GetGen ⇐ {𝕩.Rand}_ggg
   getGenUnique ⇐ {size<32 ? {𝕩.RandUnique}_ggg ; GetGen} # Large-range •rand.Deal unimplemented
-  GetGenSorted ⇐ {∧𝕏}∘{size<32 ? GetGen ; {÷⟜¯2+`𝕩.Rand⟜0}_ggg0}
+  GetGenSorted ⇐ {∧𝕏}∘{size≤32 ? GetGen ; {¯0.5+`⊣÷˜𝕩.Rand⟜0}_ggg0}
 
   # Random numbers that won't overflow for +-
   GetGenSmall ⇐ {
