@@ -55,7 +55,7 @@ _fmtLang_ ← {
   ⟩ d
 }
 
-⟨
+"extendlangs.bqn" •Import˜⍟(•file.Exists⊣) ⟨
   {
     shell ⇐ ⋈ extension⇐name ⇐ "bqn"
     FmtFn ⇐ •Repr⊢
