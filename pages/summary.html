@@ -29,7 +29,7 @@
   <img width="50%" src="../output/plot/arithm-slow.svg"></img>
 </tr></table>
 <h3><a href="fold.html">Fold</a> and <a href="scan.html">Scan</a></h3>
-<p>Folds and scans are defined as a sequential evaluation, but for operand functions that are associative and commutative, evaluation can be reordered to give efficient SIMD implementations. These include <code>+-×⌈⌊</code> on integers, <code>⌈⌊</code> on floats, and many boolean functions. Because floating-point <code>+</code> (along with <code>-</code> and <code>×</code>) isn't exactly associative, we may add a vectorized <code>•math.Sum</code> function for when speed is important. CBQN's coverage of the associative cases is still fairly spotty. Uncovered cases run at about 5ns/value because that's the overhead of calling a primitive function.</p>
+<p>Folds and scans are defined as a sequential evaluation, but for operand functions that are associative and commutative, evaluation can be reordered to give efficient SIMD implementations. These include <code>+-×⌈⌊</code> on integers, <code>⌈⌊</code> on floats, and many boolean functions. Because floating-point <code>+</code> (along with <code>-</code> and <code>×</code>) isn't exactly associative, we may add a vectorized <code>•math.Sum</code> function for when speed is important. CBQN still has a few gaps in coverage, especially in scan. Uncovered cases run at about 5ns/value because that's the overhead of calling a primitive function.</p>
 <table><tr>
   <img width="50%" src="../output/plot/fold-arith.svg"></img>
   <img width="50%" src="../output/plot/scan-arith.svg"></img>
