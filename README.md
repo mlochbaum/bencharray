@@ -1,8 +1,10 @@
 # Array language benchmarks
 
-In-progress benchmark suite for array languages. Supports BQN primarily, with working but not-too-accurate cross-language interfaces to BQN, Dyalog APL, and J.
+This benchmark suite is used as a reference for BQN development. It has precise within-language benchmarks and a finicky (lots of errors) [cross-language interface](measure/cross) to BQN, Dyalog APL, and J.
 
-[See my results here](https://mlochbaum.github.io/bencharray/pages/summary.html).
+There are benchmarks for most primitives that have significant performance considerations, mostly focused on rank-1 numeric arrays at the moment.
+
+[BQN result graphs with commentary here](https://mlochbaum.github.io/bencharray/pages/summary.html).
 
 To use:
 
