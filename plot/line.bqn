@@ -26,7 +26,7 @@ Tick ← {
   Lines ← {
     h ← 'h'=𝕨
     P ← ⌽⌾(2⊸↑)⍟h ∾⟜((¬h)⊏⍉off≍dim)
-    ("path"Elt"d"⋈·∾("M "∾𝕨)∾¨Num∘P)¨ 𝕩
+    (Path·∾("M "∾𝕨)∾¨Num∘P)¨ 𝕩
   }
   dist ← (s⊏dim)(-⌊⊢)tpos-s⊏off
   Filter ← ≤⟜dist/¨⊢
@@ -71,6 +71,7 @@ Plot ⇐ { opts 𝕊 dat:
 
   axes ← x‿y
   xcapt‿ycapt ← {𝕩.name}¨ axes
+  splitx ← 1<≡xcapt
   alog ← {⟨r⇐log⟩:r; 1}¨ axes
   disp ← {⟨r⇐disp⟩:r; DispNum}¨ axes
 
@@ -97,7 +98,11 @@ Plot ⇐ { opts 𝕊 dat:
     Background out
     ⟨
       ((TSize 18)∾Pos⟨width÷2,¯19⟩) Text title
-      xcapt Text˜ Pos 0‿32+dim×0.5‿1
+      { ¬splitx ? xcapt Text˜ Pos 0‿32+dim×0.5‿1
+      ; P ← {0‿𝕨+dim×𝕩‿1}
+        xc←xcapt Text˜⟜Pos¨ 32 P¨ 0.25‿0.75
+        xc∾<"stroke-width=1|stroke=#555" At⊸Path ∾"M v"∾¨Num (18 P 0.5)∾22
+      }
       ycapt Text˜ "transform"‿"rotate(-90)"∾Pos 0‿42-˜⌽dim×0‿¯0.5
     ⟩
     Tick {
@@ -106,7 +111,7 @@ Plot ⇐ { opts 𝕊 dat:
       RoundDown ← {(⊑∘⍋⟜𝕩-1˙)⊸⊑1‿2‿5×⌊⌾(10⋆⁼⊢)𝕩}
       tval ← axes {⟨r⇐ticks⟩𝕊𝕩:r; 𝕩}¨ alog GetTicks⟜∧¨ Scale⁼0⋈¨dim
       tpos ⇐ Scale ticks ← (⍷∧⊑xy) {𝕨⌾⊑𝕩}⍟(10≥≠∘⊣) tval
-      ttext ⇐ disp {𝕎⚇0𝕩}¨ ticks
+      ttext ⇐ disp {𝕎⚇0𝕩}¨ {splitx?x.max-⍟(÷⟜2⊸<)¨⌾⊑𝕩;𝕩} ticks
     }
     ls Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
     Outline 0‿0≍dim
