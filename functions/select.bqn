@@ -8,7 +8,7 @@ Bench ← {
 
   result ⇐ ({⟨r⇐denom⟩:⟨{denom⇐r}⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
   result.SetMin 0.05
-  params ⇐ ⟨types⟩
+  params ⇐ ⟨{⟨r⇐types⟩:r;types}𝕩⟩
 
   plotOpts ⇐ {
     title ⇐ plotname
@@ -50,6 +50,26 @@ Bench¨ ⟨
     }
     Measure ⇐ { 𝕊 ⟨type⟩:
       TimeParams ⇐ { ⟨⊏, •rand.Deal𝕩˙, type.GetGen𝕩⟩ }
+    }
+  }
+  {
+    ext ⇐ "width"
+    plotname ⇐ "Selecting 16KB of cells with ⊏"
+    input ⇐ {
+      name ⇐ "Cell width"
+      max ⇐ 40
+      range ⇐ 1+↕max
+    }
+    denom ⇐ "output element"
+    Measure ⇐ { 𝕊 ⟨type⟩:
+      l ← 1e3
+      N ← ⌈((2⋆3+14)÷type.size)÷⊢
+      Len ⇐ N×⊢
+      TimeParams ⇐ {
+        Ind ← (⟨𝕩⟩•Import"../measure/gen.bqn").Rand
+        sh ← l‿𝕩
+        ⟨⊏, (N 𝕩) Ind l˙, sh ⥊ (type.GetGen ×´sh){𝔽} ⟩
+      }
     }
   }
 ⟩
