@@ -1,5 +1,38 @@
 #! /usr/bin/env bqn
 
+Spl ← (⊢-˜¬×+`)⊸⊔          # Split by boolean left argument
+Trim ← ((∨`∧∨`⌾⌽)' '⊸≠)⊸/  # Trim leading and trailing spaces
+
+opts ← {
+help_pre ← 1↓"
+Strength reduction tester: compare runtime of equivalent expressions.
+Argument is a list of input files and options. Options:"
+
+  short‿long‿args‿dup‿desc ← <˘⍉> ⟨
+    "h"‿"help"     ‿0‿1‿"Print this message and exit"
+    "t"‿"threshold"‿1‿0‿"Minimum relative performance difference for output (1.2)"
+  ⟩
+  short‿long ∾˜¨⟜<¨↩ "-"‿"--"
+  args ∾↩ 0
+
+  c ← ≠short
+  op ← (short⊸⊐ ⌊ long⊸⊐) •args
+  op ⌈↩ c ×¬ <`⊸= op⊏args
+  opts ← ((1+c)∾˜f/op) ⊔ ((op=c)(1-˜×⟜(+`))○(∾⟜1)f←¬0»op⊏args) ⊔ •args
+  "Option can't be duplicated" ! ∧´ (dup∾1) ≥ 1<≠¨opts
+  os ← (0⌾⊑dup∾0) (∾','⊸Spl¨)⍟⊣¨ (1⌾(¯1⊸⊑)args) ⊣◶⟨0<≠∘⊢,⊑¨⊢⟩¨ opts
+  help‿threshold‿files ⇐ os
+  threshold ↩ 1.2 ⊣´ •ParseFloat¨ threshold
+
+  { help ?
+    opt_help ← ∾¨´ ⟨desc⟩ ∾˜ (1+·⌈´≠¨)⊸(↑¨)¨ short‿long ∾¨¨ ",:"
+    •Out ∾∾⟜(@+10)¨ ⟨help_pre,""⟩ ∾ opt_help
+    •Exit@
+  ;@}
+}
+
+files ← (0<≠)◶⟨1,∨´"all"⊸≡¨⟩◶⟨∾⟜".bqn"¨, •file.List∘"reductions"⟩ opts.files
+
 # Format number with 3 sig figs and scientific notation
 Fmt ⇐ {
   e ← ⌊•math.Log10𝕩
@@ -8,13 +41,10 @@ Fmt ⇐ {
   (1(↑∾"."∾↓)•Repr⌊r)∾"e"∾•Repr e
 }
 
-Spl ← (⊢-˜¬×+`)⊸⊔          # Split by boolean left argument
-Trim ← ((∨`∧∨`⌾⌽)' '⊸≠)⊸/  # Trim leading and trailing spaces
-
 # Alert if the first function is at least 20% slower than the second
 CompareTime ← { fnsc 𝕊 arg:
   fns‿chk ← 2(↑⋈↓)•BQN¨fnsc
-  Bad ← ≥⟜(1.2⊸×)´
+  Bad ← ≥⟜(opts.threshold⊸×)´
   GetApply ← {m𝕊⟨w,x⟩: {𝕨 w⊸𝕏_m x}; m𝕊⟨x⟩: {𝕨 𝕏_m x}}⟜arg
   On ← (GetApply {{𝔽}})¨
   Time ← (GetApply •timed)¨⟜fns
@@ -31,9 +61,6 @@ RunGroup ← {
   args‿equivs ← 2↑('%'≠⊑¨)⊸⊔ 𝕩
   ('%'⊸=⊸Spl¨ equivs) CompareTime⌜ ∾ (⥊∘•BQN 1⊸↓)¨ args
 }
-
-files‿opts ← 2 ↑ ('-'=⊑)¨⊸⊔ •args
-files ↩ (0<≠)◶⟨1,∨´"all"⊸≡¨⟩◶⟨∾⟜".bqn"¨, •file.List∘"reductions"⟩ files
 
 lines ← ∾ (⟨""⟩ ∾˜ · (0<≠)◶1‿('#'≠⊑)¨⊸/ · •file.Lines "reductions/"⊸∾)¨ files
 groups ← (0=≠¨)⊸Spl lines
