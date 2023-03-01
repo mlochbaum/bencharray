@@ -57,9 +57,30 @@ CompareTime ← { fnsc 𝕊 arg:
   ; @
 }
 
+# Generate argument from one of several abstract specifiers
+MakeArg ← {
+  ⟨Post,arg⟩: Post 𝕊 arg
+;
+  ⟨warg,xarg⟩:
+    w‿x⇐ ⋄ ⟨wd⇐desc,w⇐x⟩‿⟨xd⇐desc,x⟩ ← 𝕊¨ warg‿xarg
+    GetDesc ← {c←+´∧`=´(𝕨⌊○≠𝕩)↑¨𝕨‿𝕩⋄(c↑𝕨)∾∾⟜" and "⊸∾´c↓¨𝕨‿𝕩}
+    desc ⇐ {⟨r⇐desc⟩:r ; wd GetDesc xd} 𝕩
+;
+  ⟨len,type⟩:
+    r ← 2‿100‿1e4‿1e9‿0⊑˜"bool"‿"i8"‿"i16"‿"i32"‿"f64"⊸⊐⌾<type
+    x ⇐ len •rand.Range r
+    desc ⇐ ∾⟨•Repr len," ",type⟩
+;
+  ⟨len,range⟩:
+    desc⇐∾⟨•Repr len," <",•Repr range⟩
+    x⇐len •rand.Range range
+;
+  𝕩
+}
+
 RunGroup ← {
   args‿equivs ← 2↑('%'≠⊑¨)⊸⊔ 𝕩
-  ('%'⊸=⊸Spl¨ equivs) CompareTime⌜ ∾ (⥊∘•BQN 1⊸↓)¨ args
+  (('%'⊸=⊸Spl¨ equivs) CompareTime¨ <∘MakeArg)¨ ∾ (⥊∘•BQN 1⊸↓)¨ args
 }
 
 lines ← ∾ (⟨""⟩ ∾˜ · (0<≠)◶1‿('#'≠⊑)¨⊸/ · •file.Lines "reductions/"⊸∾)¨ files
