@@ -3,7 +3,7 @@
 basename ← "arith"
 
 ns_v   ← •Import "../params/ns_v.bqn"
-types  ← •Import "../params/cputype.bqn"
+types‿itypes ← •Import⟜"../params/cputype.bqn"¨ ⟨⟩‿⟨"Input type"⟩
 GetFns ← ⋈ •Import "../params/arith.bqn"˙
 GetInp ← {name⇐"Length" ⋄ range⇐𝕩}
 
@@ -27,30 +27,31 @@ MLarge ← (⋈˜{𝕎𝕩})_mGen
 MLScal ← {⟨{⊑𝕏}𝕎1,𝕎𝕩⟩}_mGen
 
 Bench ← {
-  ext‿fns‿range‿measure‿plotpre‿plotname ← 𝕩
+  ext‿fns‿range‿measure‿plotpre‿plotname‿itype ← 𝕩
   name ⇐ basename∾ext
+  types ← •Import "../params/cputype.bqn"
   params ⇐ types ⋈ fnobjs ← GetFns fns
   input ⇐ GetInp range
   result ⇐ ns_v
   Measure‿PlotPre⇐
   plotOpts ⇐ {
     title ⇐ plotname
-    x ⇐ types
+    x ⇐ itype ⊑ types‿itypes
     y ⇐ result
     labels ⇐ {𝕩.Disp¨ 𝕩.num} fnobjs
   }
 }
 Summary ← Bench∘{
-  ext⇐𝕨 ⋄ fns‿measure‿plotname ⇐ 𝕩
+  ext⇐𝕨 ⋄ fns‿measure‿itype‿plotname ⇐ 𝕩
   Range ⇐ {<(2⋆3+15)÷𝕩.size}
   PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
 }
 
 ⟨
-  "-summary" Summary ⟨×‿+‿⌊‿<,      MSmall, "Arithmetic with no overflow, 32KB"⟩
-  "-small"   Summary ⟨×‿+‿-‿⌊‿⌈,    MSmall, "Arithmetic with no overflow, 32KB"⟩
-  "-over"    Summary ⟨×‿+‿-,        MLarge, "Arithmetic with overflow, 32KB"⟩
-  "-scal"    Summary ⟨×‿+‿⌊‿<,      MLScal, "Scalar-list arithmetic allowing overflow, 32KB"⟩
-  "-compare" Summary ⟨<‿>‿=‿≠‿≤‿≥,  MLarge, "Comparisons, 32KB"⟩
-  "-slow"    Summary ⟨(⋆⁼)‿⋆‿√‿|‿÷, MLarge, "Slow arithmetic, 32KB"⟩
+  "-summary" Summary ⟨×‿+‿⌊‿<,      MSmall, 0, "Arithmetic with no overflow, 32KB"⟩
+  "-small"   Summary ⟨×‿+‿-‿⌊‿⌈,    MSmall, 0, "Arithmetic with no overflow, 32KB"⟩
+  "-over"    Summary ⟨×‿+‿-,        MLarge, 1, "Arithmetic with overflow, 32KB"⟩
+  "-scal"    Summary ⟨×‿+‿⌊‿<,      MLScal, 1, "Scalar-list arithmetic allowing overflow, 32KB"⟩
+  "-compare" Summary ⟨<‿>‿=‿≠‿≤‿≥,  MLarge, 0, "Comparisons, 32KB"⟩
+  "-slow"    Summary ⟨(⋆⁼)‿⋆‿√‿|‿÷, MLarge, 1, "Slow arithmetic, 32KB"⟩
 ⟩

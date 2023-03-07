@@ -1,5 +1,5 @@
 # CPU types: ints and floats
-name ⇐ "Type"
+name ⇐ "Type" ⊣´ •args
 num ⇐ ↕4
 log ⇐ 0
 
