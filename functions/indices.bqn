@@ -10,7 +10,7 @@ sizes ← {
 }
 
 Bench ← {
-  params‿input‿measure ⇐ ext‿plotname ← 𝕩
+  params‿input‿measure ⇐ ext‿plotname ← opts ← 𝕩
   name ⇐ "indices-"∾ext
 
   result ⇐ ({⟨r⇐output⟩:⟨r⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
@@ -21,6 +21,7 @@ Bench ← {
     x ⇐ input
     y ⇐ result
     labels ⇐ ({label⇐⋈"/"} ⊣´ params).label
+    order ⇐ {⟨r⇐order⟩:r;⊢}opts
   }
 }
 
@@ -82,9 +83,10 @@ Bench¨ ⟨
     plotname ⇐ "Index list to counts (/⁼)"
     params ⇐ ⟨{
       name ⇐ "Max"
-      range ⇐ 10⋆exp←2‿3‿4‿5
+      range ⇐ 10⋆exp←1‿2‿3‿4‿5
       label ⇐ ("max 1e"∾•Repr)¨ exp
     }⟩
+    Order ⇐ ⌽
 
     input ⇐ {
       name ⇐ "Input length"
