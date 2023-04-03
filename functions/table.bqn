@@ -10,9 +10,10 @@ params ⇐ types‿fns
 
 xmax ← 1e5
 Flip ← xmax⌈∘÷⊢  # Length of other dimension
+scales ← •Import "../measure/scale.bqn"
 input ⇐ {
   name ⇐ "Left argument length"
-  range ⇐ {(⊢∾Flip∘⌽) ⍷ ⌈ 𝕩 ⋆ (2⊸×÷˜0∾0.5+↕) ⌈2÷˜ ⌈1.3⋆⁼𝕩} xmax
+  range ⇐ 1.3 scales._exp2d xmax
 }
 
 Measure ⇐ { 𝕊 type‿fn:
