@@ -49,6 +49,7 @@
   <img width="50%" src="../output/plot/select-few.svg"></img>
 </tr><tr>
   <img width="50%" src="../output/plot/select-permute.svg"></img>
+  <img width="50%" src="../output/plot/select-width.svg"></img>
 </tr></table>
 <h3>Reshape</h3>
 <p>The speed of Reshape with a large result should essentially be limited by the amount of memory written. The current method is to copy the argument to the result, then repeatedly double it until it reaches a suitable block size for filling the rest of the result. There are special cases for 1-byte and 8-byte blocks; strangely, these measure slower than the general case, giving the bumps at the left of the first graph. We've left them in on the grounds that it may be specific to my CPU, and if not, later compiler and libc improvements could fix these cases (there's nothing obviously wrong with the emitted code).</p>
