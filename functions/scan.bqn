@@ -1,2 +1,3 @@
 # Scan modifier
-{name⇐"scan", _op⇐`} •Import "common/foldscan.bqn"
+o ← {name⇐"scan", _op⇐`}
+∾⥊¨ o •Import¨ "common/foldscan.bqn"‿"common/arith2d.bqn"
