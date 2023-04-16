@@ -38,7 +38,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ itype ⊑ types‿itypes
     y ⇐ result
-    labels ⇐ {𝕩.Disp¨ 𝕩.num} fnobjs
+    key ⇐ fnobjs
   }
 }
 Summary ← Bench∘{

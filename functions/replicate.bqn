@@ -16,7 +16,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    labels ⇐ (⊑params).labels
+    key ⇐ ⊑params
     Order ⇐ ⌽
   }
 }

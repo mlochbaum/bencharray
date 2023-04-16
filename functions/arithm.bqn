@@ -22,7 +22,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ types
     y ⇐ result
-    labels ⇐ {𝕩.Disp¨ 𝕩.num} fnobjs
+    key ⇐ fnobjs
   }
 }
 Summary ← Bench∘{

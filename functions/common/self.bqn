@@ -17,7 +17,7 @@ Bench ⇐ {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    ⟨labels⟩ ⇐ ⊑params
+    key ⇐ ⊑params
   }
 }
 BenchLenAll ⇐ { pe‿pd 𝕊 maxlen‿Scale‿typeToGen:

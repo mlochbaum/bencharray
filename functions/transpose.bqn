@@ -24,7 +24,7 @@ scales ← •Import "../measure/scale.bqn"
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    ⟨labels⟩ ⇐ ⊑params
+    key ⇐ ⊑params
     Order ⇐ ⌽
   }
 }

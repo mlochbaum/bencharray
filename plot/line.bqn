@@ -64,7 +64,7 @@ ENum ← {∾⟜"e"⊸∾○Num´ (𝕩÷10⊸⋆)⊸((1<5e¯4+÷⟜10)◶⟨⋈
 DispNum ← (2|1e¯9‿1e¯3‿1e4⊸⍋⌾<)◶Num‿ENum
 
 Plot ⇐ { opts 𝕊 dat:
-  title‿x‿y‿labels ← opts
+  ⟨title,x,y,⟨labels⟩⇐key⟩ ← opts
   order ← {⟨r⇐order⟩:r; ⊢} opts
   BoundAxis ← ⊣ {⟨r⇐min⟩:r;¯∞}⊸⌈ {⟨r⇐max⟩:r;∞}⊸⌊
   col ← "stroke"⊸⋈¨ GetColors labels

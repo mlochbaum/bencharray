@@ -25,6 +25,6 @@ plotOpts ⇐ {
   title ⇐ "Arithmetic ⌈⌜ with 1e5-element result"
   x ⇐ input
   y ⇐ result
-  labels ⇐ types.labels
+  key ⇐ types
   Order ⇐ ⌽
 }

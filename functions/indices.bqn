@@ -6,7 +6,7 @@ scale ← •Import"../measure/scale.bqn"
 sizes ← {
   name ⇐ "Size"
   range ⇐ 10⋆exp←2‿4‿6
-  label ⇐ ("length 1e"∾•Repr)¨ exp
+  labels ⇐ ("length 1e"∾•Repr)¨ exp
 }
 
 Bench ← {
@@ -20,7 +20,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    labels ⇐ ({label⇐⋈"/"} ⊣´ params).label
+    key ⇐ {labels⇐⋈"/"} ⊣´ params
     order ⇐ {⟨r⇐order⟩:r;⊢}opts
   }
 }
@@ -84,7 +84,7 @@ Bench¨ ⟨
     params ⇐ ⟨{
       name ⇐ "Max"
       range ⇐ 10⋆exp←1‿2‿3‿4‿5
-      label ⇐ ("max 1e"∾•Repr)¨ exp
+      labels ⇐ ("max 1e"∾•Repr)¨ exp
     }⟩
     Order ⇐ ⌽
 

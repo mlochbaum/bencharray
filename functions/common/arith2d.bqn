@@ -29,7 +29,7 @@ Bench2d ← { mext‿mod‿mname 𝕊 dat:
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    ⟨labels⟩ ⇐ ⊑params
+    key ⇐ ⊑params
   }
 }
 

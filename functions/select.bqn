@@ -14,7 +14,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    labels ⇐ types.labels
+    key ⇐ types
     Order ⇐ ⌽
   }
 }

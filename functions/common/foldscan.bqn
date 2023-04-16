@@ -31,7 +31,7 @@ Detail ← {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    ⟨labels⟩ ⇐ ⊑params
+    key ⇐ ⊑params
   }
 }
 
@@ -64,7 +64,7 @@ Summary ← {
     title ⇐ ∾tname‿" F"‿oname‿" of numeric list, 32KB"
     x ⇐ types
     y ⇐ result
-    ⟨labels⟩ ⇐ fns
+    key ⇐ fns
   }
 }
 

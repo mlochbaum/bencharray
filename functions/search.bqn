@@ -43,7 +43,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    ⟨labels⟩ ⇐ ⊑params
+    key ⇐ ⊑params
   }
 }
 
