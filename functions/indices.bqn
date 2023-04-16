@@ -21,7 +21,6 @@ Bench ← {
     x ⇐ input
     y ⇐ result
     key ⇐ {labels⇐⋈"/"} ⊣´ params
-    order ⇐ {⟨r⇐order⟩:r;⊢}opts
   }
 }
 
@@ -85,8 +84,8 @@ Bench¨ ⟨
       name ⇐ "Max"
       range ⇐ 10⋆exp←1‿2‿3‿4‿5
       labels ⇐ ("max 1e"∾•Repr)¨ exp
+      Order ⇐ ⌽
     }⟩
-    Order ⇐ ⌽
 
     input ⇐ {
       name ⇐ "Input length"

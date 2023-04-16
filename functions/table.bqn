@@ -26,5 +26,4 @@ plotOpts ⇐ {
   x ⇐ input
   y ⇐ result
   key ⇐ types
-  Order ⇐ ⌽
 }

@@ -25,6 +25,5 @@ scales ← •Import "../measure/scale.bqn"
     x ⇐ input
     y ⇐ result
     key ⇐ ⊑params
-    Order ⇐ ⌽
   }
 }

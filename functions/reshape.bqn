@@ -15,7 +15,6 @@ Bench ← {
     x ⇐ input
     y ⇐ result
     key ⇐ ⊑params
-    Order ⇐ ⌽
   }
 }
 

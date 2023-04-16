@@ -31,3 +31,4 @@ range ⇐ {
 
 Disp ⇐ {𝕩.disp}⊑⟜range
 labels ⇐ {𝕩.label}¨range
+Order ⇐ ⌽
