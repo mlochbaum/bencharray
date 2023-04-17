@@ -64,7 +64,7 @@ Summary ← {
     title ⇐ ∾tname‿" F"‿oname‿" of numeric list, 32KB"
     x ⇐ types
     y ⇐ result
-    key ⇐ fns
+    key ⇐ 1⊑params
   }
 }
 

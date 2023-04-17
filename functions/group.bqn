@@ -15,7 +15,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ input
     y ⇐ result
-    key ⇐ types
+    key ⇐ ⊑params
   }
 }
 

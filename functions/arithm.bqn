@@ -10,7 +10,7 @@ GetInp ← {name⇐"Length" ⋄ range⇐𝕩}
 Bench ← {
   ext‿fns‿range‿plotpre‿plotname ← 𝕩
   name ⇐ basename∾ext
-  params ⇐ types ⋈ fnobjs ← GetFns fns
+  params ⇐ ⟨types, GetFns fns⟩
   input ⇐ GetInp range
   result ⇐ ns_v
   Measure ⇐ { 𝕊 type‿fn:
@@ -22,7 +22,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ types
     y ⇐ result
-    key ⇐ fnobjs
+    key ⇐ 1⊑params
   }
 }
 Summary ← Bench∘{

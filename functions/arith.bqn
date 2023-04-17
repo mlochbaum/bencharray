@@ -30,7 +30,7 @@ Bench ← {
   ext‿fns‿range‿measure‿plotpre‿plotname‿itype ← 𝕩
   name ⇐ basename∾ext
   types ← •Import "../params/cputype.bqn"
-  params ⇐ types ⋈ fnobjs ← GetFns fns
+  params ⇐ ⟨types, GetFns fns⟩
   input ⇐ GetInp range
   result ⇐ ns_v
   Measure‿PlotPre⇐
@@ -38,7 +38,7 @@ Bench ← {
     title ⇐ plotname
     x ⇐ itype ⊑ types‿itypes
     y ⇐ result
-    key ⇐ fnobjs
+    key ⇐ 1⊑params
   }
 }
 Summary ← Bench∘{
