@@ -4,7 +4,7 @@
     <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
     <text dy='0.33em' font-size='18px' x='256' y='-19'>Partitioning 1e5 elements with ⊔</text>
     <text dy='0.33em' x='256' y='313.6'>Number of groups</text>
-    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / value)</text>
+    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / input)</text>
     <g stroke-width='0.3' stroke='#555'>
       <path d='M85.333 0v281.6'/>
       <path d='M170.667 0v281.6'/>

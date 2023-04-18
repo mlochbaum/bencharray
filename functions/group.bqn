@@ -1,14 +1,20 @@
 # Group ⊔
 
-ns    ← •Import "../params/ns_v.bqn"
+ns    ← ⟨{denom⇐"input"}⟩ •Import "../params/ns_v.bqn"
 types ← •Import "../params/numtype.bqn"
 scale ← •Import"../measure/scale.bqn"
+sizes ← {
+  name ⇐ "Size"
+  range ⇐ 10⋆exp←2‿3‿4‿6
+  labels ⇐ ("length 1e"∾•Repr)¨ exp
+}
 
-Bench ← {
-  input‿measure ⇐ ext‿plotname ← 𝕩
-  name ⇐ "group-"∾ext
+Bench ← { isInd‿nameext‿params‿_getMeasure 𝕊 𝕩:
+  ⟨input⟩ ⇐ ext‿plotname‿GetGrGen ← 𝕏 isInd
+  name ⇐ ∾"group-"‿nameext‿ext
   result ⇐ ns
-  params ⇐ ⟨types⟩
+  params⇐
+  Measure ⇐ GetGrGen _getMeasure
   plotOpts ⇐ {
     title ⇐ plotname
     x ⇐ input
@@ -16,42 +22,58 @@ Bench ← {
     key ⇐ ⊑params
   }
 }
+withGroup ← {
+  isInd ⇐ 0
+  nameext ⇐ ""
+  params ⇐ ⟨types⟩
+  l ← 1e5
+  _getMeasure ⇐ { GetGrGen _𝕣 ⟨type⟩:
+    gen ← GetGrGen len ⇐ l
+    TimeParams ⇐ { ⟨⊔, Gen 𝕩, type.GetGen len⟩ }
+  }
+}
+withInds ← {
+  isInd ⇐ 1
+  nameext ⇐ "indices-"
+  params ⇐ ⟨sizes⟩
+  _getMeasure ⇐ { GetGrGen _𝕣 ⟨len⟩:
+    len⇐
+    gen ← GetGrGen len
+    TimeParams ⇐ { ⟨⊔, Gen 𝕩⟩ }
+  }
+}
 
-density ← Bench {
+Density ← { 𝕊 i:
   ext ⇐ "density"
-  plotname ⇐ "1e5 elements to 1e3 groups with ⊔"
+  plotname ⇐ i⊑⟨"1e5 elements to 1e3 groups with ⊔"
+                "n elements to n/100 index groups with ⊔"⟩
   input ⇐ {
-    name ⇐ "Left argument non-negative density"
+    name ⇐ (i⊑"Left argument n"‿"N")∾"on-negative density"
     max ⇐ 1
     log ⇐ 0 ⋄ Trans ⇐ 1.6⊸√
     range ⇐ ×˜ ↕⊸∾⊸÷ 10
   }
-  Measure ⇐ { 𝕊 ⟨type⟩:
-    len ⇐ 1e5
-    base ← len (⟨1e3⟩•Import"../measure/gen.bqn").Rand 1e3
-    TimeParams ⇐ {
-      ⟨⊔, {¯1¨⌾(𝕩⊸⊏)base} (⌊0.5+len×¬𝕩) •rand.Subset len˙, type.GetGen len⟩
-    }
+  GetGrGen ⇐ { 𝕊 len:
+    n ← len ÷ 100
+    base ← len (⟨n⟩•Import"../measure/gen.bqn").Rand n
+    { {¯1¨⌾(𝕩⊸⊏)base} (⌊0.5+len×¬𝕩) •rand.Subset len˙ }
   }
 }
-Range ← Bench∘{ 𝕊 e‿verb‿ProcW:
+Range ← { 𝕊 e‿verb‿ProcW: { 𝕊 i:
   ext ⇐ "range"∾e
-  plotname ⇐ verb∾"ing 1e5 elements with ⊔"
+  plotname ⇐ i⊑⟨verb∾"ing 1e5 elements with ⊔"
+                verb∾"ing n indices with ⊔"⟩
   input ⇐ {
     name ⇐ "Number of groups"
     max ⇐ 1e6
     range ⇐ scale.E23 max
   }
-  Measure ⇐ { 𝕊 ⟨type⟩:
-    len ⇐ 1e5
-    TimeParams ⇐ {
-      Grp ← ProcW len (⟨𝕩⟩•Import"../measure/gen.bqn").Rand 𝕩˙
-      ⟨⊔, Grp, type.GetGen len⟩
-    }
+  GetGrGen ⇐ { 𝕊 len:
+    { ProcW len (⟨𝕩⟩•Import"../measure/gen.bqn").Rand 𝕩˙ }
   }
-}
+}}
 
-⟨
+withGroup‿withInds Bench⌜ ⟨
   density
   Range ""     ‿"Group"    ‿⊢
   Range "-sort"‿"Partition"‿∧
