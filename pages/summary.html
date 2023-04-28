@@ -16,8 +16,8 @@
 
 <h2><a href="arith.html">Arithmetic</a></h2>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/arithmetic.html">Implementation notes</a></p>
-<p>The arithmetic functions <code>+-×⌈⌊</code>, and comparisons, are standard SIMD functionality. With <code>+-×</code> an overflow check is needed, and if it happens a result in a larger type needs to be created.</p>
-<p>Most other primitives, including <code>÷√⋆</code> and <code>⋆⁼</code>, require conversion to floats, so will ideally run at the same speed for all types. <code>÷</code> and monadic <code>√</code> have native SIMD support. Libraries to compute others using SIMD exist but CBQN doesn't use anything like this yet. Dyadic <code>|</code> is kind of weird as it has faster implementations on integers, but they tend to be complicated.</p>
+<p>The arithmetic functions <code>+-×⌈⌊</code>, and comparisons, are standard SIMD functionality. With <code>+-×</code> an overflow check is needed, and if it happens a result in a larger type needs to be created. Dyadic <code>|</code> has some optimization for integers but is only really fast when <code>𝕨</code> is an atom.</p>
+<p>Most other primitives, including <code>÷√⋆</code> and <code>⋆⁼</code>, require conversion to floats, so will ideally run at the same speed for all types. <code>÷</code> and monadic <code>√</code> have native SIMD support. Libraries to compute others using SIMD exist but CBQN doesn't use anything like this yet.</p>
 <table><tr>
   <img width="50%" src="../output/plot/arith-summary.svg"></img>
   <img width="50%" src="../output/plot/arith-over.svg"></img>
