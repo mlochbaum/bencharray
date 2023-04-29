@@ -10,25 +10,33 @@
 
 <div class="nav"><a href="https://github.com/mlochbaum/bencharray">bencharray</a> / <a href="summary.html">summary</a></div>
 <h1>Arithmetic scan benchmarks</h1>
+<p>Scans behave a lot like <a href="fold.html">folds</a> in terms of requirements, but are much slower because of the need to compute and output intermediate results (while a fast ordering for an associative fold won't combine everything completely until the end). Like folds, <code>+`</code>, <code>⌊`</code>, and <code>⌈`</code> are the only important non-boolean cases, with <code>×`</code> also used but hardly ever on long arrays. These three have SIMD code and others call one step at a time.</p>
 <table><tr>
   <img width="50%" src="../output/plot/scan-arith.svg"></img>
   <img width="50%" src="../output/plot/scan-slow.svg"></img>
-</tr><tr>
+</tr></table>
+<p>Functions <code>⌊`</code> and <code>⌈`</code> are exactly associative and have no overflow, so the implementation works out nicely. The prefix sum has to deal with overflow, which slows it down for integer inputs, and has to go in order for floats because float addition isn't associative. However, the factor of 2 to 3 loss in performance from an in-order scan is not as bad as the nearly 10x for fold.</p>
+<table><tr>
   <img width="50%" src="../output/plot/scan-min.svg"></img>
   <img width="50%" src="../output/plot/scan-plus.svg"></img>
-</tr><tr>
+</tr></table>
+<p>Typical boolean scans <code>∧∨≠+</code> are handled well: <code>∧∨</code> search for the first 0 or 1, <code>≠</code> uses carry-less multiply, and <code>+</code> has SIMD code. The scan <code>&lt;`</code> is notable as a way to turn off every other 1 in groups of 1s, and has word-at-a-time code that uses the carry of addition (and a lot of bit manipulation) to do this.</p>
+<table><tr>
   <img width="50%" src="../output/plot/scan-boolean.svg"></img>
   <img width="50%" src="../output/plot/scan-boolcmp.svg"></img>
 </tr></table>
 
 <h2>Rank 2</h2>
+<p>High-rank scan isn't optimized yet.</p>
 <table><tr>
   <img width="50%" src="../output/plot/scan-2d-min.svg"></img>
   <img width="50%" src="../output/plot/scan-2d-plus.svg"></img>
 </tr><tr>
   <img width="50%" src="../output/plot/scan-2d-boolean.svg"></img>
   <img width="50%" src="../output/plot/scan-2d-boolcmp.svg"></img>
-</tr><tr>
+</tr></table>
+<p>Scan-cells is currently just scan called on each cell. Besides the obvious improvement of doing nothing for width 1, there are various ways that small-width cases could be sped up.</p>
+<table><tr>
   <img width="50%" src="../output/plot/scan-cells-2d-min.svg"></img>
   <img width="50%" src="../output/plot/scan-cells-2d-plus.svg"></img>
 </tr><tr>
