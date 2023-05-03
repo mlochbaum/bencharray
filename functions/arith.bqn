@@ -3,6 +3,7 @@
 basename ← "arith"
 
 ns_v   ← •Import "../params/ns_v.bqn"
+scales ← •Import "../measure/scale.bqn"
 types‿itypes ← •Import⟜"../params/cputype.bqn"¨ ⟨⟩‿⟨"Input type"⟩
 GetFns ← ⋈ •Import "../params/arith.bqn"˙
 GetInp ← {name⇐"Length" ⋄ range⇐𝕩}
@@ -27,13 +28,11 @@ MLarge ← (⋈˜{𝕎𝕩})_mGen
 MLScal ← {⟨{⊑𝕏}𝕎1,𝕎𝕩⟩}_mGen
 
 Bench ← {
-  ext‿fns‿range‿measure‿plotpre‿plotname‿itype ← 𝕩
+  Measure‿PlotPre ⇐ ext‿fns‿range‿plotname‿itype ← 𝕩
   name ⇐ basename∾ext
-  types ← •Import "../params/cputype.bqn"
   params ⇐ ⟨types, GetFns fns⟩
   input ⇐ GetInp range
   result ⇐ ns_v
-  Measure‿PlotPre⇐
   plotOpts ⇐ {
     title ⇐ plotname
     x ⇐ itype ⊑ types‿itypes
@@ -47,6 +46,29 @@ Summary ← Bench∘{
   PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
 }
 
+Bench2d ← { ext 𝕊 fn‿fname‿step‿total‿Gen:
+  plotname ⇐ ∾"Leading-axis "‿fname‿" on list and table"
+  name     ⇐ ∾basename‿"-lead"‿ext
+  params ⇐ ⟨types⟩
+  input ⇐ {
+    name ⇐ "Width"
+    range ⇐ step scales._exp2d total
+  }
+  result ⇐ ns_v
+  Measure ⇐ { 𝕊 ⟨type⟩:
+    getGen ← Gen type
+    Flip ← total⌈∘÷⊢  # Length of other dimension
+    Len ⇐ Flip⊸×
+    TimeParams ⇐ { ⟨fn⟩ ∾ GetGen¨ 1‿2↑¨<𝕩 }∘(Flip⊸⋈)
+  }
+  plotOpts ⇐ {
+    title ⇐ plotname
+    x ⇐ input
+    y ⇐ result
+    key ⇐ ⊑params
+  }
+}
+
 ⟨
   "-summary" Summary ⟨×‿+‿⌊‿<,      MSmall, 0, "Arithmetic with no overflow, 32KB"⟩
   "-small"   Summary ⟨×‿+‿-‿⌊‿⌈,    MSmall, 0, "Arithmetic with no overflow, 32KB"⟩
@@ -54,4 +76,8 @@ Summary ← Bench∘{
   "-scal"    Summary ⟨×‿+‿⌊‿<,      MLScal, 1, "Scalar-list arithmetic allowing overflow, 32KB"⟩
   "-compare" Summary ⟨<‿>‿=‿≠‿≤‿≥,  MLarge, 0, "Comparisons, 32KB"⟩
   "-slow"    Summary ⟨(⋆⁼)‿⋆‿√‿|‿÷, MLarge, 1, "Slow arithmetic, 32KB"⟩
+  "-min"     Bench2d ⟨⌊, "⌊", 1.2, 1e4, {𝕩.GetGen}⟩
+  "-less"    Bench2d ⟨<, "<", 1.2, 1e4, {𝕩.GetGen}⟩
+  "-plus"    Bench2d ⟨+, "+", 1.2, 1e4, {𝕩.GetGenSmall}⟩
+  "-plus-over" Bench2d ⟨+, "+ (overflow)", 1.2, 1e4, {𝕩.GetGen}⟩
 ⟩
