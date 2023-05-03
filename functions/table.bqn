@@ -12,13 +12,13 @@ xmax ← 1e5
 Flip ← xmax⌈∘÷⊢  # Length of other dimension
 scales ← •Import "../measure/scale.bqn"
 input ⇐ {
-  name ⇐ "Left argument length"
+  name ⇐ "Right argument length"
   range ⇐ 1.3 scales._exp2d xmax
 }
 
 Measure ⇐ { 𝕊 type‿fn:
   Len ⇐ Flip⊸×
-  TimeParams ⇐ { ⟨fn⌜⟩ ∾ ⋈○type.GetGenSmall⟜Flip 𝕩 }
+  TimeParams ⇐ { ⟨fn⌜⟩ ∾ ⋈○type.GetGenSmall˜⟜Flip 𝕩 }
 }
 
 plotOpts ⇐ {
