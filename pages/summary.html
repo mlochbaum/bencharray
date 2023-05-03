@@ -37,9 +37,12 @@
   <img width="50%" src="../output/plot/fold-boolean.svg"></img>
   <img width="50%" src="../output/plot/scan-boolean.svg"></img>
 </tr></table>
-<h3>Table</h3>
+<h3><a href="arith.html">Table</a></h3>
 <p>If it had no overhead, Table would have the same per-output timing as arithmetic, or sometimes better as overflow checking can be done purely using the range of both arguments. This is attainable for large right arguments but CBQN does a lot of copying that prevents it from reaching that performance. For smaller right arguments the limiting operation is a constant Replicate (<code>/</code>) on the right argument, or sections of it.</p>
-<img width="50%" src="../output/plot/table.svg"></img>
+<table><tr>
+  <img width="50%" src="../output/plot/table-plus.svg"></img>
+  <img width="50%" src="../output/plot/table-less.svg"></img>
+</tr></table>
 
 <h2>Structural</h2>
 <h3>Select</h3>
