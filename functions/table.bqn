@@ -23,7 +23,7 @@ Bench ← { over 𝕊 fname:
   }
   result ⇐ ns
   Measure ⇐ { 𝕊 ⟨type⟩:
-    getGen ← {⟨G⇐GetGenSmall⟩: over? G ; 𝕩.GetGen} type
+    getGen ← {⟨G⇐GetGenSmall⟩: ¬over? G ; 𝕩.GetGen} type
     Len ⇐ Flip⊸×
     TimeParams ⇐ { ⟨Fn⌜⟩ ∾ GetGen¨ Flip⊸⋈ 𝕩 }
   }
