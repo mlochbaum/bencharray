@@ -38,10 +38,12 @@ _avgTime_ ← {
 # less likely to work so we just average
 a0 ← 4                            # Number of wanted argument sets
 _timedGen ← {
+  s ← •MonoTime@
   t ← 𝕨 𝔽○{𝕏@} 𝕩                  # Start with one timing (also warmup)
-  n ← 1+⌊(1+1e¯1÷t)÷2             # Target 0.1 for one run, 0.05 for many
-  n<50 ?
-    a ← n ⌊ a0 ⌈ ⌊5÷n             # Ensure ≤5 reps, and no unused args
+  s ↩ t⌈3÷˜(•MonoTime@)-s         # In case 𝔽 is much faster than 𝕎/𝕏
+  n‿m ← 1+⌊(1+1e¯1÷t‿s)÷2         # Target 0.1 for one run, 0.05 for many
+  m<50 ?
+    a ← n ⌊ a0 ⌈ ⌊5÷m             # ≤5 reps unless m<n, and no unused args
     t ↩ 𝕨𝔽¨○{n⥊𝕏¨↕a}𝕩             # Repeat args to get rep number up
     (+´÷≠) ⌊´¨ (a|↕∘≠)⊸⊔ t        # Min across equal args, then average
   ;
