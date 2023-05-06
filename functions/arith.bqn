@@ -46,9 +46,9 @@ Summary ← Bench∘{
   PlotPre ⇐ {> types.num⊸⋈¨ <˘⍉1⊑⎉1𝕩}
 }
 
-Bench2d ← { ext 𝕊 fn‿fname‿step‿total‿Gen:
-  plotname ⇐ ∾"Leading-axis "‿fname‿" on list and table"
-  name     ⇐ ∾basename‿"-lead"‿ext
+Bench2d_sub ← { 𝕊 ext‿desc‿fn‿step‿total‿Gen‿axes:
+  plotname ⇐ desc∾" on list and table"
+  name     ⇐ basename∾ext
   params ⇐ ⟨types⟩
   input ⇐ {
     name ⇐ "Width"
@@ -59,7 +59,7 @@ Bench2d ← { ext 𝕊 fn‿fname‿step‿total‿Gen:
     getGen ← Gen type
     Flip ← total⌈∘÷⊢  # Length of other dimension
     Len ⇐ Flip⊸×
-    TimeParams ⇐ { ⟨fn⟩ ∾ GetGen¨ 1‿2↑¨<𝕩 }∘(Flip⊸⋈)
+    TimeParams ⇐ { ⟨fn⟩ ∾ GetGen¨ axes↑¨<𝕩 }∘(Flip⊸⋈)
   }
   plotOpts ⇐ {
     title ⇐ plotname
@@ -68,8 +68,22 @@ Bench2d ← { ext 𝕊 fn‿fname‿step‿total‿Gen:
     key ⇐ ⊑params
   }
 }
+Lead ← { ext1 𝕊 fn‿fname‿step‿total‿Gen:
+  fn‿step‿total‿Gen⇐
+  desc ⇐ "Leading-axis "∾fname
+  ext  ⇐ "-lead"∾ext1
+  axes ⇐ 1‿2
+}
+Rank1 ← { ext1 𝕊 fn0‿fname‿step‿total‿Gen:
+  fn‿step‿total‿Gen⇐
+  Fn ⇐ Fn0⎉1
+  desc ⇐ "Arithmetic "∾(∧`' '⊸≠)⊸(/∾"⎉1"∾¬⊸/)fname
+  ext  ⇐ "-rank"∾ext1
+  axes ⇐ ¯1‿2
+}
+Bench2d ← Lead ⋈○Bench2d_sub Rank1
 
-⟨
+∾⟨
   "-summary" Summary ⟨×‿+‿⌊‿<,      MSmall, 0, "Arithmetic with no overflow, 32KB"⟩
   "-small"   Summary ⟨×‿+‿-‿⌊‿⌈,    MSmall, 0, "Arithmetic with no overflow, 32KB"⟩
   "-over"    Summary ⟨×‿+‿-,        MLarge, 1, "Arithmetic with overflow, 32KB"⟩
