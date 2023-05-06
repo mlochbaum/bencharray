@@ -44,7 +44,7 @@ Fmt ⇐ {
 # Alert if the first function is at least 20% slower than the second
 CompareTime ← { fnsc 𝕊 arg:
   fns‿chk ← 2(↑⋈↓)•BQN¨fnsc
-  Bad ← ≥⟜(opts.threshold⊸×)´
+  Bad ← ≥⟜(2e¯7+opts.threshold⊸×)´
   GetApply ← {m𝕊⟨w,x⟩: {𝕨 w⊸𝕏_m x}; m𝕊⟨x⟩: {𝕨 𝕏_m x}}⟜arg
   On ← (GetApply {{𝔽}})¨
   Time ← (GetApply •timed)¨⟜fns
@@ -78,7 +78,7 @@ MakeArg ← {
     desc⇐∾⟨•Repr len," <",•Repr range⟩
     x⇐len •rand.Range range
 ;
-  𝕩
+  desc⇐•Repr x⇐𝕩
 }
 
 RunGroup ← {
