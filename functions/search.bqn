@@ -49,26 +49,6 @@ Bench ← {
 
 Bench¨ ∾ {𝕏¨types.range}¨ ⟨
   {
-    ext ⇐ "rand"
-    desc ⇐ "Searching for 1e6 random %s"
-    ⟨GetGen⟩ ← type ⇐ 𝕩
-    input ⇐ "in" Length 1e4
-    Measure ⇐ { 𝕊 ⟨fn⟩:
-      len ⇐ 1e6
-      TimeParams ⇐ { fn MakePar ⟨GetGen 𝕩, (𝕩+1) GetGen len⟩ }
-    }
-  }
-  {
-    ext ⇐ "half"
-    desc ⇐ "Searching for 1e6 %s, half hits"
-    type ⇐ 𝕩
-    input ⇐ "in" Length 1e4
-    Measure ⇐ { 𝕊 ⟨fn⟩:
-      len ⇐ 1e6
-      TimeParams ⇐ { fn MakePar type ParOverlap 𝕩‿len‿0.5 }
-    }
-  }
-  {
     ext ⇐ "total"
     desc ⇐ "Searching with 1e6 total %s, half hits"
     type ⇐ 𝕩
@@ -91,6 +71,16 @@ Bench¨ ∾ {𝕏¨types.range}¨ ⟨
     Measure ⇐ { 𝕊 ⟨fn⟩:
       len ⇐ 1e6
       TimeParams ⇐ { fn MakePar type ParOverlap 1e3‿len‿𝕩 }
+    }
+  }
+  {
+    ext ⇐ "rand"
+    desc ⇐ "Searching for 1e6 random %s"
+    ⟨GetGen⟩ ← type ⇐ 𝕩
+    input ⇐ "in" Length 1e4
+    Measure ⇐ { 𝕊 ⟨fn⟩:
+      len ⇐ 1e6
+      TimeParams ⇐ { fn MakePar ⟨GetGen 𝕩, (𝕩+1) GetGen len⟩ }
     }
   }
 ⟩
