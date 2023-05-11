@@ -22,13 +22,13 @@ ParOverlap ← { type 𝕊 in‿for‿overlap:
   # Use a larger synchronized generator and extract overlapping slices
   tot ← in + (¬overlap) × for ⌊ in÷overlap
   range ← 2⋆type.size
-  nu ← range ⌊ tot  # Number uniques to generate
-  is ← in ⌊ range × (÷2) ⌈ in÷tot
+  nu ← range ⌊ ⌈tot  # Number uniques to generate
+  is ← in ⌊ range (-⟜(20⌊for) ⌊ ×) (÷2) ⌈ in÷tot
   fs ← (is÷overlap) ⌊ (nu-is) ÷ ¬overlap
   fo ← nu - fs
-  {𝕏∘(type.GetGenUnique ⌈ nu)}¨ ⟨
-    {is=in ? in⊸↑ ; (⌊ is × in  •rand.Range 0˙)⊸⊏}
-               (⌊ fo + fs × for •rand.Range 0˙)⊸⊏
+  {𝕏∘(type.GetGenUnique nu)}¨ ⟨
+    {is=in ? in⊸↑ ; (⌊ is ×                 in  •rand.Range 0˙)⊸⊏}
+               (⌊ fo + fs × (3÷4) ⌈⌾⊑⍟(∧´>) for •rand.Range 0˙)⊸⊏
   ⟩
 }
 MakePar ← {fn 𝕊 gs: ⟨Fn⟩ ∾ ⌽⍟(fn≡{∊}) gs}
