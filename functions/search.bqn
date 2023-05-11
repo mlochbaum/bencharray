@@ -75,7 +75,7 @@ Bench¨ ∾ {𝕏¨types.range}¨ ⟨
     input ⇐ {
       name ⇐ {∾"Searched-"‿𝕩‿" length"}¨ "in"‿"for"
       max ⇐ 10⋆e←6 ⋄ Comp ← ⊢∾max-1↓⌽
-      range ⇐ Comp scales.E23⊸⌊ max÷2
+      range ⇐ Comp (scales.E13 64) (⊣ ∾ ⌈´⊸</⊢) scales.E23⊸⌊ max÷2
       Trans ⇐ (1-˜max⊸×)⌾÷ ⋄ ticks ⇐ Comp (10⋆↕e)∾max÷2
     }
     Measure ⇐ { 𝕊 ⟨fn⟩:
