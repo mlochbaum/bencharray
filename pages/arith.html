@@ -10,6 +10,9 @@
 
 <div class="nav"><a href="https://github.com/mlochbaum/bencharray">bencharray</a> / <a href="summary.html">summary</a></div>
 <h1>Arithmetic function benchmarks</h1>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/arithmetic.html">Implementation notes</a></p>
+<p>The arithmetic functions <code>+-×⌈⌊</code>, comparisons, and floating-point division, are standard SIMD functionality. With <code>+-×</code> an overflow check is needed, and if it happens a result in a larger type needs to be created. Dyadic <code>|</code> has some optimization for integers but is only really fast when <code>𝕨</code> is an atom.</p>
+<p>Most other primitives, including <code>÷√⋆</code> and <code>⋆⁼</code>, require conversion to floats, so will ideally run at the same speed for all types. Libraries to compute others using SIMD exist but CBQN doesn't use anything like this yet.</p>
 <table><tr>
   <img width="50%" src="../output/plot/arith-summary.svg"></img>
   <img width="50%" src="../output/plot/arith-over.svg"></img>
@@ -22,12 +25,14 @@
 </tr></table>
 
 <h2>Monadic</h2>
+<p>Mostly the same as the dyadic case. There's a SIMD <code>√</code> instruction. Primitives <code>-</code> and <code>|</code> can overflow for an integer argument containing the smallest value of that type, or boolean 1 for <code>-</code>. This slows them down for i16 and smaller cases; i32 isn't likely to include the minimum value.</p>
 <table><tr>
   <img width="50%" src="../output/plot/arithm-simple.svg"></img>
   <img width="50%" src="../output/plot/arithm-slow.svg"></img>
 </tr></table>
 
 <h2>Table</h2>
+<p>Arithmetic Table works like a bunch of scalar-list operations, with the list repeated. For long right arguments this is straightforward; for shorter ones the constant overhead of setting up scalar-list arithmetic as well as the efficiency loss for uneven lengths become expensive. So Table switches to list-list arithmetic, expanding <code>𝕨</code> with a constant Replicate <code>k/𝕨</code>, to keep the overhead from going too high.</p>
 <table><tr>
   <img width="50%" src="../output/plot/table-min.svg"></img>
   <img width="50%" src="../output/plot/table-less.svg"></img>
@@ -37,6 +42,7 @@
 </tr></table>
 
 <h2>Leading-axis extension</h2>
+<p>Leading-axis arithmetic is a series of scalar-list operations like Table, the difference being that it has a new list at each step. So the performance is pretty similar; not having to reshape <code>𝕩</code> speeds it up for smaller widths but the extra memory traffic slows it down for larger ones.</p>
 <table><tr>
   <img width="50%" src="../output/plot/arith-lead-min.svg"></img>
   <img width="50%" src="../output/plot/arith-lead-less.svg"></img>
@@ -46,6 +52,7 @@
 </tr></table>
 
 <h2>Trailing-axis extension, with Rank</h2>
+<p>This case does list-list operations but with one fixed list. For small widths it just has to repeat the lower-rank argument, which is less intrusive than constant Replicate. However, list-list arithmetic is slower than scalar-list.</p>
 <table><tr>
   <img width="50%" src="../output/plot/arith-rank-min.svg"></img>
   <img width="50%" src="../output/plot/arith-rank-less.svg"></img>
