@@ -12,7 +12,7 @@
 <h1>Benchmark summary</h1>
 
 <p>Not all benchmarks are included on this page. Header links go to pages with full benchmarks and sometimes extra explanation.</p>
-<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/88193/intel-core-i56200u-processor-3m-cache-up-to-2-80-ghz/specifications.html">Skylake i5-6200U</a> processor using CBQN compiled with <code>make o3n-singeli</code>. It's not a powerful CPU but does support the x86 extensions like AVX2 used by the Singeli build.</p>
+<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/208658/intel-core-i51135g7-processor-8m-cache-up-to-4-20-ghz/specifications.html">Tiger Lake i5-1135G7</a> processor using CBQN compiled with <code>make o3 has='avx2 bmi2'</code>. These options are used instead of the usual <code>make o3n</code> to compile without AVX-512 support, as this CPU supports it but most consumer hardware doesn't.</p>
 
 <h2><a href="arith.html">Arithmetic</a></h2>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/arithmetic.html">Implementation notes</a></p>
@@ -55,7 +55,7 @@
   <img width="50%" src="../output/plot/select-width.svg"></img>
 </tr></table>
 <h3>Reshape</h3>
-<p>The speed of Reshape with a large result should essentially be limited by the amount of memory written. The current method is to copy the argument to the result, then repeatedly double it until it reaches a suitable block size for filling the rest of the result. There are special cases for 1-byte and 8-byte blocks; strangely, these measure slower than the general case, giving the bumps at the left of the first graph. We've left them in on the grounds that it may be specific to my CPU, and if not, later compiler and libc improvements could fix these cases (there's nothing obviously wrong with the emitted code).</p>
+<p>The speed of Reshape with a large result should essentially be limited by the amount of memory written. The current method is to copy the argument to the result, then repeatedly double it until it reaches a suitable block size for filling the rest of the result. There are special cases for 1-byte and 8-byte blocks; however, the 8-byte case measures slower than the general case, giving the bumps at the left of the first graph. We've left it in on the grounds that it may be specific to my CPU (in fact, the 1-byte case went from slower to faster when I upgraded), and if not, later compiler and libc improvements could fix it.</p>
 <table><tr>
   <img width="50%" src="../output/plot/reshape-large.svg"></img>
   <img width="50%" src="../output/plot/reshape-double.svg"></img>

@@ -10,7 +10,7 @@ Bench ← {
 
   params ⇐ ⟨types⟩
   result ⇐ ({⟨r⇐denom⟩:⟨{denom⇐r}⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
-  result.SetMin 0.02
+  result.SetMin 0.01
 
   plotOpts ⇐ {
     title ⇐ plotname
