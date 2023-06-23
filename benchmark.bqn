@@ -1,25 +1,36 @@
 #! /usr/bin/env bqn
 
-types ← "measure"‿"plot"‿"all"‿"list"‿"help"
-type ← ⊑ types ⊐ 1↑•args
-
 Exit ← •Exit∘⊣⟜•Out
 ⟨At⟩ ← •file
 
-ifHelp‿ifList ← type=1‿2-˜≠types
-{¬ifHelp?@;
-  0 Exit "Usage: benchmark.bqn (help|list|measure|plot|all) [langs,benchmarks...]"
+help ← "help"‿"-h"‿"--help"
+ops ← help∾"list"‿"measure"‿"plot"
+htype ← ⊑ ops (0<≠∘⊢)◶⟨≠∘⊣, ⊐⟜⊏⟩ •args
+
+{(≠help)≤htype?@;
+  0 Exit 1↓"
+Usage: benchmark.bqn [list|measure|plot] [langs,benchmarks...]
+
+Default (no argument): measure and plot
+list:    display benchmark names only
+measure: perform benchmarks, storing timings in output/timings
+plot:    plot benchmarks, storing svg plots in output/plot"
 }
 
-{ifList? 1=≠•args?
-  c ← -≠ ext ← ".bqn"
-  0 Exit "Available groups:"∾∾(@+10)∾¨ c↓¨ (ext≡c⊸↑)¨⊸/ ∧ •file.List "functions"
-;@}
-
-{1<≠•args?@; 1 Exit "No benchmarks specified" }
-
 lnames ← {𝕩.name}¨ langs ← •Import "measure/cross/langs.bqn"
-fspec‿lang ← (∊⟜lnames∾2˙)⊸⊔ 1↓•args
+fspec‿lang ← (∊⟜lnames∾2˙)⊸⊔ (htype<≠ops) ↓ •args
+
+type ← htype - 1+≠help
+ifList ← ¯1 = type
+ifMeasure ← ⊑ type ∊ 0‿2
+
+# If no groups are given, use them all
+{0<≠fspec?@;
+  c ← -≠ ext ← ".bqn"
+  fspec ↩ c↓¨ (ext≡c⊸↑)¨⊸/ ∧ •file.List "functions"
+  {ifList ? 0 Exit "Available groups:"∾∾(@+10)∾¨fspec ; @}
+  •Out⍟ifMeasure "Measuring all benchmarks. This will take several minutes."
+}
 
 fname‿fid ← (⍷⋈⊐) (∧`'-'⊸≠)⊸/¨ fspec
 fpath ← ("functions"At∾⟜".bqn")¨ fname
@@ -35,7 +46,7 @@ FilterFns ← {
 }
 fns ← ∾ (fid⊔fspec) FilterFns⍟(⊑'-'∊∾∘⊣)⟜(⥊•Import)¨ fpath
 
-{ ¬ifList?@; 0 Exit "Available benchmarks:"∾∾(@+10)∾¨{𝕩.name}¨fns }
+{ ¬ifList?@; 0 Exit "Selected benchmarks:"∾∾(@+10)∾¨{𝕩.name}¨fns }
 
 ⟨LinePlot⇐Plot⟩ ← •Import "plot/line.bqn"
 

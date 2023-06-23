@@ -8,8 +8,9 @@ There are benchmarks for most primitives that have significant performance consi
 
 To use:
 
-    $ ./benchmark.bqn help       # See options
-    $ ./benchmark.bqn list       # See functions that can be benchmarked
-    $ ./benchmark.bqn all arith  # Record and plot arithmetic benchmarks
+    $ ./benchmark.bqn        # Benchmark and plot everything (slow)
+    $ ./benchmark.bqn help   # See options
+    $ ./benchmark.bqn list   # See functions that can be benchmarked
+    $ ./benchmark.bqn arith  # Record and plot arithmetic benchmarks
 
 ![Arithmetic performance](output/plot/sort-rand-i16.svg)
