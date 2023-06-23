@@ -13,4 +13,10 @@ To use:
     $ ./benchmark.bqn list   # See functions that can be benchmarked
     $ ./benchmark.bqn arith  # Record and plot arithmetic benchmarks
 
+Strength reduction tests (very incomplete) test primitives against equivalent expressions to find cases where alternate implementations would be faster.
+
+    $ ./testreduct.bqn       # Run all tests
+    $ ./testreduct.bqn -h    # Options
+    $ ls reductions          # Test specification files
+
 ![Arithmetic performance](output/plot/sort-rand-i16.svg)
