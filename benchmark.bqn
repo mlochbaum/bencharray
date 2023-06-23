@@ -45,9 +45,9 @@ FilterFns ← ∧⊸{
   ("benchmark" ErrUnknown /⟜𝕨)⍟(∨´) 0=(≠𝕨)↑/⁼f/i
   f / 𝕩
 }
-fns ← ∾ (fid⊔fspec) FilterFns⍟(⊑'-'∊∾∘⊣)⟜(⥊•Import)¨ fpath
+fns ← (fid⊔fspec) FilterFns⍟(⊑'-'∊∾∘⊣)⟜(⥊•Import)¨ fpath
 
-{ ¬ifList?@; 0 Exit "Selected benchmarks:"∾∾(@+10)∾¨{𝕩.name}¨fns }
+{ ¬ifList?@; 0 Exit "Selected benchmarks:"∾∾(@+10)∾¨{𝕩.name}¨∾fns }
 
 ⟨LinePlot⇐Plot⟩ ← •Import "plot/line.bqn"
 
@@ -75,6 +75,8 @@ Run ← { 𝕊 lang:
   Write ← TName ⊸ •file.Chars ⟜ •Repr
   Read  ← •BQN •file.Chars∘TName
 
-  (type⊑⟨ Write⟜Measure, Plot⟜Read, (Plot⊣Write)⟜Measure ⟩)¨ fns
+  do ← type⊑⟨ Write⟜Measure, Plot⟜Read, (Plot⊣Write)⟜Measure ⟩
+  Start ← (•Out"Starting "∾⊢)⍟(ifMeasure∧15≤+´≠¨fns)
+  fspec {Start𝕨 ⋄ Do¨𝕩}¨ fns
 }
 Run¨ ⟨@⟩⊸∾⍟(0=≠) langs ⊏˜ lnames ⊐ lang
