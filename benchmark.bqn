@@ -39,10 +39,11 @@ ErrUnknown ← { 1 Exit ∾ ⟨"Unknown ", 𝕨∾"s"/˜1<≠𝕩⟩ ∾ ": "⌾
 
 ("group" ErrUnknown /⟜fname)⍟(∨´) ¬ •file.Exists¨ fpath
 
-FilterFns ← {
-  i ← 𝕨 ⊐˜ n ← {𝕩.name}¨𝕩
-  ("benchmark" ErrUnknown /⟜𝕨)⍟(∨´) i=≠𝕩
-  i ⊏ 𝕩
+FilterFns ← ∧⊸{
+  i ← 1 -˜ 𝕨 ⍋ n ← {𝕩.name}¨𝕩
+  f ← (i⊏𝕨) (⊣≡≠⊸↑)¨ n
+  ("benchmark" ErrUnknown /⟜𝕨)⍟(∨´) 0=(≠𝕨)↑/⁼f/i
+  f / 𝕩
 }
 fns ← ∾ (fid⊔fspec) FilterFns⍟(⊑'-'∊∾∘⊣)⟜(⥊•Import)¨ fpath
 
