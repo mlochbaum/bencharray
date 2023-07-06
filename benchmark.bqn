@@ -77,6 +77,6 @@ Run ← { 𝕊 lang:
 
   do ← type⊑⟨ Write⟜Measure, Plot⟜Read, (Plot⊣Write)⟜Measure ⟩
   Start ← (•Out"Starting "∾⊢)⍟(ifMeasure∧15≤+´≠¨fns)
-  fspec {Start𝕨 ⋄ Do¨𝕩}¨ fns
+  fname {Start𝕨 ⋄ Do¨𝕩}¨ fns
 }
 Run¨ ⟨@⟩⊸∾⍟(0=≠) langs ⊏˜ lnames ⊐ lang
