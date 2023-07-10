@@ -40,9 +40,8 @@
 ∊˜ % ∨˝=⌜
 ⊐ % +˝·∧`≠⌜
 
-# TODO
-#% (1‿2‿12‿31⋈⌜1e3) {m‿n𝕊t:warg‿xarg⇐{len⇐𝕩,type⇐t}¨𝕨⋄warg{Post⇐{desc‿x⇐𝕩⋄x∧↩}⋄arg⇐𝕩}↩}⌜ "bool"‿"i8"‿"i16"‿"i32"‿"f64"
-#⍋ % +˝≤⌜
-#
-#% (1‿2‿12‿31⋈⌜1e3) {m‿n𝕊t:warg‿xarg⇐{len⇐𝕩,type⇐t}¨𝕨⋄warg{Post⇐{desc‿x⇐𝕩⋄x∨↩}⋄arg⇐𝕩}↩}⌜ "bool"‿"i8"‿"i16"‿"i32"‿"f64"
-#⍒ % +˝≥⌜
+% (1‿2‿12‿31⋈⌜1e3) {m‿n𝕊t:warg‿xarg⇐{len⇐𝕩,type⇐t}¨𝕨⋄warg{Post⇐{desc‿x⇐𝕩⋄x∧↩}⋄arg⇐𝕩}↩}⌜ "bool"‿"i8"‿"i16"‿"i32"‿"f64"
+⍋ % +˝≤⌜
+
+% (1‿2‿12‿31⋈⌜1e3) {m‿n𝕊t:warg‿xarg⇐{len⇐𝕩,type⇐t}¨𝕨⋄warg{Post⇐{desc‿x⇐𝕩⋄x∨↩}⋄arg⇐𝕩}↩}⌜ "bool"‿"i8"‿"i16"‿"i32"‿"f64"
+⍒ % +˝≥⌜
