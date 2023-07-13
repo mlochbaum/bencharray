@@ -47,6 +47,7 @@
         <text dy='0.33em' x='-6' y='31.037'>0.5</text>
       </g>
     </g>
+    <rect stroke-width='1.2' stroke='#111' fill='white' transform='translate(442,6)' x='0' y='0' width='60' height='84'/>
     <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
       <path stroke='#e41a1c' d='M0 303.657L38.532 221.845L61.072 20.131L77.064 22.949L99.603 27.398L122.143 25.615L142.585 23.871L160.675 118.201L183.215 117.79L203.656 108.323L224.752 102.648L245.642 72.252L266.597 94.281L287.426 113.592L308.471 131.311L328.88 150.034L351.37 169.25L369.471 181.693L389.901 199.885L412.408 209.328L434.936 222.689L450.94 232.878L473.468 248.499L512 290.534'/>
       <path stroke='#377eb8' d='M0 306.778L38.532 220.407L61.072 20.137L77.064 22.945L99.603 27.316L122.143 25.508L142.585 23.751L160.675 109.465L183.215 117.386L203.656 108.295L224.752 101.794L245.642 72.871L266.597 95.136L287.426 115.821L308.471 134.468L328.88 153.758L351.37 173.905L369.471 188.445L389.901 209.328L412.408 225.644L434.936 244.52L450.94 257.832L473.468 268.304L512 289.623'/>
@@ -55,7 +56,7 @@
     </g>
     <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
     <g transform='translate(442,6)' text-anchor='start' font-size='13px'>
-      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='60' height='84'/>
+      <rect fill='white' opacity='0.6' x='0.65' y='0.65' width='58.7' height='82.7'/>
       <path stroke='#e41a1c' d='M8 15h22'/>
       <path stroke='#377eb8' d='M8 33h22'/>
       <path stroke='#4daf4a' d='M8 51h22'/>

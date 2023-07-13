@@ -13,8 +13,9 @@ Legend ← {
   dim ← ⟨width,(2×pad)+spacing×n⟩
   pl ← (10‿6×¬⊸-place) + place×outer-dim
   ltr ← "transform=translate("∾")"∾˜∾⟜","⊸∾´Num pl
-  legend ← (ltr∾"|text-anchor=start|font-size=13px") Ge ⟨
-    "white" Box 0‿0≍dim
+  back ⇐ ("white|"∾ltr) Box 0‿0≍dim
+  main ⇐ (ltr∾"|text-anchor=start|font-size=13px") Ge ⟨
+    "fill=white|opacity=0.6" Rect (1.3÷2‿¯1)+0‿0≍dim
     Samples y
     y (Pos 36⊸⋈)⊸Text¨ label
   ⟩
@@ -92,6 +93,14 @@ Plot ⇐ { opts 𝕊 dat:
   ScaleI ← ¬⌾(1⊸⊑) ({𝕩÷˜𝕨-˜⊢}˝ ⍉>win)∘Log          # To [0,1]
   Scale ← padi + (dim-padb+padi) × ScaleI          # To pixels
   line ← (<≍˘)○Num´∘Scale˘ dat
+  
+  leg ← Legend {
+    label ⇐ Order labels
+    outer ⇐ dim
+    place ⇐ (↕2‿2) ⊑∘⍒⊸⊑˜○⥊ (⌊´0⊸≤⊸/)¨ ≍˘⟜¬ ≤⟜(÷4)⊸/{𝔽⋈¬⊸𝔽}´ ScaleI xy
+    width ⇐ (2<⌈´≠¨label)⊑60‿134 ⋄ spacing ⇐ 18 ⋄ pad ⇐ 6
+    Samples ⇐ col ≍⊸Path⟜(∾"M h"∾¨Num)¨ (8∾∾⟜22)¨
+  }
 
   ∾ ∾⟜(@+10)¨ (⥊out) SVG gr Ge ⟨
     Clip 0‿0≍dim
@@ -113,14 +122,9 @@ Plot ⇐ { opts 𝕊 dat:
       tpos ⇐ Scale ticks ← (⍷∧⊑xy) {𝕨⌾⊑𝕩}⍟(10≥≠∘⊣) tval
       ttext ⇐ disp {𝕎⚇0𝕩}¨ {splitx?x.max-⍟(÷⟜2⊸<)¨⌾⊑𝕩;𝕩} ticks
     }
+    leg.back
     ls Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
     Outline 0‿0≍dim
-    Legend {
-      label ⇐ Order labels
-      outer ⇐ dim
-      place ⇐ (↕2‿2) ⊑∘⍒⊸⊑˜○⥊ (⌊´0⊸≤⊸/)¨ ≍˘⟜¬ ≤⟜(÷4)⊸/{𝔽⋈¬⊸𝔽}´ ScaleI xy
-      width ⇐ (2<⌈´≠¨label)⊑60‿134 ⋄ spacing ⇐ 18 ⋄ pad ⇐ 6
-      Samples ⇐ col ≍⊸Path⟜(∾"M h"∾¨Num)¨ (8∾∾⟜22)¨
-    }
+    leg.main 
   ⟩
 }

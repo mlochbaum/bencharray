@@ -42,6 +42,7 @@
         <text dy='0.33em' x='-6' y='8.892'>2</text>
       </g>
     </g>
+    <rect stroke-width='1.2' stroke='#111' fill='white' transform='translate(10,191.6)' x='0' y='0' width='60' height='84'/>
     <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
       <path stroke='#e41a1c' d='M0 93.409L64 88.866L101.438 82.998L128 82.808L179.671 82.704L221.404 82.736L266.875 83.672L314.041 82.401L359.341 81.315L405.75 81.08L450.841 84.273L495.884 85.449L512 84.583'/>
       <path stroke='#377eb8' d='M0 20L64 46.512L101.438 48.586L128 45.1L179.671 45.092L221.404 45.006L266.875 45.15L314.041 44.794L359.341 45.018L405.75 45.097L450.841 45.189L495.884 45.063L512 45.18'/>
@@ -50,7 +51,7 @@
     </g>
     <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
     <g transform='translate(10,191.6)' text-anchor='start' font-size='13px'>
-      <rect stroke-width='1.2' stroke='#111' fill='white' x='0' y='0' width='60' height='84'/>
+      <rect fill='white' opacity='0.6' x='0.65' y='0.65' width='58.7' height='82.7'/>
       <path stroke='#e41a1c' d='M8 15h22'/>
       <path stroke='#377eb8' d='M8 33h22'/>
       <path stroke='#4daf4a' d='M8 51h22'/>
