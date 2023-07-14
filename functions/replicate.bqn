@@ -10,7 +10,6 @@ Bench ← {
 
   params ⇐ ⟨types⟩
   result ⇐ ({⟨r⇐denom⟩:⟨{denom⇐r}⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
-  result.SetMin 0.01
 
   plotOpts ⇐ {
     title ⇐ plotname
@@ -46,6 +45,7 @@ Bench¨ ⟨
       max ⇐ 1
       log ⇐ 0 ⋄ Trans ⇐ 1.6⊸√⌾(1-˜÷)
       range ⇐ ×˜⌾(1-˜÷) ↕⊸∾⊸÷ 20
+      FilterMin ⇐ ¬∊⟜0‿1
     }
     denom ⇐ "input"
 
@@ -81,6 +81,7 @@ Bench¨ ⟨
       name ⇐ "Left argument"
       max ⇐ 200
       range ⇐ scale.E13 max
+      FilterMin ⇐ 1⊸<
     }
     denom ⇐ "output"
 

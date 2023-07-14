@@ -1,6 +1,6 @@
 # Transpose ⍉
 
-ns ← {min⇐0.01} •Import "../params/ns_v.bqn"
+ns ← •Import "../params/ns_v.bqn"
 types ← •Import "../params/numtype.bqn"
 scales ← •Import "../measure/scale.bqn"
 
@@ -12,6 +12,7 @@ scales ← •Import "../measure/scale.bqn"
   input ⇐ {
     name ⇐ "Width"
     range ⇐ 1.5 scales._exp2d total
+    FilterMin ⇐ ¬∊⟜(0‿¯1⊏range)
   }
   result ⇐ ns
   Measure ⇐ { 𝕊 ⟨type⟩:

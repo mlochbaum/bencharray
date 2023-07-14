@@ -7,7 +7,7 @@ oname ← •Repr op
 ⟨RandBool⟩ ← •Import "../../measure/gen.bqn"
 scales     ← •Import "../../measure/scale.bqn"
 cputypes   ← •Import "../../params/cputype.bqn"
-ns←{min⇐0.01}•Import "../../params/ns_v.bqn"
+ns         ← •Import "../../params/ns_v.bqn"
 
 Bench2d ← { mext‿mod‿mname 𝕊 dat:
   ⟨params⟩ ⇐ ext‿fname‿arg‿GetTime ← dat
@@ -17,6 +17,7 @@ Bench2d ← { mext‿mod‿mname 𝕊 dat:
   input ⇐ {
     name ⇐ "Width"
     range ⇐ 1.5 scales._exp2d total
+    FilterMin ⇐ ¬∊⟜(0‿¯1⊏range)
   }
   result ⇐ ns
   Measure ⇐ {

@@ -14,7 +14,6 @@ Bench ← {
   name ⇐ "indices-"∾ext
 
   result ⇐ ({⟨r⇐output⟩:⟨r⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
-  result.SetMin 0.01
 
   plotOpts ⇐ {
     title ⇐ plotname
@@ -52,6 +51,7 @@ Bench¨ ⟨
       max ⇐ 1
       log ⇐ 0 ⋄ Trans ⇐ 1.6⊸√⌾(1-˜÷)
       range ⇐ ×˜⌾(1-˜÷) ↕⊸∾⊸÷ 20
+      FilterMin ⇐ ¬∊⟜0‿1
     }
     output ⇐ {denom ⇐ "input"}
 
