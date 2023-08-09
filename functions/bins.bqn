@@ -10,11 +10,17 @@ Length ← {
   range ⇐ scales.E13 max ⇐ 𝕩
 }
 
+sizes ← {
+  name ⇐ "Size"
+  range ⇐ 10‿25‿100‿1e6
+  labels ⇐ ("in "∾•Repr)¨ range
+  Order ⇐ ⌽
+}
+
 Bench ← {
-  input‿Measure ⇐ ext‿desc ← 𝕩
+  params‿input‿Measure ⇐ ext‿desc ← 𝕩
   name     ⇐ "bins-"∾ext
   plotname ⇐ desc
-  params ⇐ ⟨types⟩
   result ⇐ ns
   plotOpts ⇐ {
     title ⇐ plotname
@@ -24,9 +30,10 @@ Bench ← {
   }
 }
 
-Bench {
+summary ← {
   ext ⇐ "rand-up"
   desc ⇐ "Bins Up for 1e6 random numbers"
+  params ⇐ ⟨types⟩
   input ⇐ "in" Length 1e7
   Measure ⇐ { 𝕊 ⟨type⟩:
     ⟨GetGen,GetGenSorted⟩ ← type
@@ -34,3 +41,16 @@ Bench {
     TimeParams ⇐ { ⟨⍋, GetGenSorted 𝕩, (𝕩+1) GetGen len⟩ }
   }
 }
+
+BenchType ← {
+  ext ⇐ 𝕩.disp∾"-up"
+  desc ⇐ ∾"Bins Up on random "‿𝕩.label‿"s"
+  params ⇐ ⟨sizes⟩
+  input ⇐ "for" Length 1e5
+  ⟨GetGen,GetGenSorted⟩ ← 𝕩
+  Measure ⇐ { 𝕊 ⟨len⟩:
+    TimeParams ⇐ { ⟨⍋, GetGenSorted len, (𝕩+1) GetGen 𝕩⟩ }
+  }
+}
+
+Bench¨ ⟨summary⟩∾BenchType¨ types.range
