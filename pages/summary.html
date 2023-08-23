@@ -12,7 +12,7 @@
 <h1>Benchmark summary</h1>
 
 <p>Not all benchmarks are included on this page. Header links go to pages with full benchmarks and sometimes extra explanation.</p>
-<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/208658/intel-core-i51135g7-processor-8m-cache-up-to-4-20-ghz/specifications.html">Tiger Lake i5-1135G7</a> processor using CBQN compiled with <code>make o3 has='avx2 bmi2'</code>. These options are used instead of the usual <code>make o3n</code> to compile without AVX-512 support, as this CPU supports it but most consumer hardware doesn't.</p>
+<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/208658/intel-core-i51135g7-processor-8m-cache-up-to-4-20-ghz/specifications.html">Tiger Lake i5-1135G7</a> processor using CBQN compiled with <code>make o3 has='pclmul avx2 bmi2'</code>. These options are used instead of the usual <code>make o3n</code> to compile without AVX-512 support, as this CPU supports it but most consumer hardware doesn't.</p>
 
 <h2><a href="arith.html">Arithmetic</a></h2>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/arithmetic.html">Implementation notes</a></p>
