@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <title>bencharray: Bins</title>
+  <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="nav"><a href="https://github.com/mlochbaum/bencharray">bencharray</a> / <a href="summary.html">summary</a></div>
+<h1>Bins benchmarks</h1>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/sort.html">Implementation notes</a></p>
+<p>Bins is well optimized in most cases, the major exception being when <code>𝕨</code> is larger than the L2 cache. The graph below shows its performance for long <code>𝕩</code>. This allows preprocessing steps like building a table to be effective, which is what the 1-byte and 2-byte cases do (lookups are constant time; the lift at the right comes from the cost of building the table). The general case for 4-byte and 8-byte data uses a branchless binary search with multiple searches interleaved. Integer types use AVX2 vector binary searches for small <code>𝕨</code>, allowing an entire register from <code>𝕩</code> to be searched in parallel. Both kinds of binary search show a characteristic stepped pattern, since the number of steps increases only when the search size crosses a power of two.</p>
+<img width="50%" src="../output/plot/bins-rand-up.svg"></img>
+<p>And graphs for shorter <code>𝕩</code> arrays, showing when table-based methods become effective. The jaggedness at the left is caused by interleaving: there's one loop that interleaves 4 searches at a time, followed by one that does just 1, so multiples of 4 are the most efficient.</p>
+<table><tr>
+  <img width="50%" src="../output/plot/bins-i8-up.svg"></img>
+  <img width="50%" src="../output/plot/bins-i16-up.svg"></img>
+</tr></table>
+<p>Larger elements rely on binary searches, except the 10-element 4-byte search. A large <code>𝕨</code> array can't be kept in cache, making each access slow. This cost can be mitigated by partitioning, which isn't implemented yet.</p>
+<table><tr>
+  <img width="50%" src="../output/plot/bins-i32-up.svg"></img>
+  <img width="50%" src="../output/plot/bins-f64-up.svg"></img>
+</tr></table>
+</html>
