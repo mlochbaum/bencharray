@@ -24,7 +24,7 @@ ParOverlap ← { type 𝕊 in‿for‿overlap:
   range ← 2⋆type.size
   nu ← range ⌊ ⌈tot  # Number uniques to generate
   is ← in ⌊ range (-⟜(20⌊for) ⌊ ×) (÷2) ⌈ in÷tot
-  fs ← (is÷overlap) ⌊ (nu-is) ÷ ¬overlap
+  fs ← (is÷overlap) ⌊ (nu-is) 0⊸=◶÷‿∞ ¬overlap
   fo ← nu - fs
   {𝕏∘(type.GetGenUnique nu)}¨ ⟨
     {is=in ? in⊸↑ ; (⌊ is ×                 in  •rand.Range 0˙)⊸⊏}
