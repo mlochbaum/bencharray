@@ -81,6 +81,7 @@
 </tr></table>
 <h3>Transpose</h3>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/transpose.html">Implementation notes</a></p>
+<p>CBQN has fast AVX2 kernel transposes, which can be used when both axes are at least one kernel long. This gives the lower region in the middle while the sides use scalar code, except for dedicated code if one side has length 2. Other than this length-2 case, booleans are simply converted to 1-byte integers to be transposed. Typically, cache associativity slows transposes down a lot when a side length is a multiple of a large power of 2; to avoid this, there's a method that takes advantage of that even length to write a whole cache line at a time. It's faster than the normal case, giving the downward spikes in the 4- and 8-byte lines.</p>
 <table><tr>
   <img width="50%" src="../output/plot/transpose-2d.svg"></img>
 </tr></table>
@@ -122,6 +123,7 @@
 </tr></table>
 <h3><a href="bins.html">Bins</a></h3>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/sort.html">Implementation notes</a></p>
+<p>Bins is mostly fast. This graph shows AVX2 binary searches at the left for 1- to 4-byte types, table lookups for 1- and 2-byte types, and branchless binary searches with 4-way interleaving for 4- and 8-byte types. A shortcoming is the 4- and 8-byte case where <code>𝕨</code> is very long, which has poor cache usage and could be improved by partitioning <code>𝕩</code>.</p>
 <img width="50%" src="../output/plot/bins-rand-up.svg"></img>
 
 </body>
