@@ -47,8 +47,10 @@ _timedGen ← {
     t ↩ 𝕨𝔽¨○{n⥊𝕏¨↕a}𝕩             # Repeat args to get rep number up
     (+´÷≠) ⌊´¨ (a|↕∘≠)⊸⊔ t        # Min across equal args, then average
   ;
-    t ← 1e¯8 ⌈ (+´÷≠)𝕨𝔽¨○{𝕏¨↕10}𝕩 # Redo the timing with more runs
-    a ← a0 + ⌊2e¯5÷t              # Try to add sets
+    i ← 𝕨⋈○{𝕏¨↕10}𝕩               # More inputs
+    t ← 1e¯8⌈ (+´÷≠)𝕨𝔽¨∘⊑⊘(𝔽¨´⊢)i # Redo the timing
+    e ← (2⋆12) ÷ +´((+´÷≠)≠∘⥊¨)¨i # Cap total elements for added sets
+    a ← a0 + ⌊e⌊2e¯5÷t            # Try to add sets
     r ← ⌈(200⌊2e¯2÷t)÷a           # Number of reps
     𝕨 𝔽_avgTime_ r○{𝕏¨↕a} 𝕩       # Do the fancy timing
 }
