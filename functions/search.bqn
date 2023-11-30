@@ -1,7 +1,7 @@
 # Search: two-argument ∊⊐⊒
 
 scales ← •Import "../measure/scale.bqn"
-ns     ← •Import "../params/ns_v.bqn"
+ns     ← {denom⇐"total values"} •Import "../params/ns_v.bqn"
 types  ← •Import "../params/cputype.bqn"
 fnobjs ← ⟨∊‿⊐‿⊒⟩ •Import "../params/arith.bqn"
 
@@ -64,23 +64,41 @@ Bench¨ ∾ {𝕏¨types.range}¨ ⟨
     }
   }
   {
+    ext ⇐ "equal"
+    desc ⇐ "Searching equal-length %s, half hits"
+    type ⇐ 𝕩
+    input ⇐ {
+      name ⇐ "Shared length"
+      range ⇐ scales.E16 max ⇐ 1e7
+    }
+    Measure ⇐ { 𝕊 ⟨fn⟩:
+      Len ⇐ 2⊸×
+      TimeParams ⇐ { fn MakePar type ParOverlap 𝕩‿𝕩‿0.5 }
+    }
+  }
+  {
+    ext ⇐ "unique"
+    desc ⇐ "Searching repetitive %s (both length 1e5)"
+    type ⇐ 𝕩
+    len ← 1e5
+    input ⇐ {
+      name ⇐ "Searched-in uniques"
+      m ← type.maxrange
+      range ⇐ m ⌊ scales.E16 max ⇐ len⌊m
+    }
+    Measure ⇐ { 𝕊 ⟨fn⟩:
+      len ⇐ 2×len
+      TimeParams ⇐ { fn MakePar {len(•rand.Range⟜≠⊏⊢)𝕏}⌾⊑ type ParOverlap 𝕩‿len‿0.5 }
+    }
+  }
+  {
     ext ⇐ "overlap"
     desc ⇐ "Searching for 1e6 %s in 1e3"
     type ⇐ 𝕩
     input ⇐ overlap
     Measure ⇐ { 𝕊 ⟨fn⟩:
-      len ⇐ 1e6
-      TimeParams ⇐ { fn MakePar type ParOverlap 1e3‿len‿𝕩 }
-    }
-  }
-  {
-    ext ⇐ "rand"
-    desc ⇐ "Searching for 1e6 random %s"
-    ⟨GetGen⟩ ← type ⇐ 𝕩
-    input ⇐ "in" Length 1e4
-    Measure ⇐ { 𝕊 ⟨fn⟩:
-      len ⇐ 1e6
-      TimeParams ⇐ { fn MakePar ⟨GetGen 𝕩, (𝕩+1) GetGen len⟩ }
+      len ⇐ +´ m‿n←1e3‿1e6
+      TimeParams ⇐ { fn MakePar type ParOverlap m‿n‿𝕩 }
     }
   }
 ⟩
