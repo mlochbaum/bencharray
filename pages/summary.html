@@ -88,8 +88,7 @@
 
 <h2>Searching and sorting</h2>
 <p>Searching and sorting are the heaviest of BQN's commonly used functions, performance-wise. Element size is very important, as doubling it often slows things down by more than a factor of two.</p>
-<p>For 1- and 2-byte elements, lookup tables usually fit entirely in L1 cache (2-byte tables with large elements can be iffy). Lookup tables are so fast that it doesn't make sense to try for adaptivity on these arguments.</p>
-<p>For larger elements, comparison sorting and hash tables are usually needed, and adaptive sorting can be used. CBQN doesn't have particularly fast implementations of these yet. Some cases of 4-byte elements are better handled by radix partitioning plus lookup tables.</p>
+<p>For 1- and 2-byte elements, lookup tables usually fit entirely in L1 cache (2-byte tables with large elements can be iffy). Lookup tables are so fast that it doesn't make sense to try for adaptivity on these arguments. For larger elements, comparison sorting and hash tables are usually needed, and adaptive sorting can be used. The only case that doesn't have specialized code yet is sorting 8-byte elements.</p>
 <h3>Sort and Grade</h3>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/sort.html">Implementation notes</a></p>
 <p>Currently CBQN has solid counting and radix sort implementations used for 1 to 4-byte elements, and uses the generic Timsort for 8-byte elements. 4-byte sorting is competitive with the state of the art for random elements but isn't adaptive at all.</p>
@@ -103,7 +102,7 @@
 <h3><a href="search.html">Search functions</a></h3>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/search.html">Implementation notes</a></p>
 <p>The x-axis format here is used to display a small searched-in array (<code>𝕨</code> for <code>⊐</code> and <code>⊒</code>, and <code>𝕩</code> for <code>∊</code>) on the left and a small searched-for array (the other argument) on the right. "Half hits" means that half the values in the searched-for argument are found at some index, and is tough on branchy implementations; depending on the application all hits could be more relevant.</p>
-<p>There is special code for 1- and 2-byte integers, and a small searched-in argument. SIMD searches would still be faster for some of these cases. Larger types are handled with generic hash table code.</p>
+<p>The generic case uses lookup tables for 1- and 2-byte elements (with SIMD creation and membership for 1-byte), and hashing for 4- and 8-byte. When one argument is short either linear lookups or SIMD binary search may be used.</p>
 <table><tr>
   <img width="50%" src="../output/plot/search-total-i8.svg"></img>
   <img width="50%" src="../output/plot/search-total-i16.svg"></img>
