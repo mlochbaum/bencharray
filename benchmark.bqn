@@ -76,7 +76,7 @@ Run ← { 𝕊 lang:
   Read  ← •BQN •file.Chars∘TName
 
   do ← type⊑⟨ Write⟜Measure, Plot⟜Read, (Plot⊣Write)⟜Measure ⟩
-  Start ← (•Out"Starting "∾⊢)⍟(ifMeasure∧15≤+´≠¨fns)
+  Start ← (•Out"Starting "∾⊢)⍟(ifMeasure∧(1<≠fns)∧15≤+´≠¨fns)
   fname {Start𝕨 ⋄ Do¨𝕩}¨ fns
 }
 Run¨ ⟨@⟩⊸∾⍟(0=≠) langs ⊏˜ lnames ⊐ lang
