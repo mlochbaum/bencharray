@@ -23,14 +23,15 @@ typ ← {
 }
 
 TimeFn ⇐ {
+  valence ← 1-˜≠𝕩
+  @ ≢ fn ← valence lang.FmtFn⎊@ ⊑𝕩 ?
   iter‿num ← {
     fn‿x  :   fn    •_timed   _estCount x ;
     fn‿w‿x: w fn{𝕨⊸𝔽•_timed𝕩} _estCount x
   } 𝕩
   arrs ← ⥊⍉> {𝕏¨↕num}¨ 1↓𝕩
-  valence ← 1-˜≠𝕩
   header ← (typ.Write∾·∾' '∾¨•Fmt¨∘≢)¨ arrs
-  meta ← ⟨valence lang.FmtFn ⊑𝕩⟩∾(•Fmt¨valence‿iter)∾header
+  meta ← ⟨fn⟩∾(•Fmt¨valence‿iter)∾header
   "/tmp/bencharray_meta" •file.Lines meta
   "/tmp/bencharray_data" •file.Bytes ∾ typ.Conv∘⥊¨ arrs
   Run ← {𝕊:
@@ -39,4 +40,6 @@ TimeFn ⇐ {
     •BQN "_¯" (⊢+-˜´∘⊣×⊑⊸=) 1 ⊑ res
   }
   num ÷˜ Run•_while_(1e¯9⊸>) 0
+;
+  @  # Failed to translate function: will be left out of graph
 }

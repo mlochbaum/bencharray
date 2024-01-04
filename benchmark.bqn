@@ -57,22 +57,25 @@ Run ← { 𝕊 lang:
     ⟨lang⟩ •Import "measure/cross/run.bqn"
   }
   file ← { lang≡@ ? At ; At⟜(∾⟜("-x-"∾lang.name)) }
+  NonEmpty ← {0<+´⥊≠¨𝕩} # Empty result if cross-language can't translate anything
   Measure ← {
     params‿input‿result‿Measure ← 𝕩
     M ← {
       Time ← TimeFn 𝕩.TimeParams
       {⟨i⇐timeInit⟩:Time¨i;@} 𝕩
-      𝕩 result.Calc ⋈⟜(Time¨) input.Range 𝕩
+      𝕩 result.Calc ((<@≢¨⊢)/⍟(0<=∘⊣)¨⋈)⟜(Time¨) input.Range 𝕩
     }
-    > M∘Measure¨ (<⟨⟩) <⊸∾⌜´ {𝕩.range}¨ params
+    r ← > M∘Measure¨ (<⟨⟩) <⊸∾⌜´ {𝕩.range}¨ params
+    {NonEmpty r?@; •Out ∾"Can't translate to "‿lang.name‿": "‿𝕩.name}𝕩
+    r
   }
   Plot ← {
     p ← 𝕨.plotOpts LinePlot 𝕨{⟨P⇐PlotPre⟩_𝕣:P; ⊢} 𝕩
     (("output/plot" File 𝕨.name)∾".svg") •file.Chars p
-  }
+  }⍟NonEmpty
 
   TName ← { "output/timings" File 𝕩.name }
-  Write ← TName ⊸ •file.Chars ⟜ •Repr
+  Write ← TName ⊸ •file.Chars ⟜ •Repr ⍟ NonEmpty
   Read  ← •BQN •file.Chars∘TName
 
   do ← type⊑⟨ Write⟜Measure, Plot⟜Read, (Plot⊣Write)⟜Measure ⟩

@@ -123,7 +123,7 @@ Plot ⇐ { opts 𝕊 dat:
       ttext ⇐ disp {𝕎⚇0𝕩}¨ {splitx?x.max-⍟(÷⟜2⊸<)¨⌾⊑𝕩;𝕩} ticks
     }
     leg.back
-    ls Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨ line
+    ls Ge col ≍⊸Path⟜('M'⌾⊑∘∾·⥊ "L "∾¨⎉1⊢)¨○((0<≠¨line)⊸/) line
     Outline 0‿0≍dim
     leg.main 
   ⟩

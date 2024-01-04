@@ -1,6 +1,6 @@
 # Array language benchmarks
 
-This benchmark suite is used as a reference for BQN development. It has precise within-language benchmarks and a finicky (lots of errors) [cross-language interface](measure/cross) to BQN, Dyalog APL, and J.
+This benchmark suite is used as a reference for BQN development. It has precise within-language benchmarks and a slow and sometimes unreliable [cross-language interface](measure/cross) to BQN, Dyalog APL, and J.
 
 There are benchmarks for most primitives that have significant performance considerations, mostly focused on rank-1 numeric arrays at the moment.
 
