@@ -15,7 +15,7 @@
 
 <h3>Shuffled pairs</h3>
 <p>The shuffled pairs test tries to avoid falling into easy special cases: there are many unique elements, with unpredictable repetition. When the length is larger than the type range, each value has to be repeated more than twice, and at least one possible value is left out to prevent any function from seeing the entire range and stopping early.</p>
-<p>Cases with a small argument (bound of 8 to 20 depending on type and function) are handled with all-pairs comparisons that use the comparison branchlessly, although a SIMD implementation could be faster. 1-byte and 2-byte cases use a lookup table otherwise, with sparse initialization for the 2-byte table for smaller sizes giving the corner at 1000 or a little higher. <code>∊</code> and <code>⍷</code> use a bit table in SIMD registers, which lets them quickly skip past values that aren't new (here <code>⍷</code> has dedicated code instead of calling <code>∊⊸/</code>). Both <code>⊒</code> and <code>⊐</code> are slowed down at large sizes because they need a 4-byte instead of 1-byte table, and there are some bumps in <code>⊐</code> because it has to branch on table lookups.</p>
+<p>Cases with a small argument (bound of 8 to 20 depending on type and function) are handled with all-pairs comparisons that use the comparison branchlessly, although a SIMD implementation could be faster. 1-byte and 2-byte cases use a lookup table otherwise, with sparse initialization for the 2-byte table for smaller sizes giving the corner at 1000 or a little higher. <code>∊</code> and <code>⍷</code> use a bit table in SIMD registers, which lets them quickly skip past values that aren't new (here <code>⍷</code> has dedicated code instead of calling <code>∊⊸/</code>). Both <code>⊒</code> and <code>⊐</code> are slowed down at large sizes because they need a 4-byte instead of 1-byte table, and there are some bumps in <code>⊐</code> because it has to branch on table lookups. 1-byte <code>⊐</code> is implemented as <code>⍷⊸⊐</code> for long arrays.</p>
 <table><tr>
   <img width="50%" src="../output/plot/selfsearch-pair-i8.svg"></img>
   <img width="50%" src="../output/plot/selfsearch-pair-i16.svg"></img>
@@ -31,7 +31,7 @@
 </tr></table>
 
 <h3>Unique values</h3>
-<p>The unique-values test is mainly relevant for larger types. But in 1-byte values we can see that the SIMD bit table shortcuts if all values in the range are seen, and in the 2-byte table we see that Classify slows down with more uniques as branching becomes expensive.</p>
+<p>The unique-values test is mainly relevant for larger types. But in 1-byte values we can see that the SIMD bit table shortcuts if all values in the range are seen, and in the 2-byte table we see that Classify slows down with more uniques as branching becomes expensive. The stair-step of 1-byte <code>⊐</code> comes from vector binary search used by Index-of in <code>⍷⊸⊐</code>.</p>
 <table><tr>
   <img width="50%" src="../output/plot/selfsearch-unique-i8.svg"></img>
   <img width="50%" src="../output/plot/selfsearch-unique-i16.svg"></img>
