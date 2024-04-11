@@ -9,7 +9,7 @@ _estCount ← {
   n<50 ?
     n‿(n ⌊ a0 ⌈ ⌊5÷n)
   ;
-    t ← (+´÷≠)𝕨𝔽¨○{𝕏¨↕10}𝕩        # Redo the timing with more runs
+    t ← 1e¯8⌈ (+´÷≠)𝕨𝔽¨○{𝕏¨↕10}𝕩  # Redo the timing with more runs
     a ← a0 + ⌊2e¯5÷t              # Try to add sets
     r ← ⌈(200⌊2e¯2÷t)÷a           # Number of reps
     r‿a
