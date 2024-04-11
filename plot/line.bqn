@@ -88,7 +88,8 @@ Plot ⇐ { opts 𝕊 dat:
   Log ← ⋆⁼⌾(alog⊸/) ({⟨R⇐Trans⟩:R; ⊢}⊑axes)⌾⊑
   dat ↩ 0‿0 ↓ Order dat
   xy ← <∘∾˘⍉dat
-  bounds ← axes BoundAxis¨ (⌊´⋈⌈´)¨ axes ⊑⊸{⟨F⇐FilterMin⟩𝕊𝕩:F⊸/`𝕩;𝕩} xy
+  fxy ← alog {1e¯9⊸∾⍟(0=≠)0⊸<⊸/𝕩}⍟⊣¨ axes ⊑⊸{⟨F⇐FilterMin⟩𝕊𝕩:F⊸/`𝕩;𝕩} xy
+  bounds ← axes BoundAxis¨ (⌊´⋈⌈´)¨ fxy
   win ← -˜`¨ 0⌾(⊑1⊑⊢)⍟(¬1⊑alog) Log bounds
   ScaleI ← ¬⌾(1⊸⊑) ({𝕩÷˜𝕨-˜⊢}˝ ⍉>win)∘Log          # To [0,1]
   Scale ← padi + (dim-padb+padi) × ScaleI          # To pixels
