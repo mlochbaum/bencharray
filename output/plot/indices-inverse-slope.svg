@@ -1,0 +1,72 @@
+<svg viewBox='-60 -40 592 371.6' height='557.4' width='888' xmlns='http://www.w3.org/2000/svg'>
+  <g stroke-width='2.6' font-size='14px' text-anchor='middle'>
+    <defs><clipPath id='clip'><rect x='0' y='0' width='512' height='281.6'/></clipPath></defs>
+    <rect fill='white' x='-60' y='-40' width='592' height='371.6'/>
+    <text dy='0.33em' font-size='18px' x='256' y='-19'>Sorted indices to counts with /⁼</text>
+    <text dy='0.33em' x='256' y='313.6'>Range / length</text>
+    <text dy='0.33em' transform='rotate(-90)' x='-140.8' y='-42'>Time (ns / input)</text>
+    <g stroke-width='0.3' stroke='#555'>
+      <path d='M51.2 0v281.6'/>
+      <path d='M102.4 0v281.6'/>
+      <path d='M153.6 0v281.6'/>
+      <path d='M204.8 0v281.6'/>
+      <path d='M256 0v281.6'/>
+      <path d='M307.2 0v281.6'/>
+      <path d='M358.4 0v281.6'/>
+      <path d='M409.6 0v281.6'/>
+      <path d='M460.8 0v281.6'/>
+      <path d='M0 263.262h512'/>
+      <path d='M0 229.006h512'/>
+      <path d='M0 200.044h512'/>
+      <path d='M0 174.955h512'/>
+      <path d='M0 152.825h512'/>
+      <path d='M0 133.029h512'/>
+      <path d='M0 98.774h512'/>
+      <path d='M0 56.848h512'/>
+      <path d='M0 2.797h512'/>
+    </g>
+    <g font-size='11px'>
+      <text dy='0.33em' x='0' y='291.1'>0</text>
+      <text dy='0.33em' x='51.2' y='291.1'>0.2</text>
+      <text dy='0.33em' x='102.4' y='291.1'>0.4</text>
+      <text dy='0.33em' x='153.6' y='291.1'>0.6</text>
+      <text dy='0.33em' x='204.8' y='291.1'>0.8</text>
+      <text dy='0.33em' x='256' y='291.1'>1</text>
+      <text dy='0.33em' x='307.2' y='291.1'>1.2</text>
+      <text dy='0.33em' x='358.4' y='291.1'>1.4</text>
+      <text dy='0.33em' x='409.6' y='291.1'>1.6</text>
+      <text dy='0.33em' x='460.8' y='291.1'>1.8</text>
+      <text dy='0.33em' x='512' y='291.1'>2</text>
+      <g text-anchor='end'>
+        <text dy='0.33em' x='-6' y='263.262'>0.5</text>
+        <text dy='0.33em' x='-6' y='229.006'>0.6</text>
+        <text dy='0.33em' x='-6' y='200.044'>0.7</text>
+        <text dy='0.33em' x='-6' y='174.955'>0.8</text>
+        <text dy='0.33em' x='-6' y='152.825'>0.9</text>
+        <text dy='0.33em' x='-6' y='133.029'>1</text>
+        <text dy='0.33em' x='-6' y='98.774'>1.2</text>
+        <text dy='0.33em' x='-6' y='56.848'>1.5</text>
+        <text dy='0.33em' x='-6' y='2.797'>2</text>
+      </g>
+    </g>
+    <rect stroke-width='1.2' stroke='#111' fill='white' transform='translate(10,6)' x='0' y='0' width='134' height='84'/>
+    <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+      <path stroke='#e41a1c' d='M0 1236.951L25.6 101.872L51.2 127.223L76.8 139.871L102.4 146.455L128 148.876L153.6 147.851L179.2 145.794L204.8 141.082L230.4 134.114L256 125.891L281.6 115.478L307.2 105.608L332.8 95.739L358.4 85.689L384 75.405L409.6 64.719L435.2 52.645L460.8 41.319L486.4 30.288L512 20'/>
+      <path stroke='#377eb8' d='M0 1220.816L25.6 126.23L51.2 147.347L76.8 154.927L102.4 185.37L128 191.454L153.6 195.339L179.2 197.108L204.8 198.93L230.4 197.657L256 193.968L281.6 193.185L307.2 190.417L332.8 187.777L358.4 183.74L384 179.128L409.6 174.329L435.2 169.955L460.8 163.888L486.4 159.645L512 152.787'/>
+      <path stroke='#4daf4a' d='M0 1068.814L25.6 138.373L51.2 174.656L76.8 195.222L102.4 212.561L128 223.195L153.6 233.809L179.2 240.282L204.8 247.739L230.4 252.891L256 241.657L281.6 260.6L307.2 261.6L332.8 260.093L358.4 255.526L384 256.763L409.6 257.089L435.2 255.874L460.8 252.882L486.4 253.967L512 249.935'/>
+      <path stroke='#984ea3' d='M0 719.617L25.6 130.765L51.2 159.698L76.8 185.629L102.4 200.597L128 205.945L153.6 213.216L179.2 227.214L204.8 228.799L230.4 236.52L256 242.431L281.6 242.389L307.2 243.759L332.8 245.921L358.4 249.58L384 250.52L409.6 252.195L435.2 250.685L460.8 251.525L486.4 255.231L512 251.746'/>
+    </g>
+    <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
+    <g transform='translate(10,6)' text-anchor='start' font-size='13px'>
+      <rect fill='white' opacity='0.6' x='0.65' y='0.65' width='132.7' height='82.7'/>
+      <path stroke='#e41a1c' d='M8 15h22'/>
+      <path stroke='#377eb8' d='M8 33h22'/>
+      <path stroke='#4daf4a' d='M8 51h22'/>
+      <path stroke='#984ea3' d='M8 69h22'/>
+      <text dy='0.33em' x='36' y='15'>length 1e6</text>
+      <text dy='0.33em' x='36' y='33'>length 1e5</text>
+      <text dy='0.33em' x='36' y='51'>length 1e4</text>
+      <text dy='0.33em' x='36' y='69'>length 1e3</text>
+    </g>
+  </g>
+</svg>

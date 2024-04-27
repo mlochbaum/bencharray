@@ -32,7 +32,11 @@
 </tr></table>
 <p>Indices inverse is somewhat related to Indices, but also to Group and Bins. The main idea is just to increment a count for each element of <code>𝕩</code>, although there are some additional improvements. For small ranges, like 10 below, counts are computed by comparing to all possible values and adding instead. And for long enough arguments (particularly 1-byte ints), a table that fits all possible values for the type is used to avoid needing an explicit range check. Incrementing is not a particularly fast operation, and it also slows down if values repeat often because this creates dependencies between an increment and the previous one at the same location.</p>
 <table><tr>
-  <img width="50%" src="../output/plot/indices-inverse.svg"></img>
+  <img width="50%" src="../output/plot/indices-inverse-rand.svg"></img>
+  <img width="50%" src="../output/plot/indices-inverse-sorted.svg"></img>
+</tr><tr>
+  <img width="50%" src="../output/plot/indices-inverse-runs.svg"></img>
+  <img width="50%" src="../output/plot/indices-inverse-slope.svg"></img>
 </tr></table>
 
 </body>
