@@ -10,6 +10,7 @@
 
 <div class="nav"><a href="https://github.com/mlochbaum/bencharray">bencharray</a> / <a href="summary.html">summary</a></div>
 <h1>Arithmetic scan benchmarks</h1>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/fold.html">Implementation notes</a></p>
 <p>Scans behave a lot like <a href="fold.html">folds</a> in terms of requirements, but are much slower because of the need to compute and output intermediate results (while a fast ordering for an associative fold won't combine everything completely until the end). Like folds, <code>+`</code>, <code>⌊`</code>, and <code>⌈`</code> are the only important non-boolean cases, with <code>×`</code> also used but hardly ever on long arrays. These three have SIMD code and others call one step at a time.</p>
 <table><tr>
   <img width="50%" src="../output/plot/scan-arith.svg"></img>

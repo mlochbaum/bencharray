@@ -10,6 +10,7 @@
 
 <div class="nav"><a href="https://github.com/mlochbaum/bencharray">bencharray</a> / <a href="summary.html">summary</a></div>
 <h1>Arithmetic fold benchmarks</h1>
+<p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/fold.html">Implementation notes</a></p>
 <p>The numeric folds <code>+´</code>, <code>⌊´</code>, and <code>⌈´</code> are overwhelmingly more common than others; <code>×´</code> is also used but hardly ever on long arrays. All of these folds are optimized on lists, although the benchmark for <code>×´</code> overflows so only the float case is seen (it's not vectorized on integers but cases without overflow would generally be too short for this to matter much; filtering out 1s would be more useful for a very long non-overflowing array). Other folds could be sped up: <code>-´</code> can be optimized like <code>+´</code>, monadic <code>¬´</code> is <code>{(¬2|≠𝕩)+-´𝕩}</code>, and comparisons can be shortcut for what little it's worth.</p>
 <table><tr>
   <img width="50%" src="../output/plot/fold-arith.svg"></img>
