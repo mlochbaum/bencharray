@@ -81,12 +81,23 @@ MakeArg ← {
   desc⇐•Repr x⇐𝕩
 }
 
+# Expand multi-definitions of the form *F←{+-×} *G←{÷⋆} %
+Macro ← {
+  M1 ← {
+    name‿vs ← '←'⊸=⊸Spl 𝕩
+    val ← (⊑' '⊸∊)◶⟨⋈¨, ' '⊸=⊸Spl⟩ ("{"∾∾⟜"}")⁼ Trim vs
+    (name∾"←"∾∾⟜"⋄")¨ val
+  }
+  ⥊<⎉1 𝕩 ∾⌜´ M1¨ 1 ↓ '*'⊸=⊸Spl 𝕨
+}
+
 RunGroup ← {
   args‿equivs ← 2↑('%'≠⊑¨)⊸⊔ 𝕩
-  (('%'⊸=⊸Spl¨ equivs) CompareTime¨ <∘MakeArg)¨ ∾ (⥊∘•BQN 1⊸↓)¨ args
+  exprs ← ∾ (('*'=⊑∘⊑)◶⋈‿(⊑ Macro 1⊸↓) '%'⊸=⊸Spl)¨ equivs
+  (exprs CompareTime¨ <∘MakeArg)¨ ∾ (⥊∘•BQN 1⊸↓)¨ args
 }
 
 lines ← ∾ (⟨""⟩ ∾˜ · (0<≠)◶1‿('#'≠⊑)¨⊸/ · •file.Lines "reductions/"⊸∾)¨ files
-groups ← (0=≠¨)⊸Spl lines
+groups ← (0<≠¨)⊸/ (0=≠¨)⊸Spl lines
 •Out 1↓∾' '⊸∾¨ ⟨"Running",•Repr≠groups,"groups:"⟩∾¯4↓¨files
 RunGroup¨ groups
