@@ -62,6 +62,12 @@
   <img width="50%" src="../output/plot/reshape-large.svg"></img>
   <img width="50%" src="../output/plot/reshape-double.svg"></img>
 </tr></table>
+<h3>Reverse</h3>
+<p></p>
+<table><tr>
+  <img width="50%" src="../output/plot/reverse-2d.svg"></img>
+  <img width="50%" src="../output/plot/reverse-cells-2d.svg"></img>
+</tr></table>
 <h3><a href="replicate.html">Replicate</a></h3>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/replicate.html">Implementation notes</a></p>
 <p>Replicate is a complicated family of functions, and CBQN does a lot of work to get consistent worst-case performance and take advantage of special cases: sparse input, and booleans with 1s and 0s mostly grouped together. Except for the grouped case, each algorithm takes some amount of time to process each input value, and some to produce an output value, and CBQN chooses between them based on the density. Note that the graphs for a boolean argument use ns/input and those for the general case use ns/output! In the flat sections for the boolean case, the performance doesn't depend on density at all, usually because the same writes are performed regardless, just overlapping more when the density is smaller.</p>

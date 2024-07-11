@@ -1,38 +1,11 @@
 # Insert ˝ and Scan ` on rank-2 arrays
 ⟨basename⇐name, _op⟩ ← ⊑•args
 
-tname ← (-´"Aa")⊸+⌾⊑ basename
 oname ← •Repr op
 
 ⟨RandBool⟩ ← •Import "../../measure/gen.bqn"
-scales     ← •Import "../../measure/scale.bqn"
 cputypes   ← •Import "../../params/cputype.bqn"
-ns         ← •Import "../../params/ns_v.bqn"
-
-Bench2d ← { mext‿mod‿mname 𝕊 dat:
-  ⟨params⟩ ⇐ ext‿fname‿arg‿GetTime ← dat
-  plotname ⇐ ∾tname   ‿mext‿" "‿fname‿mname‿" of "‿arg‿" "‿"rank 2 array"
-  name     ⇐ ∾basename‿mext‿"-2d-"‿ext
-  total ← 10⋆e←4
-  input ⇐ {
-    name ⇐ "Width"
-    range ⇐ 1.5 scales._exp2d total
-    FilterMin ⇐ ¬∊⟜(0‿¯1⊏range)
-  }
-  result ⇐ ns
-  Measure ⇐ {
-    Flip ← total⌈∘÷⊢  # Length of other dimension
-    Len ⇐ Flip⊸×
-    TimeParams ⇐ (mod GetTime 𝕩)∘(Flip⊸⋈)
-    timeInit ⇐ 1e5‿1‿1e3
-  }
-  plotOpts ⇐ {
-    title ⇐ plotname
-    x ⇐ input
-    y ⇐ result
-    key ⇐ ⊑params
-  }
-}
+bench2d    ← {basename⇐basename} •Import "bench2d.bqn"
 
 BoolDat ← { ext 𝕊 fns:
   ext⇐ ⋄ fname ⇐ "F" ⋄ arg ⇐ "boolean"
