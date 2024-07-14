@@ -47,13 +47,10 @@
 </tr></table>
 
 <h2>Structural</h2>
-<h3>Select</h3>
+<h3><a href="select.html">Select</a></h3>
 <p>BQN uses AVX2 for most cases of selection, with shuffles on small <code>𝕩</code> sizes and the gather instruction on larger ones (unfortunately gather is slower than scalar code prior to Skylake in 2015). AVX2 can shuffle 16 bytes or 8 4-byte values in one instruction, giving the various steps as BQN blends more registers together. The 16KB benchmark shows these small sizes better where the 1e6-element benchmark is limited by write bandwidth. selection from a boolean array is usually slower because it requires reading the right byte from memory and then picking out the right bit within it, but for larger <code>𝕩</code> it takes up less cache space and can be faster. For a small <code>𝕩</code> but large <code>𝕨</code>, <code>𝕩</code> is temporarily converted to 1-byte values so that it runs at the same speed as 1-byte selection.</p>
 <table><tr>
-  <img width="50%" src="../output/plot/select-many.svg"></img>
   <img width="50%" src="../output/plot/select-few.svg"></img>
-</tr><tr>
-  <img width="50%" src="../output/plot/select-permute.svg"></img>
   <img width="50%" src="../output/plot/select-width.svg"></img>
 </tr></table>
 <h3>Reshape</h3>

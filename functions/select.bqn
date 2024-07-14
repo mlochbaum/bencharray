@@ -1,6 +1,7 @@
 # Select function ⊏
 
-types ← •Import "../params/numtype.bqn"
+types   ← •Import "../params/numtype.bqn"
+bench2d ← {basename⇐"select"} •Import "common/bench2d.bqn"
 
 Bench ← {
   input‿Measure ⇐ ext‿plotname ← 𝕩
@@ -36,7 +37,7 @@ BenchXLen ← { ext 𝕊 xmax‿wdesc‿Wlen:
   }
 }
 
-Bench¨ ⟨
+leading ← Bench¨ ⟨
   "many" BenchXLen ⟨1e6, "1e6",1e6⟩
   "few"  BenchXLen ⟨1e3, "16KB of",{(2⋆3+14)÷𝕩.size}⟩
   {
@@ -71,4 +72,21 @@ Bench¨ ⟨
       }
     }
   }
+⟩
+leading ∾ "-cells-right"‿{𝔽⎉1}‿"⎉1"⊸Bench2d¨ ⟨
+{
+  plotname ⇐ "Permuting columns of rank 2 array with ⊏⎉1"
+  result ⇐ ⟨{denom⇐"element"}⟩ •Import "../params/ns_v.bqn"
+  ext⇐""
+  params ⇐ ⟨types⟩
+  GetTime ⇐ { mod 𝕊 ⟨type⟩: { ⟨⊏ _mod, •rand.Deal(⊢´𝕩)˙, type.GetGen𝕩⟩ } }
+}
+{
+  plotname ⇐ "Selecting 5 columns of rank 2 array with ⊏⎉1"
+  result ⇐ ⟨{denom⇐"output element"}⟩ •Import "../params/ns_v.bqn"
+  ext⇐"res5"
+  params ⇐ ⟨types⟩
+  GetLen ⇐ 5×⊣
+  GetTime ⇐ { mod 𝕊 ⟨type⟩: { ⟨⊏ _mod, 5•rand.Range(⊢´𝕩)˙, type.GetGen𝕩⟩ } }
+}
 ⟩

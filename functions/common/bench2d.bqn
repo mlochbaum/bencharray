@@ -6,20 +6,24 @@ scales     ← •Import "../../measure/scale.bqn"
 ns         ← •Import "../../params/ns_v.bqn"
 
 Bench2d ← { mext‿mod‿mname 𝕊 dat:
-  ⟨params⟩ ⇐ ext‿fname‿arg‿GetTime ← dat
-  arg " "⊸∾⍟(0<≠)↩ ⋄ ext "-"⊸∾⍟(0<≠)↩
-  plotname ⇐ ∾tname   ‿mext‿" "‿fname‿mname‿" of"‿arg‿" rank 2 array"
-  name     ⇐ ∾basename‿mext‿"-2d"‿ext
+  ⟨params⟩ ⇐ ext‿GetTime ← dat
+  plotname ⇐ {
+    ⟨r⇐plotname⟩: r;
+    ⟨fname,arg⟩: ∾⟨tname,mext," ",fname,mname
+                   " of"," "⊸∾⍟(0<≠)arg," rank 2 array"⟩
+  } dat
+  name ⇐ ∾⟨basename,mext,"-2d","-"⊸∾⍟(0<≠)ext⟩
   total ← 10⋆e←4
   input ⇐ {
     name ⇐ "Width"
     range ⇐ 1.5 scales._exp2d total
     FilterMin ⇐ ¬∊⟜(0‿¯1⊏range)
   }
-  result ⇐ ns
+  result ⇐ {⟨r⇐result⟩:r; ns} dat
+  getLen ← {⟨r⇐getLen⟩:r; ×} dat
   Measure ⇐ {
     Flip ← total⌈∘÷⊢  # Length of other dimension
-    Len ⇐ Flip⊸×
+    Len ⇐ Flip⊸GetLen
     TimeParams ⇐ (mod GetTime 𝕩)∘(Flip⊸⋈)
     timeInit ⇐ 1e5‿1‿1e3
   }
