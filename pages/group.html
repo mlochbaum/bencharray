@@ -10,13 +10,18 @@
 
 <div class="nav"><a href="https://github.com/mlochbaum/bencharray">bencharray</a> / <a href="summary.html">summary</a></div>
 <h1>Group benchmarks</h1>
+<p>The first pair of benchmarks shows the case of a uniformly random <code>𝕨</code> with a varying range. In the middle the generic algorithm is used and the main cost is that of moving each argument value to the required output group. At the right, the cost of allocating arrays for the groups begins to matter, and eventually there are many empty groups that don't count in the denominator. They're all copies of the same empty array but making so many copies begins to get expensive. At the left, if the range is 1 the result is simply <code>⋈𝕩</code>, and if the range is 2, Replicate is used to get both groups.</p>
 <table><tr>
   <img width="50%" src="../output/plot/group-range.svg"></img>
   <img width="50%" src="../output/plot/group-indices-range.svg"></img>
-</tr><tr>
+</tr></table>
+<p>This pair is the same except that <code>𝕨</code> is sorted, so that the groups are slices from <code>𝕩</code>. Copying such slices is much faster than moving elements one at a time. Between 1000 and 1e4 groups, Group switches over from a sorting-specific method on the right to a generic chunked one on the left; both use the same data copying but the surrounding code is different. For Group (not Group Indices), CBQN could instead take virtual slices to avoid copying, but memory leaks would be a possible concern since one small result group could keep all the data alive.</p>
+<table><tr>
   <img width="50%" src="../output/plot/group-range-sort.svg"></img>
   <img width="50%" src="../output/plot/group-indices-range-sort.svg"></img>
-</tr><tr>
+</tr></table>
+<p>This benchmark adds <code>¯1</code>s to <code>𝕨</code> to drop elements; when an initial statistics pass finds a lot of these, Replicate is used to filter them out quickly. For length 1e2 there's only one output group, so at density 1 the <code>⋈𝕩</code> case applies.</p>
+<table><tr>
   <img width="50%" src="../output/plot/group-density.svg"></img>
   <img width="50%" src="../output/plot/group-indices-density.svg"></img>
 </tr></table>

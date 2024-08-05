@@ -11,8 +11,8 @@
 <div class="nav"><a href="https://github.com/mlochbaum/bencharray">bencharray</a></div>
 <h1>Benchmark summary</h1>
 
-<p>Not all benchmarks are included on this page. Header links go to pages with full benchmarks and sometimes extra explanation.</p>
-<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/208658/intel-core-i51135g7-processor-8m-cache-up-to-4-20-ghz/specifications.html">Tiger Lake i5-1135G7</a> processor using CBQN compiled with <code>make o3 has='bmi2'</code> (which also enables AVX2 and earlier vector instructions). These options are used instead of the usual <code>make o3n</code> to compile without AVX-512 support, as this CPU supports it but most consumer hardware doesn't.</p>
+<p>Not all benchmarks are included on this page. Header links go to pages with full benchmarks and more detailed explanation.</p>
+<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/208658/intel-core-i51135g7-processor-8m-cache-up-to-4-20-ghz/specifications.html">Tiger Lake i5-1135G7</a> processor using CBQN v0.7.0 compiled with <code>make o3 has='bmi2'</code> (which also enables AVX2 and earlier vector instructions). These options are used instead of the usual <code>make o3n</code> to compile without AVX-512 support, as this CPU supports it but most consumer hardware doesn't.</p>
 
 <h2><a href="arith.html">Arithmetic</a></h2>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/arithmetic.html">Implementation notes</a></p>
@@ -48,22 +48,22 @@
 
 <h2>Structural</h2>
 <h3><a href="select.html">Select</a></h3>
-<p>BQN uses AVX2 for most cases of selection, with shuffles on small <code>𝕩</code> sizes and the gather instruction on larger ones (unfortunately gather is slower than scalar code prior to Skylake in 2015). AVX2 can shuffle 16 bytes or 8 4-byte values in one instruction, giving the various steps as BQN blends more registers together. The 16KB benchmark shows these small sizes better where the 1e6-element benchmark is limited by write bandwidth. selection from a boolean array is usually slower because it requires reading the right byte from memory and then picking out the right bit within it, but for larger <code>𝕩</code> it takes up less cache space and can be faster. For a small <code>𝕩</code> but large <code>𝕨</code>, <code>𝕩</code> is temporarily converted to 1-byte values so that it runs at the same speed as 1-byte selection.</p>
+<p>Selection is optimized using AVX2 to perform range-checking and wrapping (if necessary) more quickly, and for table lookups with shuffle instructions when the right argument is small. With a small enough table these cases can be fairly fast, while selecting from many values is slow relative to SIMD operations.</p>
 <table><tr>
   <img width="50%" src="../output/plot/select-few.svg"></img>
   <img width="50%" src="../output/plot/select-width.svg"></img>
+</tr></table>
+<h3>Reverse</h3>
+<p>Reverse on a rank-1 array is fairly simple to optimize (in fact, one <a href="https://github.com/mlochbaum/Singeli/blob/master/doc/compiler.md">Singeli tutorial</a> focuses on it), and is implemented with SIMD code. The 2-dimensional benchmarks shown here reduce to this case if the width is 1 for <code>⌽</code> or the maximum for <code>⌽˘</code>, and the case in <code>⌽</code> where the cell has the width of some type is implemented similarly. Other cases are not very optimized.</p>
+<table><tr>
+  <img width="50%" src="../output/plot/reverse-2d.svg"></img>
+  <img width="50%" src="../output/plot/reverse-cells-2d.svg"></img>
 </tr></table>
 <h3>Reshape</h3>
 <p>The speed of Reshape with a large result should essentially be limited by the amount of memory written. The current method is to copy the argument to the result, then repeatedly double it until it reaches a suitable block size for filling the rest of the result. There are special cases for 1-byte and 8-byte blocks; however, the 8-byte case measures slower than the general case, giving the bumps at the left of the first graph. We've left it in on the grounds that it may be specific to my CPU (in fact, the 1-byte case went from slower to faster when I upgraded), and if not, later compiler and libc improvements could fix it.</p>
 <table><tr>
   <img width="50%" src="../output/plot/reshape-large.svg"></img>
   <img width="50%" src="../output/plot/reshape-double.svg"></img>
-</tr></table>
-<h3>Reverse</h3>
-<p></p>
-<table><tr>
-  <img width="50%" src="../output/plot/reverse-2d.svg"></img>
-  <img width="50%" src="../output/plot/reverse-cells-2d.svg"></img>
 </tr></table>
 <h3><a href="replicate.html">Replicate</a></h3>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/replicate.html">Implementation notes</a></p>
@@ -79,7 +79,7 @@
   <img width="50%" src="../output/plot/indices-inverse-rand.svg"></img>
 </tr></table>
 <h3><a href="group.html">Group</a></h3>
-<p>The benchmarks here are not very complete. The first shows how performance scales with the number of <code>¯1</code>s in the argument; when there are a lot Replicate is used to filter out these values and avoid excessive branching. The second concerns a sorted <code>𝕨</code> value, so that the groups are slices from <code>𝕩</code>.</p>
+<p>The algorithm of moving values sequentially into result arrays provides a good baseline performance for Group, but as it works on single memory accesses it can often be improved. CBQN has a few optimizations based on analysis of <code>𝕨</code>. If it has long sequences of equal values, these are detected in order to process in chunks. A similar case applies if it doesn't have these long sequences but is sorted. And if it has many instances of <code>¯1</code> they're quickly filtered out with Replicate.</p>
 <table><tr>
   <img width="50%" src="../output/plot/group-density.svg"></img>
   <img width="50%" src="../output/plot/group-range-sort.svg"></img>
