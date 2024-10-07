@@ -12,7 +12,7 @@
 <h1>Benchmark summary</h1>
 
 <p>Not all benchmarks are included on this page. Header links go to pages with full benchmarks and more detailed explanation.</p>
-<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/208658/intel-core-i51135g7-processor-8m-cache-up-to-4-20-ghz/specifications.html">Tiger Lake i5-1135G7</a> processor using CBQN v0.7.0 compiled with <code>make o3 has='bmi2'</code> (which also enables AVX2 and earlier vector instructions). These options are used instead of the usual <code>make o3n</code> to compile without AVX-512 support, as this CPU supports it but most consumer hardware doesn't.</p>
+<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/208658/intel-core-i51135g7-processor-8m-cache-up-to-4-20-ghz/specifications.html">Tiger Lake i5-1135G7</a> processor using CBQN v0.8.0 compiled with <code>make o3 has='bmi2'</code> (which also enables AVX2 and earlier vector instructions). These options are used instead of the usual <code>make o3n</code> to compile without AVX-512 support, as this CPU supports it but most consumer hardware doesn't.</p>
 
 <h2><a href="arith.html">Arithmetic</a></h2>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/arithmetic.html">Implementation notes</a></p>
@@ -54,7 +54,7 @@
   <img width="50%" src="../output/plot/select-width.svg"></img>
 </tr></table>
 <h3>Reverse</h3>
-<p>Reverse on a rank-1 array is fairly simple to optimize (in fact, one <a href="https://github.com/mlochbaum/Singeli/blob/master/doc/compiler.md">Singeli tutorial</a> focuses on it), and is implemented with SIMD code. The 2-dimensional benchmarks shown here reduce to this case if the width is 1 for <code>⌽</code> or the maximum for <code>⌽˘</code>, and the case in <code>⌽</code> where the cell has the width of some type is implemented similarly. Other cases are not very optimized.</p>
+<p>Reverse on a rank-1 array is fairly simple to optimize (in fact, one <a href="https://github.com/mlochbaum/Singeli/blob/master/doc/compiler.md">Singeli tutorial</a> focuses on it), and is implemented with SIMD code. The 2-dimensional benchmarks shown here reduce to this case if the width is 1 for <code>⌽</code> or the maximum for <code>⌽˘</code>, and the case in <code>⌽</code> where the cell has the width of some type is implemented similarly. Then <code>⌽˘</code> for short rows is implemented as <code>i⊸⊏˘</code> for the appropriate indices.</p>
 <table><tr>
   <img width="50%" src="../output/plot/reverse-2d.svg"></img>
   <img width="50%" src="../output/plot/reverse-cells-2d.svg"></img>

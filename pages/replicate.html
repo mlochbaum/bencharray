@@ -18,7 +18,7 @@
   <img width="50%" src="../output/plot/replicate-compress-length.svg"></img>
   <img width="50%" src="../output/plot/replicate-compress-density.svg"></img>
 </tr></table>
-<p>General Replicate uses methods based on scans for smaller densities, and a simple loop for larger ones. Replicating by a constant factor uses many methods including lookup tables for permutations.</p>
+<p>General Replicate uses methods based on scans for smaller densities, and a simple loop for larger ones. Replicating by a constant factor uses many methods including lookup tables for permutations. We get a rather drastic performance drop from 64 to 65 for boolean replication; parts of the method we use for smaller numbers break down when there's no longer one result group starting point per word, but there are probably workarounds that would get similar performance.</p>
 <table><tr>
   <img width="50%" src="../output/plot/replicate-avg.svg"></img>
   <img width="50%" src="../output/plot/replicate-const.svg"></img>

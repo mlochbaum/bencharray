@@ -28,7 +28,7 @@
 </tr></table>
 
 <h2>Insert, rank 2</h2>
-<p>These benchmarks show performance on a table of 1e4 total elements. No optimization here currently, even the width 1 case which is equivalent to a fold.</p>
+<p>These benchmarks show performance on a table of 1e4 total elements. No optimization here currently, except the width 1 case which is equivalent to a fold.</p>
 <table><tr>
   <img width="50%" src="../output/plot/insert-2d-min.svg"></img>
   <img width="50%" src="../output/plot/insert-2d-plus.svg"></img>
@@ -36,7 +36,7 @@
   <img width="50%" src="../output/plot/insert-2d-boolean.svg"></img>
   <img width="50%" src="../output/plot/insert-2d-boolcmp.svg"></img>
 </tr></table>
-<p>Insert-cells on small widths is converted to a transpose and ordinary insert; transpose is the main cost (and it would have cache issues at much larger sizes but is split into blocks to avoid them). Width 1 is a simple reshape. Longer widths use the generic implementation, which ends up calling Fold on each row.</p>
+<p>Insert-cells on small widths can be converted to a transpose and ordinary insert; transpose is the main cost (and it would have cache issues at much larger sizes but is split into blocks to avoid them). Width 1 is a simple reshape. Longer widths use the generic implementation, which ends up calling Fold on each row. For common boolean reductions there's dedicated code that's much faster than transposing.</p>
 <table><tr>
   <img width="50%" src="../output/plot/insert-cells-2d-min.svg"></img>
   <img width="50%" src="../output/plot/insert-cells-2d-plus.svg"></img>
