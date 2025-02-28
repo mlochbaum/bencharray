@@ -6,19 +6,19 @@ BenchLenAll‿BenchFixLen‿BenchBool ← "common/self.bqn" •Import˜ {
   fns ⇐ ⊐‿⊒‿∊‿⍷
 }
 
-E13‿E16‿E23 ← •Import "../measure/scale.bqn"
+Q13‿E16‿E23 ← •Import "../measure/scale.bqn"
 
 ∾ ⟨
-  "pair"‿"shuffled pairs," BenchLenAll 1e7‿E16‿{⊢ {(≠|•rand.Deal∘𝕨)⊸⊏𝕏} ·𝕩.GetGen (𝕩.maxrange-1)⌊1⌈⌊∘÷⟜2}
-  "rand"‿"random"          BenchLenAll 1e7‿E16‿{𝕩.GetGen}
-  "sort"‿"sorted"          BenchLenAll 1e7‿E16‿{𝕩.GetGenSorted}
+  "pair"‿"shuffled pairs," BenchLenAll 1e7‿Q13‿{⊢ {(≠|•rand.Deal∘𝕨)⊸⊏𝕏} ·𝕩.GetGen (𝕩.maxrange-1)⌊1⌈⌊∘÷⟜2}
+  "rand"‿"random"          BenchLenAll 1e7‿Q13‿{𝕩.GetGen}
+  "sort"‿"sorted"          BenchLenAll 1e7‿Q13‿{𝕩.GetGenSorted}
   "unique"‿"1e5 repetitive" BenchFixLen {
     len ⇐ 1e5
     TypeToGen ⇐ {{len(•rand.Range⟜≠⊏⊢)𝕏} 𝕩.GetGenUnique}
     Input ⇐ {
       name ⇐ "Unique values"
       m ← 𝕩.maxrange
-      range ⇐ m ⌊ E16 max ⇐ len⌊m
+      range ⇐ m ⌊ 1e4⊸≤◶⟨E16, 12‿8⊸E23⟩ max ⇐ len⌊m
     }
   }
   "range"‿"1e5 small-range" BenchFixLen {
@@ -31,7 +31,7 @@ E13‿E16‿E23 ← •Import "../measure/scale.bqn"
     }
     Input ⇐ {
       name ⇐ "Range"
-      range ⇐ max ⌊ { ⌊(↕1+⌈)⌾((𝕩⋆15÷˜⊢)⁼)𝕩 } max ⇐ 𝕩.maxrange
+      range ⇐ max ⌊ { ⍷⌊(↕1+⌈)⌾((𝕩⋆12÷˜⊢)⁼)𝕩 } max ⇐ 𝕩.maxrange
     }
   }
   BenchBool 1e7‿E16

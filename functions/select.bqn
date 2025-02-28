@@ -1,6 +1,7 @@
 # Select function ⊏
 
 types   ← •Import "../params/numtype.bqn"
+scales  ← •Import "../measure/scale.bqn"
 bench2d ← {basename⇐"select"} •Import "common/bench2d.bqn"
 
 Bench ← {
@@ -19,13 +20,13 @@ Bench ← {
   }
 }
 
-BenchXLen ← { ext 𝕊 xmax‿wdesc‿Wlen:
+BenchXLen ← { ext 𝕊 xmax‿XScale‿wdesc‿Wlen:
   ext⇐
   plotname ⇐ "Selecting "‿wdesc‿" elements with ⊏"
   input ⇐ {
     name ⇐ "Right argument length"
     max ⇐ xmax
-    range ⇐ (•Import"../measure/scale.bqn").E13 max
+    range ⇐ XScale max
   }
   denom ⇐ "selection"
   Measure ⇐ { 𝕊 ⟨type⟩:
@@ -38,8 +39,8 @@ BenchXLen ← { ext 𝕊 xmax‿wdesc‿Wlen:
 }
 
 leading ← Bench¨ ⟨
-  "many" BenchXLen ⟨1e6, "1e6",1e6⟩
-  "few"  BenchXLen ⟨1e3, "16KB of",{(2⋆3+14)÷𝕩.size}⟩
+  "many" BenchXLen ⟨1e6, 13‿7⊸scales.E16, "1e6",1e6⟩
+  "few"  BenchXLen ⟨1e3,      scales.E13, "16KB of",{(2⋆3+14)÷𝕩.size}⟩
   {
     ext ⇐ "permute"
     plotname ⇐ "Permuting a list with ⊏"

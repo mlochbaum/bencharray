@@ -1,18 +1,19 @@
 # Search: two-argument ∊⊐⊒
 
-scales ← •Import "../measure/scale.bqn"
 ns     ← {denom⇐"total values"} •Import "../params/ns_v.bqn"
 types  ← •Import "../params/cputype.bqn"
 fnobjs ← ⟨∊‿⊐‿⊒⟩ •Import "../params/arith.bqn"
 
+Q13‿E13‿E16‿E23 ← •Import "../measure/scale.bqn"
+
 # Inputs
 Length ← {
   name ⇐ ∾"Searched-"‿𝕨‿" length"
-  range ⇐ scales.E13 max ⇐ 𝕩
+  range ⇐ E13 max ⇐ 𝕩
 }
 overlap ← {
   name ⇐ "Overlap fraction"
-  range ⇐ ↕⊸∾⊸÷ 20
+  range ⇐ ↕⊸∾⊸÷ 10
   log ⇐ 0
 }
 
@@ -55,7 +56,7 @@ Bench¨ ∾ {𝕏¨types.range}¨ ⟨
     input ⇐ {
       name ⇐ {∾"Searched-"‿𝕩‿" length"}¨ "in"‿"for"
       max ⇐ 10⋆e←6 ⋄ Comp ← ⊢∾max-1↓⌽
-      range ⇐ Comp (scales.E13 64) (⊣ ∾ ⌈´⊸</⊢) scales.E23⊸⌊ max÷2
+      range ⇐ Comp (E13 64) (⊣ ∾ ⌈´⊸</⊢) E23⊸⌊ max÷2
       Trans ⇐ (1-˜max⊸×)⌾÷ ⋄ ticks ⇐ Comp (10⋆↕e)∾max÷2
     }
     Measure ⇐ { 𝕊 ⟨fn⟩:
@@ -69,7 +70,7 @@ Bench¨ ∾ {𝕏¨types.range}¨ ⟨
     type ⇐ 𝕩
     input ⇐ {
       name ⇐ "Shared length"
-      range ⇐ scales.E16 max ⇐ 1e7
+      range ⇐ Q13 max ⇐ 1e7
     }
     Measure ⇐ { 𝕊 ⟨fn⟩:
       Len ⇐ 2⊸×
@@ -84,7 +85,7 @@ Bench¨ ∾ {𝕏¨types.range}¨ ⟨
     input ⇐ {
       name ⇐ "Searched-in uniques"
       m ← type.maxrange
-      range ⇐ m ⌊ scales.E16 max ⇐ len⌊m
+      range ⇐ m ⌊ 1e4⊸≤◶⟨E16, 12‿8⊸E23⟩ max ⇐ len⌊m
     }
     Measure ⇐ { 𝕊 ⟨fn⟩:
       len ⇐ 2×len

@@ -39,7 +39,7 @@ Inverse ← { 𝕊 e‿desc‿GetGen:
   input ⇐ {
     name ⇐ "Input length"
     max ⇐ 1e7
-    range ⇐ scale.E23 max
+    range ⇐ scale.Q13 max
   }
   output ⇐ {max ⇐ 100, denom ⇐ "input"}
 
@@ -134,7 +134,7 @@ Bench¨ ⟨
     params ⇐ ⟨{name‿range‿labels⇐𝕩 ⋄ Order⇐⌽} GetSizes 3‿4‿5‿6⟩
     input ⇐ {
       name ⇐ "Range / length"
-      range ⇐ 2 × ↕⊸∾⊸÷ 20
+      range ⇐ 2 × ↕⊸∾⊸÷ 15
       log ⇐ 0 ⋄ FilterMin ⇐ 0⊸<
     }
     output ⇐ {denom ⇐ "input"}

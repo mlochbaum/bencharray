@@ -7,7 +7,7 @@ types  ← •Import "../params/cputype.bqn"
 # Inputs
 Length ← {
   name ⇐ ∾"Searched-"‿𝕨‿" length"
-  range ⇐ scales.E13 max ⇐ 𝕩
+  range ⇐ scales.Q13 max ⇐ 𝕩
 }
 
 sizes ← {
