@@ -27,7 +27,7 @@ Bench¨ ⟨
     input ⇐ {
       name ⇐ "Input length"
       max ⇐ 1e7
-      range ⇐ scale.E23 max
+      range ⇐ scale.Q13 max
     }
     denom ⇐ "input"
 
@@ -80,7 +80,7 @@ Bench¨ ⟨
     input ⇐ {
       name ⇐ "Left argument"
       max ⇐ 200
-      range ⇐ scale.E13 max
+      range ⇐ scale.E105 max
       FilterMin ⇐ 1⊸<
     }
     denom ⇐ "output"

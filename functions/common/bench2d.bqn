@@ -16,7 +16,7 @@ Bench2d ← { mext‿mod‿mname 𝕊 dat:
   total ← 10⋆e←4
   input ⇐ {
     name ⇐ "Width"
-    range ⇐ 1.5 scales._exp2d total
+    range ⇐ scales.E2d11 total
     FilterMin ⇐ ¬∊⟜(0‿¯1⊏range)
   }
   result ⇐ {⟨r⇐result⟩:r; ns} dat

@@ -19,7 +19,7 @@ Bench ← { over 𝕊 fname:
   params ⇐ ⟨(over<fname='+')⊑types‿ctypes⟩
   input ⇐ {
     name ⇐ "Right argument length"
-    range ⇐ 1.2 scales._exp2d total
+    range ⇐ scales.E2d11 total
   }
   result ⇐ ns
   Measure ⇐ { 𝕊 ⟨type⟩:

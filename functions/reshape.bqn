@@ -26,7 +26,7 @@ Bench¨ ⟨
     input ⇐ {
       name ⇐ "Input length"
       max ⇐ 1e5
-      range ⇐ scale.E23 max
+      range ⇐ scale.Q13 max
     }
 
     denom ⇐ "input"
@@ -42,7 +42,7 @@ Bench¨ ⟨
     input ⇐ {
       name ⇐ "Input length"
       max ⇐ 1e3
-      range ⇐ scale.E13 max
+      range ⇐ scale.E105 max
     }
 
     denom ⇐ "byte out"

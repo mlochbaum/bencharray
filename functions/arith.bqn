@@ -53,7 +53,7 @@ Bench2d_sub ← { 𝕊 ext‿desc‿fn‿isadd‿over‿total‿axes:
   params ⇐ ⟨(over<isadd)⊑typeb‿types⟩
   input ⇐ {
     name ⇐ "Width"
-    range ⇐ 1.2 scales._exp2d total
+    range ⇐ scales.E2d11 total
   }
   result ⇐ ns_v
   Measure ⇐ { 𝕊 ⟨type⟩:

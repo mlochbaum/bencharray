@@ -11,7 +11,7 @@ scales ← •Import "../measure/scale.bqn"
   params ⇐ ⟨types⟩
   input ⇐ {
     name ⇐ "Width"
-    range ⇐ 1.5 scales._exp2d total
+    range ⇐ scales.E2d11 total
     FilterMin ⇐ ¬∊⟜(0‿¯1⊏range)
   }
   result ⇐ ns
