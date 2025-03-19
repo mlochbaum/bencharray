@@ -18,7 +18,7 @@
   <img width="50%" src="../output/plot/replicate-compress-length.svg"></img>
   <img width="50%" src="../output/plot/replicate-compress-density.svg"></img>
 </tr></table>
-<p>General Replicate uses methods based on scans for smaller densities, and a simple loop for larger ones. Replicating by a constant factor uses many methods including lookup tables for permutations. We get a rather drastic performance drop from 64 to 65 for boolean replication; parts of the method we use for smaller numbers break down when there's no longer one result group starting point per word, but there are probably workarounds that would get similar performance.</p>
+<p>General Replicate uses methods based on scans for smaller densities, and a simple loop for larger ones. Replicating by a constant factor uses many methods including lookup tables for permutations. For booleans, odd replication factors from 64 to 256 are somewhat worse on AVX2, roughly because propagating bits is harder when a result word doesn't have to contain any boundaries between argument bits.</p>
 <table><tr>
   <img width="50%" src="../output/plot/replicate-avg.svg"></img>
   <img width="50%" src="../output/plot/replicate-const.svg"></img>
@@ -30,11 +30,15 @@
 </tr><tr>
   <img width="50%" src="../output/plot/indices-avg.svg"></img>
 </tr></table>
-<p>Indices inverse is somewhat related to Indices, but also to Group and Bins. The main idea is just to increment a count for each element of <code>𝕩</code>, although there are some additional improvements. For small ranges, like 10 below, counts are computed by comparing to all possible values and adding instead. And for long enough arguments (particularly 1-byte ints), a table that fits all possible values for the type is used to avoid needing an explicit range check. Incrementing is not a particularly fast operation, and it also slows down if values repeat often because this creates dependencies between an increment and the previous one at the same location.</p>
+<h2>Indices inverse</h2>
+<p>Indices inverse is somewhat related to Indices, but also to <a href="group.html">Group</a> and <a href="bins.html">Bins</a>. The main idea is just to increment a count for each element of <code>𝕩</code>, but there are various improvements. For large-range arguments, several tricks are used to keep from initializing a result with a type that's too large. Conversely, for long enough arguments of a small type, a table that fits all possible values is allocated to avoid a range-checking pass.</p>
+<p>SIMD alternatives to incrementing are valuable because it's never very fast, and slows down with duplicates since an increment has a dependency on the previous one at the same location. One is enabled by checking the range in blocks. If it's small (10 in the graphs below), counts are computed by comparing to all possible values and summing in SIMD.</p>
 <table><tr>
   <img width="50%" src="../output/plot/indices-inverse-rand.svg"></img>
   <img width="50%" src="../output/plot/indices-inverse-sorted.svg"></img>
-</tr><tr>
+</tr></table>
+<p>Adjacent equal elements are counted at the same time to switch to a method with SIMD run identification (like <code>/»⊸≠𝕩</code>) if there are many of them, giving the corners around average run length 2 and range/length 0.9 below. For sorted arguments there is also a galloping search that appears most clearly in long small-range arrays above.</p>
+<table><tr>
   <img width="50%" src="../output/plot/indices-inverse-runs.svg"></img>
   <img width="50%" src="../output/plot/indices-inverse-slope.svg"></img>
 </tr></table>

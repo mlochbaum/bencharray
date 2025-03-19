@@ -10,7 +10,7 @@
 
 <div class="nav"><a href="https://github.com/mlochbaum/bencharray">bencharray</a> / <a href="summary.html">summary</a></div>
 <h1>Group benchmarks</h1>
-<p>The first pair of benchmarks shows the case of a uniformly random <code>𝕨</code> with a varying range. In the middle the generic algorithm is used and the main cost is that of moving each argument value to the required output group. At the right, the cost of allocating arrays for the groups begins to matter, and eventually there are many empty groups that don't count in the denominator. They're all copies of the same empty array but making so many copies begins to get expensive. At the left, if the range is 1 the result is simply <code>⋈𝕩</code>, and if the range is 2, Replicate is used to get both groups.</p>
+<p>The first pair of benchmarks shows the case of a uniformly random <code>𝕨</code> with a varying range. In the middle the generic algorithm is used and the main cost is that of moving each argument value to the required output group. At the right, the cost of allocating arrays for the groups begins to matter, and eventually there are many empty groups that don't count in the denominator. They're all copies of the same empty array but making and freeing so many copies begins to get expensive. At the left, if the range is 1 the result is simply <code>⋈𝕩</code>, and if the range is 2, Replicate is used to get both groups.</p>
 <table><tr>
   <img width="50%" src="../output/plot/group-range.svg"></img>
   <img width="50%" src="../output/plot/group-indices-range.svg"></img>

@@ -16,7 +16,7 @@
   <img width="50%" src="../output/plot/scan-arith.svg"></img>
   <img width="50%" src="../output/plot/scan-slow.svg"></img>
 </tr></table>
-<p>Functions <code>⌊`</code> and <code>⌈`</code> are exactly associative and have no overflow, so the implementation works out nicely. The prefix sum has to deal with overflow, which slows it down for integer inputs, and has to go in order for floats because float addition isn't associative. However, the factor of 2 to 3 loss in performance from an in-order scan is not as bad as the nearly 10x for fold.</p>
+<p>Functions <code>⌊`</code> and <code>⌈`</code> are exactly associative and have no overflow, so the implementation works out nicely. The prefix sum has to deal with overflow, which slows it down for integer inputs, and has to go in order for floats because float addition isn't associative (although 32-bit ints do overflow to floats, addition on them remains associative as long as the result is in integer range, so this case could be improved). However, the factor of 2 to 3 loss in performance from an in-order scan isn't as bad as the nearly 10x for fold.</p>
 <table><tr>
   <img width="50%" src="../output/plot/scan-min.svg"></img>
   <img width="50%" src="../output/plot/scan-plus.svg"></img>
@@ -28,19 +28,24 @@
 </tr></table>
 
 <h2>Rank 2</h2>
-<p>High-rank scan is done with row-wise operations for long enough rows (above about 5 elements) but has no other optimizations.</p>
+<p>High-rank (column-wise) scan is equivalent to rank-1 if the cell size is 1 element, and a no-op if the length is 1. Operands <code>⌊⌈+</code> on numeric arguments are handled with SIMD, but using only SSE for narrower widths with 1- and 2-byte values. <code>+`</code> tests for overflow and simply widens and retries if that fails. As in the rank-1 case, for floats it suffers from non-associativity, but not as much because the different columns are independent.</p>
 <table><tr>
   <img width="50%" src="../output/plot/scan-2d-min.svg"></img>
   <img width="50%" src="../output/plot/scan-2d-plus.svg"></img>
-</tr><tr>
+</tr></table>
+<p>Boolean operands <code>∧∨≠</code> have implementations based on 64-bit words that auto-vectorize for long enough rows, and <code>=`</code> does <code>≠`⌾¬</code>. The same carry-less multiply code used for <code>≠`</code> on lists also covers any divisor of 64 by passing in different mask data. And <code>+</code> immediately widens to 1-byte int. We also see some un-specialized arithmetic, which for very short rows goes down the fully generic path of a function call per element, and otherwise is done with a function call per row.</p>
+<table><tr>
   <img width="50%" src="../output/plot/scan-2d-boolean.svg"></img>
   <img width="50%" src="../output/plot/scan-2d-boolcmp.svg"></img>
 </tr></table>
-<p>Other than for booleans, scan-cells is currently just scan called on each cell. Besides the obvious improvement of doing nothing for width 1, there are various ways that small-width cases could be sped up. Common boolean scans have dedicated implementations using various bit-bashing tricks.</p>
+<h3>Scan-cells</h3>
+<p>For long rows, leaving it to Cells to call each scan individually is mostly fine. We do miss a chance for parallelism for floating-point <code>+`</code>, where a single scan is latency-bound. For short rows there's a generic path that evaluates one element at a time but with less per-row overhead. It's not quite flat because an <code>n</code>-element row only takes <code>n-1</code> evaluations; the width-1 case in particular is a no-op.</p>
 <table><tr>
   <img width="50%" src="../output/plot/scan-cells-2d-min.svg"></img>
   <img width="50%" src="../output/plot/scan-cells-2d-plus.svg"></img>
-</tr><tr>
+</tr></table>
+<p>Common boolean scans have dedicated SIMD implementations using various bit-bashing tricks, with segmentation masks for short strides; here divisors of 32 are faster because no data has to cross between words.</p>
+<table><tr>
   <img width="50%" src="../output/plot/scan-cells-2d-boolean.svg"></img>
   <img width="50%" src="../output/plot/scan-cells-2d-boolcmp.svg"></img>
 </tr></table>
