@@ -28,7 +28,7 @@
 </tr></table>
 
 <h2>Insert, rank 2</h2>
-<p>These benchmarks show performance on a table of 1e4 total elements. The only optimizations are for small widths: the width 1 case is equivalent to a fold, and others use a generic element-at-a-time implementation to avoid the dispatching and allocation costs of short lists.</p>
+<p>These benchmarks show performance on a table of 1e4 total elements. Insert with <code>⌊⌈</code> uses associative reordering and tiling tricks to keep the performance consistently good. Since <code>+˝</code> on floats is non-associative, it's slower with short rows because only one row can be added at a time; for integers short rows aren't inherently slow but the implementation is unfinished. Boolean cases are not yet optimized, other than using a fold for width 1, and generic element-at-a-time code for other short rows to avoid the dispatching and allocation costs of short lists.</p>
 <table><tr>
   <img width="50%" src="../output/plot/insert-2d-min.svg"></img>
   <img width="50%" src="../output/plot/insert-2d-plus.svg"></img>

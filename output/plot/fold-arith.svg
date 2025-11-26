@@ -8,15 +8,15 @@
     <g stroke-width='0.3' stroke='#555'>
       <path d='M170.667 0v281.6'/>
       <path d='M341.333 0v281.6'/>
-      <path d='M0 259.28h512'/>
-      <path d='M0 230.886h512'/>
-      <path d='M0 193.351h512'/>
-      <path d='M0 164.957h512'/>
-      <path d='M0 136.563h512'/>
-      <path d='M0 99.028h512'/>
-      <path d='M0 70.633h512'/>
-      <path d='M0 42.239h512'/>
-      <path d='M0 4.704h512'/>
+      <path d='M0 258.285h512'/>
+      <path d='M0 230.028h512'/>
+      <path d='M0 192.675h512'/>
+      <path d='M0 164.418h512'/>
+      <path d='M0 136.161h512'/>
+      <path d='M0 98.808h512'/>
+      <path d='M0 70.551h512'/>
+      <path d='M0 42.294h512'/>
+      <path d='M0 4.941h512'/>
     </g>
     <g font-size='11px'>
       <text dy='0.33em' x='0' y='291.1'>i8</text>
@@ -24,23 +24,23 @@
       <text dy='0.33em' x='341.333' y='291.1'>i32</text>
       <text dy='0.33em' x='512' y='291.1'>f64</text>
       <g text-anchor='end'>
-        <text dy='0.33em' x='-6' y='259.28'>0.01</text>
-        <text dy='0.33em' x='-6' y='230.886'>0.02</text>
-        <text dy='0.33em' x='-6' y='193.351'>0.05</text>
-        <text dy='0.33em' x='-6' y='164.957'>0.1</text>
-        <text dy='0.33em' x='-6' y='136.563'>0.2</text>
-        <text dy='0.33em' x='-6' y='99.028'>0.5</text>
-        <text dy='0.33em' x='-6' y='70.633'>1</text>
-        <text dy='0.33em' x='-6' y='42.239'>2</text>
-        <text dy='0.33em' x='-6' y='4.704'>5</text>
+        <text dy='0.33em' x='-6' y='258.285'>0.01</text>
+        <text dy='0.33em' x='-6' y='230.028'>0.02</text>
+        <text dy='0.33em' x='-6' y='192.675'>0.05</text>
+        <text dy='0.33em' x='-6' y='164.418'>0.1</text>
+        <text dy='0.33em' x='-6' y='136.161'>0.2</text>
+        <text dy='0.33em' x='-6' y='98.808'>0.5</text>
+        <text dy='0.33em' x='-6' y='70.551'>1</text>
+        <text dy='0.33em' x='-6' y='42.294'>2</text>
+        <text dy='0.33em' x='-6' y='4.941'>5</text>
       </g>
     </g>
     <rect stroke-width='1.2' stroke='#111' fill='white' transform='translate(442,191.6)' x='0' y='0' width='60' height='84'/>
     <g clip-path='url(#clip)' fill='none' stroke-linecap='round' stroke-linejoin='round'>
-      <path stroke='#e41a1c' d='M0 213.559L170.667 211.536L341.333 182.23L512 72.354'/>
-      <path stroke='#377eb8' d='M0 20.003L170.667 20L341.333 28.563L512 33.038'/>
-      <path stroke='#4daf4a' d='M0 261.529L170.667 234.061L341.333 204.148L512 163.841'/>
-      <path stroke='#984ea3' d='M0 261.6L170.667 234.274L341.333 204.309L512 163.799'/>
+      <path stroke='#e41a1c' d='M0 257.859L170.667 236.944L341.333 203.277L512 72.276'/>
+      <path stroke='#377eb8' d='M0 20L170.667 20.065L341.333 28.678L512 33.141'/>
+      <path stroke='#4daf4a' d='M0 261.538L170.667 234.162L341.333 204.391L512 178.666'/>
+      <path stroke='#984ea3' d='M0 261.6L170.667 234.3L341.333 204.554L512 178.675'/>
     </g>
     <rect stroke-width='1.2' stroke='#111' fill='none' x='0' y='0' width='512' height='281.6'/>
     <g transform='translate(442,191.6)' text-anchor='start' font-size='13px'>
