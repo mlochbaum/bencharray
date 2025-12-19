@@ -67,6 +67,7 @@ Range ← { 𝕊 e‿verb‿ProcW: { 𝕊 i:
     name ⇐ "Number of groups"
     max ⇐ 1e6
     range ⇐ 10‿6 scale.E23 max
+    FilterMin ⇐ 1⊸<
   }
   GetGrGen ⇐ { 𝕊 len:
     { ProcW len (⟨𝕩⟩•Import"../measure/gen.bqn").Rand 𝕩˙ }

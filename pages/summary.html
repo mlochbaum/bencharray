@@ -12,7 +12,7 @@
 <h1>Benchmark summary</h1>
 
 <p>Not all benchmarks are included on this page. Header links go to pages with full benchmarks and more detailed explanation.</p>
-<p>The benchmarks found in bencharray are taken on a <a href="https://www.intel.com/content/www/us/en/products/sku/208658/intel-core-i51135g7-processor-8m-cache-up-to-4-20-ghz/specifications.html">Tiger Lake i5-1135G7</a> processor using CBQN v0.10.0 compiled with <code>make o3 has='bmi2'</code> (which also enables AVX2 and earlier vector instructions). These options are used instead of the usual <code>make o3n</code> to compile without AVX-512 support, as this CPU supports it but most consumer hardware doesn't.</p>
+<p>The benchmarks found in bencharray are taken on an AMD <a href="https://www.notebookcheck.net/AMD-Ryzen-7-8745HS-Processor-Benchmarks-and-Specs.1007248.0.html">Ryzen 7 8745HS</a> processor using CBQN v0.10.0 compiled with <code>make o3 has='bmi2'</code> (which also enables AVX2 and earlier vector instructions). These options are used instead of the usual <code>make o3n</code> to compile without AVX-512 support, as this CPU supports it but most consumer hardware doesn't.</p>
 
 <h2><a href="arith.html">Arithmetic</a></h2>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/arithmetic.html">Implementation notes</a></p>
@@ -96,7 +96,7 @@
 <p>For 1- and 2-byte elements, lookup tables usually fit entirely in L1 cache (2-byte tables with large elements can be iffy). Lookup tables are so fast that it doesn't make sense to try for adaptivity on these arguments. For larger elements, comparison sorting and hash tables are usually needed, and adaptive sorting can be used. The only case that doesn't have specialized code yet is sorting 8-byte elements.</p>
 <h3>Sort and Grade</h3>
 <p><a href="https://mlochbaum.github.io/BQN/implementation/primitive/sort.html">Implementation notes</a></p>
-<p>Currently CBQN has solid counting and radix sort implementations used for 1 to 4-byte elements, and uses the generic Timsort for 8-byte elements. 4-byte sorting is competitive with the state of the art for random elements but isn't adaptive at all.</p>
+<p>Currently CBQN has solid counting and radix sort implementations used for 1 to 4-byte elements, and uses the generic Timsort for 8-byte elements. 4-byte sorting is competitive with the state of the art for random elements but isn't adaptive at all. Something has gone badly wrong with the prefix sums used for 4-byte grade: it measured fine on the CPU I had when v0.10.0 came out but can be 10x slower on this new one. Will be… sorted… in the next version hopefully.</p>
 <table><tr>
   <img width="50%" src="../output/plot/sort-rand-i8.svg"></img>
   <img width="50%" src="../output/plot/sort-rand-i16.svg"></img>

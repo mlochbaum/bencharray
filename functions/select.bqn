@@ -9,7 +9,6 @@ Bench ← {
   name ⇐ "select-"∾ext
 
   result ⇐ ({⟨r⇐denom⟩:⟨{denom⇐r}⟩;⟨⟩}𝕩) •Import "../params/ns_v.bqn"
-  result.SetMin 0.02
   params ⇐ ⟨{⟨r⇐types⟩:r;types}𝕩⟩
 
   plotOpts ⇐ {
