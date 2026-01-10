@@ -1,3 +1,5 @@
+# Searching (including self-search) and sorting functions
+
 % 1e3‿1e5 {len⇐𝕨,type⇐𝕩}⌜ "bool"‿"i8"‿"i16"‿"i32"‿"f64"
 % ⟨1e4⟩ {n𝕊t:Post⇐{desc⇐"sorted "∾𝕩.desc,x⇐∧𝕩.x}⋄arg⇐{len⇐n⋄type⇐t}}⌜ "bool"‿"i8"‿"i16"‿"i32"‿"f64"
 ∧ % ⍋⊸⊏

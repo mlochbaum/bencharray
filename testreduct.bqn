@@ -2,6 +2,7 @@
 
 Spl ← (⊢-˜¬×+`)⊸⊔          # Split by boolean left argument
 Trim ← ((∨`∧∨`⌾⌽)' '⊸≠)⊸/  # Trim leading and trailing spaces
+Abbr ← "•internal."(⊢/˜1≠`≠∘⊢(↑≠·»-⊸↑)⍷)Trim
 
 opts ← {
 help_pre ← 1↓"
@@ -53,7 +54,7 @@ CompareTime ← { fnsc 𝕊 arg:
   Bad t←Time 1 ? Bad tt←Time 3⌈⌈0.03÷t ?
   # Failed!
   Vs ← ∾⟜" vs "⊸∾
-  •Out ((Vs○Trim´2↑fnsc)∾" on "∾arg.desc) ∾ ": " ∾ Vs○Fmt´ t
+  •Out ((Vs○Abbr´2↑fnsc)∾" on "∾arg.desc) ∾ ": " ∾ Vs○Fmt´ t
   ; @
 }
 
@@ -70,8 +71,9 @@ MakeArg ← {
     desc ⇐ {⟨r⇐desc⟩:r ; wd GetDesc xd} 𝕩
 ;
   ⟨len,type⟩:
-    r ← 2‿100‿1e4‿1e9‿0⊑˜"bool"‿"i8"‿"i16"‿"i32"‿"f64"⊸⊐⌾<type
-    x ⇐ len •rand.Range r
+    i ← "bool"‿"i8"‿"i16"‿"i32"‿"f64"‿"c8"‿"c16"‿"c32"⊸⊐⌾<type
+    r ← i ⊑ 2‿100‿1e4‿1e9‿0 ‿ 256‿65536‿1114112
+    x ⇐ (•internal.Squeeze @⊸+)⍟(5≤i) len •rand.Range r
     desc ⇐ ∾⟨•Repr len," ",type⟩
 ;
   ⟨len,range⟩:
