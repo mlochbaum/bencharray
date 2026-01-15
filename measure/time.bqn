@@ -39,7 +39,7 @@ _avgTime_ ← {
 a0 ← 4                            # Number of wanted argument sets
 _timedGen ← {
   s ← •MonoTime@
-  t ← 𝕨 𝔽○{𝕏@} 𝕩                  # Start with one timing (also warmup)
+  t ← 1e¯8⌈ 𝕨 𝔽○{𝕏@} 𝕩            # Start with one timing (also warmup)
   s ↩ t⌈3÷˜(•MonoTime@)-s         # In case 𝔽 is much faster than 𝕎/𝕏
   n‿m ← 1+⌊(1+1e¯1÷t‿s)÷2         # Target 0.1 for one run, 0.05 for many
   m<50 ?
