@@ -68,7 +68,7 @@ Plot ⇐ { opts 𝕊 dat:
   ⟨title,x,y,⟨labels⟩⇐key⟩ ← opts
   order ← {⟨r⇐order⟩:r; ⟨⟨r⇐order⟩⇐key⟩:r; ⊢} opts
   BoundAxis ← ⊣ {⟨r⇐min⟩:r;¯∞}⊸⌈ {⟨r⇐max⟩:r;∞}⊸⌊
-  col ← "stroke"⊸⋈¨ GetColors labels
+  col ← "stroke"⊸⋈¨ {⟨r⇐colors⟩:r; GetColors labels} opts.key
 
   axes ← x‿y
   xcapt‿ycapt ← {𝕩.name}¨ axes
