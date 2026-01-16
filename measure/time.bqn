@@ -27,7 +27,7 @@ _avgTime_ ← {
   FT ← (+´÷≠)∘⥊ ·Fil∘⍉ 𝔽¨         # And average
   t ← 𝕨 FT{𝔽𝕏;𝕎𝔽𝕏}○({𝕩˙}𝕘‿n⊸⥊) 𝕩  # Bind argument arrays
   Cond ← {
-    4>≠𝕩?1;                       # Always take at least 5 samples
+    4>≠𝕩?1;                       # Always take at least 4 samples
     20≤≠𝕩?0;                      # And give up at 20
     ¬∧´(⊢≤1.01×⌊´)¯3↑𝕩            # Stop if samples are within 1%
   }
