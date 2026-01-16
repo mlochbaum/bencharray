@@ -48,7 +48,8 @@ _timedGen ← {
   m<50 ?
     a ← n ⌊ a0 ⌈ ⌊5÷m             # ≤5 reps unless m<n, and no unused args
     t ↩ 𝕨𝔽¨○{n⥊𝕏¨↕a}𝕩             # Repeat args to get rep number up
-    (+´÷≠) ⌊´¨ (a|↕∘≠)⊸⊔ t        # Min across equal args, then average
+    Z ← 0⊸</⍟(∨´⊣)⊢               # Some systems might occasionally get 0
+    (+´÷≠) ⌊´∘Z¨ (a|↕∘≠)⊸⊔ t      # Min across equal args, then average
   ;
     i ← 𝕨⋈○{𝕏¨↕10}𝕩               # More inputs
     t ← 1e¯8⌈ (+´÷≠)𝕨𝔽¨∘⊑⊘(𝔽¨´⊢)i # Redo the timing
