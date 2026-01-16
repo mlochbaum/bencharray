@@ -9,9 +9,11 @@
 # time, it's removed by taking a minimum or other selection that skews
 # low from timings. This is only ever applied to measurements on the
 # same set of arguments, to avoid ignoring sets that are actually slower
-# to evaluate. Multiple sets of arguments are always generated if more
-# than one run is used, and calls cycle through the generated sets to
-# avoid branch prediction.
+# to evaluate. It's also not done if most measurements are below 0.5μs,
+# because at this scale the timer's resolution may be relevant and cause
+# bias with filtering. Multiple sets of arguments are always generated
+# if more than one run is used, and calls cycle through the generated
+# sets to avoid branch prediction.
 
 # Estimated average time to run 𝔽 in 𝕨 𝔽¨ 𝕩 when 𝔽 is quick
 # Time for 𝔽 is assumed deterministic but can vary based on argument
@@ -21,7 +23,8 @@
 _avgTime_ ← {
   n ← ≠⥊𝕨⊢¨𝕩                      # Number of calls (𝕘 reps each)
   Mid ← (⌈𝕘÷2)↑(⌊´0‿2+⌊𝕘÷3‿10)↓∧  # Reject potential outliers
-  FT ← (+´÷≠)∘⥊ ·Mid˘∘⍉ 𝔽¨        # And average
+  Fil ← Mid˘ ⊣⍟(∧´5e¯7≤⊏˘∘⊣) ⊢    # Unless times are too low
+  FT ← (+´÷≠)∘⥊ ·Fil∘⍉ 𝔽¨         # And average
   t ← 𝕨 FT{𝔽𝕏;𝕎𝔽𝕏}○({𝕩˙}𝕘‿n⊸⥊) 𝕩  # Bind argument arrays
   Cond ← {
     4>≠𝕩?1;                       # Always take at least 5 samples
