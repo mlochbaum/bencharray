@@ -15,7 +15,7 @@
   <img width="50%" src="../output/plot/group-range.svg"></img>
   <img width="50%" src="../output/plot/group-indices-range.svg"></img>
 </tr></table>
-<p>This pair is the same except that <code>𝕨</code> is sorted, so that the groups are slices from <code>𝕩</code>. Copying such slices is much faster than moving elements one at a time. Between 1000 and 1e4 groups, Group switches over from a sorting-specific method on the right to a generic chunked one on the left; both use the same data copying but the surrounding code is different. For Group (not Group Indices), CBQN could instead take virtual slices to avoid copying, but memory leaks would be a possible concern since one small result group could keep all the data alive.</p>
+<p>This pair is the same except that <code>𝕨</code> is sorted, so that the groups are slices from <code>𝕩</code>. CBQN takes virtual slices so it doesn't touch the data in <code>𝕩</code> at all, and the time mostly just depends on the number of non-empty groups created. This does mean all of <code>𝕩</code> will stay in memory for as long as any slice is still used. Group Indices just creates the indices <code>↕≠𝕩</code> and then groups them, with the first part taking most of the time when the number of groups is small enough.</p>
 <table><tr>
   <img width="50%" src="../output/plot/group-range-sort.svg"></img>
   <img width="50%" src="../output/plot/group-indices-range-sort.svg"></img>
